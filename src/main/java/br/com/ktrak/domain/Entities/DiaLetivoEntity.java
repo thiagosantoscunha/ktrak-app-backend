@@ -1,4 +1,4 @@
-package br.com.ktrak.domain.Entities;
+package br.com.ktrak.domain.entities;
 
 import java.util.Date;
 import java.util.List;

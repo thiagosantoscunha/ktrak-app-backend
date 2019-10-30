@@ -1,4 +1,4 @@
-package br.com.ktrak.Security.DTOs;
+package br.com.ktrak.security.dto;
 
 import java.time.LocalDateTime;
 

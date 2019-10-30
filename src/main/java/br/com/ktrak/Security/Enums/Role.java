@@ -1,4 +1,4 @@
-package br.com.ktrak.Security.Enums;
+package br.com.ktrak.security.enums;
 
 public enum Role {
     ADMINISTRADOR, PROFESSOR, ALUNO

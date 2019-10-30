@@ -1,4 +1,4 @@
-package br.com.ktrak.Secretaria.APIs;
+package br.com.ktrak.secretaria.api;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

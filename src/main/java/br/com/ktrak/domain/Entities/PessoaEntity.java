@@ -1,15 +1,31 @@
-package br.com.ktrak.domain.Entities;
+package br.com.ktrak.domain.entities;
 
-import java.util.Date;
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
+@Entity(name = "pessoas")
 public class PessoaEntity {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(length = 150)
     private String nome;
-    private Date dataNascimento;
+
+    @Column()
+    private LocalDateTime dataNascimento;
+
+    @Column(length = 64)
     private String bairro;
+
+    @Column(length = 64)
     private String cidade;
+
+    @Column(length = 64)
     private String estado;
+
+    @Column(length = 255)
     private String digital;
 
     public Long getId() {
@@ -28,11 +44,11 @@ public class PessoaEntity {
         this.nome = nome;
     }
 
-    public Date getDataNascimento() {
+    public LocalDateTime getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDateTime dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -66,5 +82,18 @@ public class PessoaEntity {
 
     public void setDigital(String digital) {
         this.digital = digital;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PessoaEntity that = (PessoaEntity) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

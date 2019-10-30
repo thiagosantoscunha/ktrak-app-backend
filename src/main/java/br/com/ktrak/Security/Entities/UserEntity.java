@@ -1,4 +1,4 @@
-package br.com.ktrak.Security.Entities;
+package br.com.ktrak.Security.entities;
 
 import br.com.ktrak.Security.Enums.Role;
 

@@ -1,4 +1,4 @@
-package br.com.ktrak.domain.Entities;
+package br.com.ktrak.domain.entities;
 
 public class MatriculaDiaLetitvoEntity {
     private Long id;

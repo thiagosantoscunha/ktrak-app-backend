@@ -1,6 +1,6 @@
-package br.com.ktrak.Security.APIs;
+package br.com.ktrak.security.api;
 
-import br.com.ktrak.Security.DTOs.UserListDTO;
+import br.com.ktrak.security.dto.UserListDTO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
