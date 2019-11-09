@@ -529,4 +529,31 @@ class AlunoValidatorTest {
         assertEquals(message, "O usuário que você esta tentado atualizar não existe");
     }
 
+
+
+
+    // Não Pode buscar
+
+    @Test
+    void isNaoPodeBuscarSeNaoTemUsuario() {
+        Long id = -1L;
+        var message = assertThrows(NotFoundException.class, () -> {
+            var result = validator.isNaoPodeBuscarPorId(id);
+        }).getMessage();
+        assertEquals(message, "Este aluno não esta cadastrado em nossa base de dados");
+    }
+
+
+
+    // Não Pode buscar
+
+    @Test
+    void isNaoPodeRemoverSeNaoTemUsuario() {
+        Long id = -1L;
+        var message = assertThrows(NotFoundException.class, () -> {
+            var result = validator.isNaoPodeBuscarPorId(id);
+        }).getMessage();
+        assertEquals(message, "Este aluno não esta cadastrado em nossa base de dados");
+    }
+
 }
