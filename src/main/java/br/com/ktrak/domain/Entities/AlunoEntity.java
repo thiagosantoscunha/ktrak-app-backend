@@ -1,15 +1,10 @@
 package br.com.ktrak.domain.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
 
+@Entity
+@Table(name = "alunos")
 public class AlunoEntity extends PessoaEntity {
-    private List<MatriculaEntity> matriculas;
-
-    public List<MatriculaEntity> getMatriculas() {
-        return matriculas;
-    }
-
-    public void setMatriculas(List<MatriculaEntity> matriculas) {
-        this.matriculas = matriculas;
-    }
 }
