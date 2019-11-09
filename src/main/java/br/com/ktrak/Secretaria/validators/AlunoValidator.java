@@ -5,6 +5,7 @@ import br.com.ktrak.Utils.NumberValidationServiceImpl;
 import br.com.ktrak.Utils.TextValidationService;
 import br.com.ktrak.domain.dto.AtualizaAlunoDto;
 import br.com.ktrak.domain.dto.InsereAlunoDto;
+import br.com.ktrak.domain.exceptions.BadRequestException;
 import br.com.ktrak.domain.exceptions.NotFoundException;
 import br.com.ktrak.domain.services.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,4 +58,15 @@ public class AlunoValidator {
         return false;
     }
 
+    public boolean isNaoPodeBuscarPorId(Long id) {
+        var hasAluno = service.existePorId(id);
+        if (!hasAluno) throw new NotFoundException("Este aluno não esta cadastrado em nossa base de dados");
+        return false;
+    }
+
+    public boolean isNaoPodeRemover(Long id) {
+        var hasAluno = service.existePorId(id);
+        if (!hasAluno) throw new NotFoundException("Este aluno não esta cadastrado em nossa base de dados");
+        return false;
+    }
 }

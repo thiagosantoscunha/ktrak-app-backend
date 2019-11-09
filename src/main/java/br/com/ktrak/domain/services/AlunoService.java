@@ -1,5 +1,6 @@
 package br.com.ktrak.domain.services;
 
+import br.com.ktrak.domain.dto.AtualizaAlunoDto;
 import br.com.ktrak.domain.dto.ExibeAlunoDto;
 import br.com.ktrak.domain.dto.InsereAlunoDto;
 import br.com.ktrak.domain.repositories.AlunoRepository;
@@ -29,6 +30,13 @@ public class AlunoService implements Serializable {
         return dtoList;
     }
 
+    public ExibeAlunoDto buscaPorId(Long id) {
+        var aluno = repository.findById(id);
+        ExibeAlunoDto dtoResponse = new ExibeAlunoDto();
+        aluno.ifPresent(dtoResponse::toDto);
+        return dtoResponse;
+    }
+
     public ExibeAlunoDto insere(InsereAlunoDto dto) {
         var entity = dto.toEntity();
         entity = repository.save(entity);
@@ -39,5 +47,17 @@ public class AlunoService implements Serializable {
 
     public boolean existePorId(Long id) {
         return repository.existsById(id);
+    }
+
+    public ExibeAlunoDto atualiza(AtualizaAlunoDto dto) {
+        var entity = dto.toEntity();
+        entity = repository.save(entity);
+        ExibeAlunoDto dtoResponse = new ExibeAlunoDto();
+        dtoResponse.toDto(entity);
+        return dtoResponse;
+    }
+
+    public void remove(Long id) {
+        repository.deleteById(id);
     }
 }
