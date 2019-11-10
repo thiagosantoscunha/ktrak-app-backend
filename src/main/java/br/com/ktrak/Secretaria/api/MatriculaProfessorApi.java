@@ -1,9 +1,9 @@
 package br.com.ktrak.secretaria.api;
 
 
-import br.com.ktrak.domain.dto.AtualizaProfessorDto;
-import br.com.ktrak.domain.dto.ExibeProfessorDto;
-import br.com.ktrak.domain.dto.InsereProfessorDto;
+import br.com.ktrak.domain.dto.in.AtualizaProfessorDto;
+import br.com.ktrak.domain.dto.out.ExibeProfessorDto;
+import br.com.ktrak.domain.dto.in.InsereProfessorDto;
 import br.com.ktrak.domain.services.ProfessorService;
 import br.com.ktrak.secretaria.validators.ProfessorValidator;
 import org.springframework.beans.factory.annotation.Autowired;

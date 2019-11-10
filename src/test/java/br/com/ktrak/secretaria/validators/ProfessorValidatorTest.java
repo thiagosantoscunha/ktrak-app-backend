@@ -1,10 +1,7 @@
 package br.com.ktrak.secretaria.validators;
 
-import br.com.ktrak.domain.dto.InsereProfessorDto;
-import br.com.ktrak.domain.entities.AlunoEntity;
+import br.com.ktrak.domain.dto.in.InsereProfessorDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;
-import br.com.ktrak.domain.exceptions.NotFoundException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

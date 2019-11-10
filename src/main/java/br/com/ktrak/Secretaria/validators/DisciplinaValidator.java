@@ -2,8 +2,8 @@ package br.com.ktrak.secretaria.validators;
 
 import br.com.ktrak.Utils.NumberValidationServiceImpl;
 import br.com.ktrak.Utils.TextValidationService;
-import br.com.ktrak.domain.dto.AtualizaDisciplinaDto;
-import br.com.ktrak.domain.dto.InsereDisciplinaDto;
+import br.com.ktrak.domain.dto.in.AtualizaDisciplinaDto;
+import br.com.ktrak.domain.dto.in.InsereDisciplinaDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import br.com.ktrak.domain.services.DisciplinaService;
 import org.springframework.beans.factory.annotation.Autowired;

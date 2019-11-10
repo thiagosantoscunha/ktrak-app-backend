@@ -1,13 +1,12 @@
 package br.com.ktrak.secretaria.validators;
 
-import br.com.ktrak.domain.dto.AtualizaAlunoDto;
-import br.com.ktrak.domain.dto.InsereAlunoDto;
+import br.com.ktrak.domain.dto.in.AtualizaAlunoDto;
+import br.com.ktrak.domain.dto.in.InsereAlunoDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import br.com.ktrak.domain.exceptions.NotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 

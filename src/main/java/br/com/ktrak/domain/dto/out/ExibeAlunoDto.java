@@ -1,4 +1,4 @@
-package br.com.ktrak.domain.dto;
+package br.com.ktrak.domain.dto.out;
 
 import br.com.ktrak.domain.entities.AlunoEntity;
 

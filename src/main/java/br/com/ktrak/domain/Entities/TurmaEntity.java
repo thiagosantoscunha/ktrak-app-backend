@@ -20,6 +20,26 @@ public class TurmaEntity {
     @JoinColumn(name = "turma_id")
     private List<DiaLetivoEntity> diasLetivos = new ArrayList<>();
 
+    @ManyToOne()
+    @JoinColumn(name = "disciplina_id", nullable = false)
+    private DisciplinaEntity disciplina;
+
+    public List<DiaLetivoEntity> getDiasLetivos() {
+        return diasLetivos;
+    }
+
+    public void setDiasLetivos(List<DiaLetivoEntity> diasLetivos) {
+        this.diasLetivos = diasLetivos;
+    }
+
+    public DisciplinaEntity getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(DisciplinaEntity disciplina) {
+        this.disciplina = disciplina;
+    }
+
     public Long getId() {
         return id;
     }

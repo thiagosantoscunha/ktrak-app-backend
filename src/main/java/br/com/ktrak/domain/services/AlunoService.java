@@ -1,8 +1,8 @@
 package br.com.ktrak.domain.services;
 
-import br.com.ktrak.domain.dto.AtualizaAlunoDto;
-import br.com.ktrak.domain.dto.ExibeAlunoDto;
-import br.com.ktrak.domain.dto.InsereAlunoDto;
+import br.com.ktrak.domain.dto.in.AtualizaAlunoDto;
+import br.com.ktrak.domain.dto.out.ExibeAlunoDto;
+import br.com.ktrak.domain.dto.in.InsereAlunoDto;
 import br.com.ktrak.domain.repositories.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

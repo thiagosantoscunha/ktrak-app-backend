@@ -16,9 +16,11 @@ public class DisciplinaEntity {
     @Column(length = 64, unique = true, nullable = false)
     private String nome;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "disciplina_id")
+    @OneToMany(mappedBy = "disciplina")
     private List<TurmaEntity> turmas = new ArrayList<>();
+
+    public DisciplinaEntity() {
+    }
 
     public Long getId() {
         return id;

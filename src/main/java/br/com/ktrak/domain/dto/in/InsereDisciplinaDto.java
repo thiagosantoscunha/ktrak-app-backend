@@ -1,4 +1,4 @@
-package br.com.ktrak.domain.dto;
+package br.com.ktrak.domain.dto.in;
 
 import br.com.ktrak.domain.entities.DisciplinaEntity;
 

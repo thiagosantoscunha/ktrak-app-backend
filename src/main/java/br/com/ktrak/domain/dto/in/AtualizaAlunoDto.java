@@ -1,12 +1,11 @@
-package br.com.ktrak.domain.dto;
+package br.com.ktrak.domain.dto.in;
 
 import br.com.ktrak.Utils.LocalDateTimeFormatter;
 import br.com.ktrak.domain.entities.AlunoEntity;
 
-import java.time.LocalDate;
+public class AtualizaAlunoDto {
 
-public class InsereAlunoDto {
-
+    public Long id;
     public String nome;
     public String dataNascimento;
     public String cep;
@@ -15,7 +14,9 @@ public class InsereAlunoDto {
     public String cidade;
     public String estado;
 
-    public InsereAlunoDto(String nome, String dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado) {
+    public AtualizaAlunoDto() {}
+
+    public AtualizaAlunoDto(Long id, String nome, String dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.cep = cep;
@@ -27,6 +28,7 @@ public class InsereAlunoDto {
 
     public AlunoEntity toEntity() {
         AlunoEntity entity = new AlunoEntity();
+        entity.setId(id);
         entity.setNome(nome);
         entity.setDataNascimento(LocalDateTimeFormatter.toLocalDate(dataNascimento));
         entity.setCep(cep);
