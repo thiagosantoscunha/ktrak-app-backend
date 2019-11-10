@@ -1,5 +1,6 @@
 package br.com.ktrak.domain.services;
 
+import br.com.ktrak.domain.dto.AtualizaProfessorDto;
 import br.com.ktrak.domain.dto.ExibeProfessorDto;
 import br.com.ktrak.domain.dto.InsereProfessorDto;
 import br.com.ktrak.domain.entities.ProfessorEntity;
@@ -32,10 +33,33 @@ public class ProfessorService implements Serializable {
     }
 
     public ExibeProfessorDto insere(InsereProfessorDto model) {
-        var entity = model.toEntity();
+        ProfessorEntity entity = model.toEntity();
         entity = repository.save(entity);
         ExibeProfessorDto dto = new ExibeProfessorDto();
         dto.toDto(entity);
         return dto;
+    }
+
+    public boolean existePorId(Long id) {
+        return repository.existsById(id);
+    }
+
+    public ExibeProfessorDto buscaPorId(Long id) {
+        var professorResponse = repository.findById(id);
+        ExibeProfessorDto dto = new ExibeProfessorDto();
+        professorResponse.ifPresent(dto::toDto);
+        return dto;
+    }
+
+    public ExibeProfessorDto atualiza(AtualizaProfessorDto model) {
+        ProfessorEntity entity = model.toEntity();
+        entity = repository.save(entity);
+        ExibeProfessorDto dto = new ExibeProfessorDto();
+        dto.toDto(entity);
+        return dto;
+    }
+
+    public void remove(Long id) {
+        repository.deleteById(id);
     }
 }
