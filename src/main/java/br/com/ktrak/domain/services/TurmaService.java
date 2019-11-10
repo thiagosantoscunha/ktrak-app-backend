@@ -1,5 +1,7 @@
 package br.com.ktrak.domain.services;
 
+import br.com.ktrak.domain.dto.in.AtualizaTurmaDto;
+import br.com.ktrak.domain.dto.in.InsereTurmaDto;
 import br.com.ktrak.domain.dto.out.ExibeTurmaDto;
 import br.com.ktrak.domain.dto.out.TurmaOutDto;
 import br.com.ktrak.domain.entities.TurmaEntity;
@@ -27,7 +29,21 @@ public class TurmaService {
         return turmas;
     }
 
-    public TurmaEntity insere(TurmaEntity entity) {
-        return repository.save(entity);
+    public ExibeTurmaDto insere(InsereTurmaDto dto) {
+        var entity = dto.toEntity();
+        ExibeTurmaDto dtoInserido = new ExibeTurmaDto();
+        dtoInserido.toDto(repository.save(entity));
+        return dtoInserido;
+    }
+
+    public ExibeTurmaDto atualiza(AtualizaTurmaDto dto) {
+        var entity = dto.toEntity();
+        ExibeTurmaDto dtoAtualizado = new ExibeTurmaDto();
+        dtoAtualizado.toDto(entity);
+        return dtoAtualizado;
+    }
+
+    public void remove(Long id) {
+        repository.deleteById(id);
     }
 }

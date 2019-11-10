@@ -1,6 +1,8 @@
 package br.com.ktrak.secretaria.api;
 
 
+import br.com.ktrak.domain.dto.in.AtualizaTurmaDto;
+import br.com.ktrak.domain.dto.in.InsereTurmaDto;
 import br.com.ktrak.domain.dto.out.ExibeTurmaDto;
 import br.com.ktrak.domain.dto.out.TurmaOutDto;
 import br.com.ktrak.domain.entities.ProfessorEntity;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +31,21 @@ public class TurmaApi {
     }
 
     @PostMapping
-    public ResponseEntity<TurmaEntity> insere(@RequestBody TurmaEntity entity) {
-        var entityInserido = service.insere(entity);
+    public ResponseEntity<ExibeTurmaDto> insere(@RequestBody InsereTurmaDto dto) {
+        var entityInserido = service.insere(dto);
         return new ResponseEntity<>(entityInserido, HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<ExibeTurmaDto> atualiza(@RequestBody AtualizaTurmaDto dto) {
+        var turmaAtualizada = service.atualiza(dto);
+        return new ResponseEntity<>(turmaAtualizada, HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> remove(@PathParam("id") Long id) {
+        service.remove(id);
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
 }
