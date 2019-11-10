@@ -38,4 +38,15 @@ public class ProfessorService implements Serializable {
         dto.toDto(entity);
         return dto;
     }
+
+    public boolean existePorId(Long id) {
+        return repository.existsById(id);
+    }
+
+    public ExibeProfessorDto buscaPorId(Long id) {
+        var professorResponse = repository.findById(id);
+        ExibeProfessorDto dto = new ExibeProfessorDto();
+        professorResponse.ifPresent(dto::toDto);
+        return dto;
+    }
 }

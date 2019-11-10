@@ -1,8 +1,11 @@
 package br.com.ktrak.secretaria.validators;
 
 import br.com.ktrak.Utils.DataValidationService;
+import br.com.ktrak.Utils.NumberValidationServiceImpl;
 import br.com.ktrak.Utils.TextValidationService;
 import br.com.ktrak.domain.dto.InsereProfessorDto;
+import br.com.ktrak.domain.exceptions.NotFoundException;
+import br.com.ktrak.domain.services.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +17,12 @@ public class ProfessorValidator {
 
     @Autowired
     private DataValidationService dataValidation;
+
+    @Autowired
+    NumberValidationServiceImpl numberValidationService;
+
+    @Autowired
+    private ProfessorService service;
 
     public boolean isNaoPodeInserir(InsereProfessorDto dto) {
         textValidation.isNullOrEmpty(dto.nome, "O nome do professor não pode ser nulo ou vazio");
@@ -33,4 +42,11 @@ public class ProfessorValidator {
         return false;
     }
 
+    public boolean naoPodeBuscar(Long id) {
+        numberValidationService.isNull(id);
+        if (!service.existePorId(id)) {
+            throw new NotFoundException("Não encontramos este professor na base de dados");
+        }
+        return false;
+    }
 }
