@@ -1,13 +1,11 @@
 package br.com.ktrak.secretaria.api;
 
-import br.com.ktrak.domain.dto.AtualizaAlunoDto;
-import br.com.ktrak.domain.dto.ExibeAlunoDto;
-import br.com.ktrak.domain.dto.InsereAlunoDto;
-import br.com.ktrak.domain.repositories.AlunoRepository;
+import br.com.ktrak.domain.dto.in.AtualizaAlunoDto;
+import br.com.ktrak.domain.dto.out.ExibeAlunoDto;
+import br.com.ktrak.domain.dto.in.InsereAlunoDto;
 import br.com.ktrak.domain.services.AlunoService;
 import br.com.ktrak.secretaria.validators.AlunoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

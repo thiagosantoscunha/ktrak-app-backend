@@ -1,10 +1,11 @@
-package br.com.ktrak.domain.dto;
+package br.com.ktrak.domain.dto.in;
 
 import br.com.ktrak.Utils.LocalDateTimeFormatter;
 import br.com.ktrak.domain.entities.ProfessorEntity;
 
-public class AtualizaProfessorDto {
-    public Long id;
+
+public class InsereProfessorDto {
+
     public String nome;
     public String dataNascimento;
     public String cep;
@@ -13,9 +14,9 @@ public class AtualizaProfessorDto {
     public String cidade;
     public String estado;
 
+
     public ProfessorEntity toEntity() {
         ProfessorEntity entity = new ProfessorEntity();
-        entity.setId(id);
         entity.setNome(nome);
         entity.setDataNascimento(LocalDateTimeFormatter.toLocalDate(dataNascimento));
         entity.setCep(cep);

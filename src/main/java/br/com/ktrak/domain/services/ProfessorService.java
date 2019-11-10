@@ -1,8 +1,8 @@
 package br.com.ktrak.domain.services;
 
-import br.com.ktrak.domain.dto.AtualizaProfessorDto;
-import br.com.ktrak.domain.dto.ExibeProfessorDto;
-import br.com.ktrak.domain.dto.InsereProfessorDto;
+import br.com.ktrak.domain.dto.in.AtualizaProfessorDto;
+import br.com.ktrak.domain.dto.out.ExibeProfessorDto;
+import br.com.ktrak.domain.dto.in.InsereProfessorDto;
 import br.com.ktrak.domain.entities.ProfessorEntity;
 import br.com.ktrak.domain.repositories.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
