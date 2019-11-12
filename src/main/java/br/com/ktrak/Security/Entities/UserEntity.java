@@ -1,6 +1,6 @@
-package br.com.ktrak.Security.entities;
+package br.com.ktrak.security.entities;
 
-import br.com.ktrak.Security.Enums.Role;
+import br.com.ktrak.security.enums.Role;
 
 import java.time.LocalDateTime;
 
@@ -51,13 +51,5 @@ public class UserEntity {
 
     public void setAtualizadoEm(LocalDateTime atualizadoEm) {
         this.atualizadoEm = atualizadoEm;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }

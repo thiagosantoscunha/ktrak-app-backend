@@ -1,15 +1,31 @@
 package br.com.ktrak.domain.entities;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "matriculas")
 public class MatriculaEntity {
+
+    @EmbeddedId
     private Long id;
+
+    @Column(length = 11, unique = true, nullable = false)
     private String numero;
+
+    @Column(nullable = false)
     private Integer faltas;
+
+    @Column
     private Double nota;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("aluno_id")
     private AlunoEntity aluno;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("turma_id")
     private TurmaEntity turma;
-    private List<MatriculaDiaLetitvoEntity> matriculaDiaLetitvo;
 
     public Long getId() {
         return id;
@@ -57,13 +73,5 @@ public class MatriculaEntity {
 
     public void setTurma(TurmaEntity turma) {
         this.turma = turma;
-    }
-
-    public List<MatriculaDiaLetitvoEntity> getMatriculaDiaLetitvo() {
-        return matriculaDiaLetitvo;
-    }
-
-    public void setMatriculaDiaLetitvo(List<MatriculaDiaLetitvoEntity> matriculaDiaLetitvo) {
-        this.matriculaDiaLetitvo = matriculaDiaLetitvo;
     }
 }

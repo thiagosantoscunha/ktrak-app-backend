@@ -1,13 +1,27 @@
 package br.com.ktrak.domain.entities;
 
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
+@Entity
+@Table(name = "dias_letivos")
 public class DiaLetivoEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private Date data;
+
+    @Column
+    private LocalDate data;
+
+    @ManyToOne
     private TurmaEntity turma;
-    private List<MatriculaDiaLetitvoEntity> matriculaDiaLetivos;
+
+//    private List<MatriculaDiaLetitvoEntity> matriculaDiaLetivos;
+
 
     public Long getId() {
         return id;
@@ -17,11 +31,11 @@ public class DiaLetivoEntity {
         this.id = id;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
@@ -33,11 +47,18 @@ public class DiaLetivoEntity {
         this.turma = turma;
     }
 
-    public List<MatriculaDiaLetitvoEntity> getMatriculaDiaLetivos() {
-        return matriculaDiaLetivos;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DiaLetivoEntity that = (DiaLetivoEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(data, that.data) &&
+                Objects.equals(turma, that.turma);
     }
 
-    public void setMatriculaDiaLetivos(List<MatriculaDiaLetitvoEntity> matriculaDiaLetivos) {
-        this.matriculaDiaLetivos = matriculaDiaLetivos;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, data, turma);
     }
 }

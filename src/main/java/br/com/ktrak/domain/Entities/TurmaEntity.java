@@ -1,18 +1,35 @@
 package br.com.ktrak.domain.entities;
 
-public class TurmaEntity {
-    private Long id;
-    private DisciplinaEntity disciplina;
-    private DiaLetivoEntity diaLetivosEntity;
-    private ProfessorEntity professor;
-    private MatriculaEntity matricula;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-    public Long getId() {
-        return id;
+@Entity
+@Table(name = "turmas")
+public class TurmaEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
+    @ManyToOne
+    private ProfessorEntity professor;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "turma_id")
+    private List<DiaLetivoEntity> diasLetivos = new ArrayList<>();
+
+    @ManyToOne()
+    @JoinColumn(name = "disciplina_id", nullable = false)
+    private DisciplinaEntity disciplina;
+
+    public List<DiaLetivoEntity> getDiasLetivos() {
+        return diasLetivos;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDiasLetivos(List<DiaLetivoEntity> diasLetivos) {
+        this.diasLetivos = diasLetivos;
     }
 
     public DisciplinaEntity getDisciplina() {
@@ -23,12 +40,12 @@ public class TurmaEntity {
         this.disciplina = disciplina;
     }
 
-    public DiaLetivoEntity getDiaLetivosEntity() {
-        return diaLetivosEntity;
+    public Long getId() {
+        return id;
     }
 
-    public void setDiaLetivosEntity(DiaLetivoEntity diaLetivosEntity) {
-        this.diaLetivosEntity = diaLetivosEntity;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public ProfessorEntity getProfessor() {
@@ -39,11 +56,17 @@ public class TurmaEntity {
         this.professor = professor;
     }
 
-    public MatriculaEntity getMatricula() {
-        return matricula;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TurmaEntity that = (TurmaEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(professor, that.professor);
     }
 
-    public void setMatricula(MatriculaEntity matricula) {
-        this.matricula = matricula;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, professor);
     }
 }

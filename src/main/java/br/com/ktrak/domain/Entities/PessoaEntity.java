@@ -1,31 +1,39 @@
 package br.com.ktrak.domain.entities;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity(name = "pessoas")
 public class PessoaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(length = 150)
+    @Column(length = 64, nullable = false)
     private String nome;
 
-    @Column()
-    private LocalDateTime dataNascimento;
+    @Column(nullable = false)
+    private LocalDate dataNascimento;
 
-    @Column(length = 64)
+    @Column(length = 64, nullable = false)
+    private String logradouro;
+
+    @Column(length = 8, nullable = false)
+    private String cep;
+
+    @Column(length = 64, nullable = false)
     private String bairro;
 
-    @Column(length = 64)
+    @Column(length = 64, nullable = false)
     private String cidade;
 
-    @Column(length = 64)
+    @Column(length = 64, nullable = false)
     private String estado;
 
-    @Column(length = 255)
+    @Column(length = 255, unique = true)
     private String digital;
 
     public Long getId() {
@@ -44,11 +52,11 @@ public class PessoaEntity {
         this.nome = nome;
     }
 
-    public LocalDateTime getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDateTime dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -95,5 +103,21 @@ public class PessoaEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 }
