@@ -1,9 +1,11 @@
 package br.com.ktrak.Utils.AimbraFluentValidationApi;
 
-import br.com.ktrak.Utils.AimbraFluentValidationApi.interfaces.IValidationObject;
+import br.com.ktrak.Utils.AimbraFluentValidationApi.interfaces.IObjectValidation;
 import br.com.ktrak.domain.exceptions.BadRequestException;
+import org.springframework.stereotype.Component;
 
-public class ValidationObjectImpl implements IValidationObject {
+@Component
+public class ObjectValidationImpl implements IObjectValidation {
 
     @Override
     public boolean isNull(Object o) {

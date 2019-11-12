@@ -1,5 +1,6 @@
 package br.com.ktrak.secretaria.validators;
 
+import br.com.ktrak.Secretaria.validators.AlunoValidator;
 import br.com.ktrak.domain.dto.in.AtualizaAlunoDto;
 import br.com.ktrak.domain.dto.in.InsereAlunoDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;

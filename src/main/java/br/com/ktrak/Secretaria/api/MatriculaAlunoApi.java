@@ -1,10 +1,10 @@
-package br.com.ktrak.secretaria.api;
+package br.com.ktrak.Secretaria.api;
 
+import br.com.ktrak.Secretaria.validators.AlunoValidator;
 import br.com.ktrak.domain.dto.in.AtualizaAlunoDto;
 import br.com.ktrak.domain.dto.out.ExibeAlunoDto;
 import br.com.ktrak.domain.dto.in.InsereAlunoDto;
 import br.com.ktrak.domain.services.AlunoService;
-import br.com.ktrak.secretaria.validators.AlunoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

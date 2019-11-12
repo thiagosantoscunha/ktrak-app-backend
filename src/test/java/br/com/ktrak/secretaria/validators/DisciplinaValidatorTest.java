@@ -1,5 +1,6 @@
 package br.com.ktrak.secretaria.validators;
 
+import br.com.ktrak.Secretaria.validators.DisciplinaValidator;
 import br.com.ktrak.domain.dto.in.InsereDisciplinaDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import org.junit.jupiter.api.BeforeEach;

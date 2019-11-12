@@ -4,6 +4,7 @@ import br.com.ktrak.Utils.AimbraFluentValidationApi.interfaces.ITextValidation;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import org.springframework.stereotype.Component;
 
+@Component
 public class TextValidationImpl implements ITextValidation {
     @Override
     public boolean isNull(String value) {
@@ -12,7 +13,7 @@ public class TextValidationImpl implements ITextValidation {
 
     @Override
     public boolean isNull(String value, String messageError) {
-        if (!isNull(value)) throw new BadRequestException(messageError);
+        if (isNull(value)) throw new BadRequestException(messageError);
         return true;
     }
 
@@ -23,7 +24,7 @@ public class TextValidationImpl implements ITextValidation {
 
     @Override
     public boolean isNotNull(String value, String messageError) {
-        if (!isNotNull(value)) throw new BadRequestException(messageError);
+        if (isNotNull(value)) throw new BadRequestException(messageError);
         return true;
     }
 
@@ -34,7 +35,7 @@ public class TextValidationImpl implements ITextValidation {
 
     @Override
     public boolean isNotEmpty(String value, String messageError) {
-        if (!isNotEmpty(value)) throw new BadRequestException(messageError);
+        if (isNotEmpty(value)) throw new BadRequestException(messageError);
         return true;
     }
 
@@ -45,7 +46,7 @@ public class TextValidationImpl implements ITextValidation {
 
     @Override
     public boolean isNotNullAndEmpty(String value, String messageError) {
-        if (!(isNotNull(value) && isNotEmpty(value))) throw new BadRequestException(messageError);
+        if (isNotNull(value) && isNotEmpty(value)) throw new BadRequestException(messageError);
         return true;
     }
 
@@ -56,7 +57,7 @@ public class TextValidationImpl implements ITextValidation {
 
     @Override
     public boolean isNullOrEmpty(String value, String messageError) {
-        if (!(isNull(value) || value.isEmpty())) throw new BadRequestException(messageError);
+        if ((isNull(value) || value.isEmpty())) throw new BadRequestException(messageError);
         return true;
     }
 

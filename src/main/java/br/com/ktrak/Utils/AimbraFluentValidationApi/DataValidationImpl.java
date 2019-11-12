@@ -5,8 +5,8 @@ import br.com.ktrak.domain.exceptions.BadRequestException;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
+@Component
 public class DataValidationImpl implements IDataValidation {
 
     @Override

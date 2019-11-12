@@ -1,5 +1,6 @@
-package br.com.ktrak.secretaria.validators;
+package br.com.ktrak.Secretaria.validators;
 
+import br.com.ktrak.Utils.AimbraFluentValidationApi.AimbraFluentApi;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.NumberValidationImpl;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.TextValidationImpl;
 import br.com.ktrak.domain.dto.in.AtualizaDisciplinaDto;
@@ -20,6 +21,7 @@ public class DisciplinaValidator {
 
     @Autowired
     private NumberValidationImpl numberValidation;
+
 
 
     public boolean isNaoPodeInserir(InsereDisciplinaDto dto) {

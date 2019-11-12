@@ -1,5 +1,7 @@
 package br.com.ktrak.Utils.AimbraFluentValidationApi.interfaces;
 
+import org.springframework.stereotype.Component;
+
 import java.text.SimpleDateFormat;
 
 public interface IDataValidation {

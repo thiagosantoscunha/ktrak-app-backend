@@ -1,6 +1,6 @@
 package br.com.ktrak.Utils.AimbraFluentValidationApi.interfaces;
 
-import java.util.Optional;
+import org.springframework.stereotype.Component;
 
 public interface INumberValidation {
 
