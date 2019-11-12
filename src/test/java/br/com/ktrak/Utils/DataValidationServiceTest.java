@@ -1,7 +1,7 @@
 package br.com.ktrak.Utils;
 
+import br.com.ktrak.Utils.AimbraFluentValidationApi.DataValidationImpl;
 import br.com.ktrak.domain.exceptions.BadRequestException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DataValidationServiceTest {
 
     @Autowired
-    private DataValidationService dataValidation;
+    private DataValidationImpl dataValidation;
 
     @BeforeEach
     void setUp() {

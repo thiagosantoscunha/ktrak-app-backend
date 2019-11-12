@@ -1,7 +1,7 @@
 package br.com.ktrak.secretaria.validators;
 
-import br.com.ktrak.Utils.NumberValidationServiceImpl;
-import br.com.ktrak.Utils.TextValidationService;
+import br.com.ktrak.Utils.AimbraFluentValidationApi.NumberValidationImpl;
+import br.com.ktrak.Utils.AimbraFluentValidationApi.TextValidationImpl;
 import br.com.ktrak.domain.dto.in.AtualizaDisciplinaDto;
 import br.com.ktrak.domain.dto.in.InsereDisciplinaDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;
@@ -16,10 +16,10 @@ public class DisciplinaValidator {
     private DisciplinaService service;
 
     @Autowired
-    private TextValidationService textValidation;
+    private TextValidationImpl textValidation;
 
     @Autowired
-    private NumberValidationServiceImpl numberValidation;
+    private NumberValidationImpl numberValidation;
 
 
     public boolean isNaoPodeInserir(InsereDisciplinaDto dto) {

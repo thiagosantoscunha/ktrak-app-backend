@@ -1,16 +1,15 @@
-package br.com.ktrak.Utils;
+package br.com.ktrak.Utils.AimbraFluentValidationApi;
 
+import br.com.ktrak.Utils.AimbraFluentValidationApi.interfaces.IDataValidation;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-@Component
-public class DataValidationService {
+public class DataValidationImpl implements IDataValidation {
 
-    private SimpleDateFormat patternFormat = new SimpleDateFormat("dd-MM-yyyy");
-
+    @Override
     public void isInvalidFormat(String dataString) {
         try {
             patternFormat.setLenient(false);
@@ -20,6 +19,7 @@ public class DataValidationService {
         }
     }
 
+    @Override
     public void isInvalidFormat(String dataString, String message) {
         try {
             patternFormat.setLenient(false);
