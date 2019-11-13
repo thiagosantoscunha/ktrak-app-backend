@@ -63,12 +63,12 @@ public class TextValidationImpl implements ITextValidation {
 
     @Override
     public boolean invalidLength(String text, Integer minLength, Integer maxLength) {
-        return text.length() < minLength && text.length() > maxLength;
+        return text.length() < minLength || text.length() > maxLength;
     }
 
     @Override
     public boolean invalidLength(String text, Integer minLength, Integer maxLength, String messageError) {
-        if (text.length() < minLength && text.length() > maxLength) throw new BadRequestException(messageError);
+        if (invalidLength(text, minLength, maxLength)) throw new BadRequestException(messageError);
         return false;
     }
 
@@ -99,29 +99,29 @@ public class TextValidationImpl implements ITextValidation {
         switch (operator) {
             case "==":
                 if (text.length() == length) sendExption(messageError);
-                return true;
+                break;
             case "!=":
                 if (text.length() != length) sendExption(messageError);
-                return true;
+                break;
             case ">":
                 if (text.length() > length) sendExption(messageError);
-                return true;
+                break;
             case ">=":
                 if (text.length() >= length) sendExption(messageError);
-                return true;
+                break;
             case "<":
                 if (text.length() < length) sendExption(messageError);
-                return true;
+                break;
             case "<=":
                 if (text.length() <= length) sendExption(messageError);
-                return true;
+                break;
         }
 
         return false;
     }
 
     private void sendExption(String messageError) {
-        if (isNullOrEmpty(messageError)) {
+        if (isNotNullAndEmpty(messageError)) {
             throw new BadRequestException(messageError);
         }
     }

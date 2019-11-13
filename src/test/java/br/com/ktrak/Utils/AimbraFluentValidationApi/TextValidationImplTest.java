@@ -110,20 +110,120 @@ class TextValidationImplTest {
 
     @Test
     void invalidLength() {
-        value = "Hello";
+        value = "Hellooooooo";
         boolean result = validation.invalidLength(value, 2, 10);
         Assertions.assertTrue(result);
     }
 
     @Test
-    void testInvalidLength() {
+    void invalidLengthThrownTest() {
+        value = "Helloooooooo";
+        String messageError = "The text is invalid length. You need of the field between 2 to 10 characteres";
+        String message = Assertions.assertThrows(BadRequestException.class, () -> {
+            validation.invalidLength(value, 2, 10, messageError);
+        }).getMessage();
+        assertEquals(messageError, message);
     }
 
     @Test
-    void testInvalidLength1() {
+    void testInvalidLengthWithIqualOperator() {
+        value = "Hello Java";
+        boolean result = validation.invalidLength(value, "==", 10);
+        assertTrue(result);
     }
 
     @Test
-    void testInvalidLength2() {
+    void testInvalidLengthWithDiferentOperator() {
+        value = "Hello, Java";
+        boolean result = validation.invalidLength(value, "!=", 10);
+        assertTrue(result);
     }
+
+    @Test
+    void testInvalidLengthWithGraterThanOperator() {
+        value = "Hello, Java";
+        boolean result = validation.invalidLength(value, ">", 10);
+        assertTrue(result);
+    }
+
+    @Test
+    void testInvalidLengthWithLessThanOperator() {
+        value = "Hell Java";
+        boolean result = validation.invalidLength(value, "<", 10);
+        assertTrue(result);
+    }
+
+    @Test
+    void testInvalidLengthWithGraterThanOrEqualOperator() {
+        value = "Hello, Java";
+        boolean result = validation.invalidLength(value, ">=", 10);
+        assertTrue(result);
+    }
+
+    @Test
+    void testInvalidLengthWithLessThanOrEqualOperator() {
+        value = "Hello Java";
+        boolean result = validation.invalidLength(value, "<=", 10);
+        assertTrue(result);
+    }
+
+    @Test
+    void testInvalidLengthWithIqualOperatorWithThrow() {
+        value = "Hello Java";
+        var messageError = "Invalid length for text.";
+        var message = assertThrows(BadRequestException.class, () -> {
+            validation.invalidLength(value, "==", 10, messageError);
+        }).getMessage();
+        assertEquals(messageError, message);
+    }
+
+    @Test
+    void testInvalidLengthWithDiferentOperatorWithThrow() {
+        value = "Hello, Java";
+        var messageError = "Invalid length for text.";
+        var message = assertThrows(BadRequestException.class, () -> {
+            validation.invalidLength(value, "!=", 10, messageError);
+        }).getMessage();
+        assertEquals(messageError, message);
+    }
+
+    @Test
+    void testInvalidLengthWithGraterThanOperatorWithThrow() {
+        value = "Hello, Java";
+        var messageError = "Invalid length for text.";
+        var message = assertThrows(BadRequestException.class, () -> {
+            validation.invalidLength(value, ">", 10, messageError);
+        }).getMessage();
+        assertEquals(messageError, message);
+    }
+    @Test
+    void testInvalidLengthWithLessThanOperatorWithThrow() {
+        value = "Hell Java";
+        var messageError = "Invalid length for text.";
+        var message = assertThrows(BadRequestException.class, () -> {
+            validation.invalidLength(value, "<", 10, messageError);
+        }).getMessage();
+        assertEquals(messageError, message);
+    }
+
+    @Test
+    void testInvalidLengthWithGraterThanOrEqualOperatorWithThrow() {
+        value = "Hell0 Java";
+        var messageError = "Invalid length for text.";
+        var message = assertThrows(BadRequestException.class, () -> {
+            validation.invalidLength(value, ">=", 10, messageError);
+        }).getMessage();
+        assertEquals(messageError, message);
+    }
+
+    @Test
+    void testInvalidLengthWithLessThanOrEqualOperatorWithThrow() {
+        value = "Hello Java";
+        var messageError = "Invalid length for text.";
+        var message = assertThrows(BadRequestException.class, () -> {
+            validation.invalidLength(value, "<=", 10, messageError);
+        }).getMessage();
+        assertEquals(messageError, message);
+    }
+
 }
