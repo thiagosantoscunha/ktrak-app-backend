@@ -1,16 +1,12 @@
 package br.com.ktrak.domain.services;
 
+import br.com.ktrak.domain.converters.ProfessorConverter;
 import br.com.ktrak.domain.dto.ProfessorDto;
-import br.com.ktrak.domain.dto.in.AtualizaProfessorDto;
-import br.com.ktrak.domain.dto.out.ExibeProfessorDto;
-import br.com.ktrak.domain.dto.in.InsereProfessorDto;
-import br.com.ktrak.domain.entities.ProfessorEntity;
 import br.com.ktrak.domain.repositories.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,12 +33,7 @@ public class ProfessorService implements Serializable {
     }
 
     public ProfessorDto buscaPorId(Long id) {
-        ProfessorDto dto = null;
-        var entity = repository.findById(id);
-        if (entity.isPresent()) {
-            dto = converter.toDto(entity.get());
-        }
-        return dto;
+        return repository.findById(id).map(professorEntity -> converter.toDto(professorEntity)).orElse(null);
     }
 
     public ProfessorDto atualiza(ProfessorDto dto) {
