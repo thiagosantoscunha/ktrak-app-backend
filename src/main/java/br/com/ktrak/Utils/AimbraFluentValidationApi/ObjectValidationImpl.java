@@ -25,7 +25,9 @@ public class ObjectValidationImpl implements IObjectValidation {
 
     @Override
     public boolean isNotNull(Object o, String messageError) {
-        if (isNotNull(o)) if (isNull(o)) throw new BadRequestException(messageError);
+        if (isNotNull(o)) {
+            throw new BadRequestException(messageError);
+        }
         return false;
     }
 
