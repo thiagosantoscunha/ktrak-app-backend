@@ -1,5 +1,6 @@
 package br.com.ktrak.domain.services;
 
+import br.com.ktrak.domain.dto.ProfessorDto;
 import br.com.ktrak.domain.dto.in.AtualizaProfessorDto;
 import br.com.ktrak.domain.dto.out.ExibeProfessorDto;
 import br.com.ktrak.domain.dto.in.InsereProfessorDto;
@@ -18,45 +19,35 @@ public class ProfessorService implements Serializable {
     @Autowired
     private ProfessorRepository repository;
 
-    public List<ExibeProfessorDto> buscaTudo() {
-        var professorResponseList = repository.findAll();
+    @Autowired
+    private ProfessorConverter converter;
 
-        List<ExibeProfessorDto> professores = new ArrayList<>();
-
-        professorResponseList.forEach(prof -> {
-            ExibeProfessorDto model = new ExibeProfessorDto();
-            model.toDto(prof);
-            professores.add(model);
-        });
-
-        return professores;
+    public List<ProfessorDto> buscaTudo() {
+        var entities = repository.findAll();
+        return converter.toDtoList(entities);
     }
 
-    public ExibeProfessorDto insere(InsereProfessorDto model) {
-        ProfessorEntity entity = model.toEntity();
-        entity = repository.save(entity);
-        ExibeProfessorDto dto = new ExibeProfessorDto();
-        dto.toDto(entity);
-        return dto;
+    public ProfessorDto insere(ProfessorDto dto) {
+        var entity = repository.save(converter.toEntity(dto));
+        return converter.toDto(entity);
     }
 
     public boolean existePorId(Long id) {
         return repository.existsById(id);
     }
 
-    public ExibeProfessorDto buscaPorId(Long id) {
-        var professorResponse = repository.findById(id);
-        ExibeProfessorDto dto = new ExibeProfessorDto();
-        professorResponse.ifPresent(dto::toDto);
+    public ProfessorDto buscaPorId(Long id) {
+        ProfessorDto dto = null;
+        var entity = repository.findById(id);
+        if (entity.isPresent()) {
+            dto = converter.toDto(entity.get());
+        }
         return dto;
     }
 
-    public ExibeProfessorDto atualiza(AtualizaProfessorDto model) {
-        ProfessorEntity entity = model.toEntity();
-        entity = repository.save(entity);
-        ExibeProfessorDto dto = new ExibeProfessorDto();
-        dto.toDto(entity);
-        return dto;
+    public ProfessorDto atualiza(ProfessorDto dto) {
+        var entity = repository.save(converter.toEntity(dto));
+        return converter.toDto(entity);
     }
 
     public void remove(Long id) {

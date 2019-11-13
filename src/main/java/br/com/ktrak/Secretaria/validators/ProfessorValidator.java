@@ -4,6 +4,7 @@ import br.com.ktrak.Utils.AimbraFluentValidationApi.AimbraFluentApi;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.DataValidationImpl;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.NumberValidationImpl;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.TextValidationImpl;
+import br.com.ktrak.domain.dto.ProfessorDto;
 import br.com.ktrak.domain.dto.in.AtualizaProfessorDto;
 import br.com.ktrak.domain.dto.in.InsereProfessorDto;
 import br.com.ktrak.domain.exceptions.NotFoundException;
@@ -27,7 +28,7 @@ public class ProfessorValidator {
     @Autowired
     private ProfessorService service;
 
-    public boolean isNaoPodeInserir(InsereProfessorDto dto) {
+    public boolean isNaoPodeInserir(ProfessorDto dto) {
         return isNaoPodeSalvar(dto.nome, dto.dataNascimento, dto.logradouro, dto.cep, dto.bairro, dto.cidade, dto.estado);
     }
 
@@ -57,7 +58,7 @@ public class ProfessorValidator {
         return false;
     }
 
-    public boolean isNaoPodeAtualizar(AtualizaProfessorDto dto) {
+    public boolean isNaoPodeAtualizar(ProfessorDto dto) {
         numberValidation.isNull(dto.id);
         var naoPodeSalvar = isNaoPodeSalvar(dto.nome, dto.dataNascimento, dto.logradouro, dto.cep, dto.bairro, dto.cidade, dto.estado);
         if (!service.existePorId(dto.id)) {
