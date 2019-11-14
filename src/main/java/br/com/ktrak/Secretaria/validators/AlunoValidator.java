@@ -1,9 +1,10 @@
-package br.com.ktrak.Secretaria.validators;
+package br.com.ktrak.secretaria.validators;
 
 import br.com.ktrak.Utils.AimbraFluentValidationApi.AimbraFluentApi;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.DataValidationImpl;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.NumberValidationImpl;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.TextValidationImpl;
+import br.com.ktrak.domain.dto.AlunoDto;
 import br.com.ktrak.domain.dto.in.AtualizaAlunoDto;
 import br.com.ktrak.domain.dto.in.InsereAlunoDto;
 import br.com.ktrak.domain.exceptions.NotFoundException;
@@ -26,11 +27,11 @@ public class AlunoValidator {
     @Autowired
     DataValidationImpl dataValidation;
 
-    public boolean isNaoPodeInserir(InsereAlunoDto dto) {
+    public boolean isNaoPodeInserir(AlunoDto dto) {
         return isNaoPodeSalvar(dto.nome, dto.dataNascimento, dto.logradouro, dto.cep, dto.bairro, dto.cidade, dto.estado);
     }
 
-    public boolean isNaoPodeAtualizar(AtualizaAlunoDto dto) {
+    public boolean isNaoPodeAtualizar(AlunoDto dto) {
         numberValidation.isNull(dto.id, "O aluno precisa de um Id");
         var naoPodeSalvar = isNaoPodeSalvar(dto.nome, dto.dataNascimento, dto.logradouro, dto.cep, dto.bairro, dto.cidade, dto.estado);
         var hasAluno = service.existePorId(dto.id);

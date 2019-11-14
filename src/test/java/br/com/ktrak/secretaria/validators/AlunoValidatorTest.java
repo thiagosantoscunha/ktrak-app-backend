@@ -1,6 +1,6 @@
 package br.com.ktrak.secretaria.validators;
 
-import br.com.ktrak.Secretaria.validators.AlunoValidator;
+import br.com.ktrak.domain.dto.AlunoDto;
 import br.com.ktrak.domain.dto.in.AtualizaAlunoDto;
 import br.com.ktrak.domain.dto.in.InsereAlunoDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;
@@ -19,12 +19,12 @@ class AlunoValidatorTest {
     @Autowired
     private AlunoValidator validator;
 
-    private InsereAlunoDto aluno;
-    private AtualizaAlunoDto atualizaAluno;
+    private AlunoDto aluno;
+    private AlunoDto atualizaAluno;
 
     @BeforeEach
     void setUp() {
-        aluno = new InsereAlunoDto(
+        aluno = new AlunoDto(
                 "Thiago dos Santos Celestino da Cunha",
                 "18-07-1989",
                 "26020087",
@@ -34,7 +34,7 @@ class AlunoValidatorTest {
                 "Rio de Janeiro"
         );
 
-        atualizaAluno = new AtualizaAlunoDto();
+        atualizaAluno = new AlunoDto();
         atualizaAluno.id = 1L;
         atualizaAluno.nome = "Thiago dos Santos Celestino da Cunha";
         atualizaAluno.dataNascimento = "18-07-1989";

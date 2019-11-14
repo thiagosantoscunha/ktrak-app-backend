@@ -1,10 +1,11 @@
-package br.com.ktrak.Secretaria.api;
+package br.com.ktrak.secretaria.api;
 
-import br.com.ktrak.Secretaria.validators.AlunoValidator;
+import br.com.ktrak.domain.dto.AlunoDto;
 import br.com.ktrak.domain.dto.in.AtualizaAlunoDto;
 import br.com.ktrak.domain.dto.out.ExibeAlunoDto;
 import br.com.ktrak.domain.dto.in.InsereAlunoDto;
 import br.com.ktrak.domain.services.AlunoService;
+import br.com.ktrak.secretaria.validators.AlunoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,27 +24,27 @@ public class MatriculaAlunoApi {
     private AlunoValidator validator;
 
     @GetMapping
-    public ResponseEntity<List<ExibeAlunoDto>> buscaTudo() {
+    public ResponseEntity<List<AlunoDto>> buscaTudo() {
         var alunos = alunoService.buscaTudo();
         return new ResponseEntity<>(alunos, HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<ExibeAlunoDto> buscaPorId(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<AlunoDto> buscaPorId(@PathVariable(name = "id") Long id) {
         validator.isNaoPodeBuscarPorId(id);
         var alunoResponse = alunoService.buscaPorId(id);
         return new ResponseEntity<>(alunoResponse, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<ExibeAlunoDto> insere(@RequestBody InsereAlunoDto dto) {
+    public ResponseEntity<AlunoDto> insere(@RequestBody AlunoDto dto) {
         validator.isNaoPodeInserir(dto);
         var alunoInserido = alunoService.insere(dto);
         return new ResponseEntity<>(alunoInserido, HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<ExibeAlunoDto> atualiza(@RequestBody AtualizaAlunoDto dto) {
+    public ResponseEntity<AlunoDto> atualiza(@RequestBody AlunoDto dto) {
         validator.isNaoPodeAtualizar(dto);
         var alunoAtualizado = alunoService.atualiza(dto);
         return new ResponseEntity<>(alunoAtualizado, HttpStatus.OK);

@@ -1,5 +1,7 @@
 package br.com.ktrak.domain.services;
 
+import br.com.ktrak.domain.converters.AlunoConverter;
+import br.com.ktrak.domain.dto.AlunoDto;
 import br.com.ktrak.domain.dto.in.AtualizaAlunoDto;
 import br.com.ktrak.domain.dto.out.ExibeAlunoDto;
 import br.com.ktrak.domain.dto.in.InsereAlunoDto;
@@ -17,44 +19,33 @@ public class AlunoService implements Serializable {
     @Autowired
     private AlunoRepository repository;
 
-    public List<ExibeAlunoDto> buscaTudo() {
+    @Autowired
+    private AlunoConverter converter;
+
+    public List<AlunoDto> buscaTudo() {
         var alunos = repository.findAll();
-        List<ExibeAlunoDto> dtoList = new ArrayList<>();
-
-        alunos.forEach(aluno -> {
-            var alunoDto = new ExibeAlunoDto();
-            alunoDto.toDto(aluno);
-            dtoList.add(alunoDto);
-        });
-
-        return dtoList;
+        return converter.toDtoList(alunos);
     }
 
-    public ExibeAlunoDto buscaPorId(Long id) {
+    public AlunoDto buscaPorId(Long id) {
         var aluno = repository.findById(id);
-        ExibeAlunoDto dtoResponse = new ExibeAlunoDto();
-        aluno.ifPresent(dtoResponse::toDto);
-        return dtoResponse;
+        return aluno.map(alunoEntity -> converter.toDto(alunoEntity)).orElse(null);
     }
 
-    public ExibeAlunoDto insere(InsereAlunoDto dto) {
-        var entity = dto.toEntity();
+    public AlunoDto insere(AlunoDto dto) {
+        var entity = converter.toEntity(dto);
         entity = repository.save(entity);
-        ExibeAlunoDto dtoResponse = new ExibeAlunoDto();
-        dtoResponse.toDto(entity);
-        return dtoResponse;
+        return converter.toDto(entity);
     }
 
     public boolean existePorId(Long id) {
         return repository.existsById(id);
     }
 
-    public ExibeAlunoDto atualiza(AtualizaAlunoDto dto) {
-        var entity = dto.toEntity();
+    public AlunoDto atualiza(AlunoDto dto) {
+        var entity = converter.toEntity(dto);
         entity = repository.save(entity);
-        ExibeAlunoDto dtoResponse = new ExibeAlunoDto();
-        dtoResponse.toDto(entity);
-        return dtoResponse;
+        return converter.toDto(entity);
     }
 
     public void remove(Long id) {
