@@ -1,6 +1,8 @@
 package br.com.ktrak.secretaria.api;
 
-import br.com.ktrak.Secretaria.validators.DisciplinaValidator;
+import br.com.ktrak.secretaria.validators.DisciplinaValidator;
+import br.com.ktrak.domain.dto.DisciplinaDto;
+import br.com.ktrak.domain.dto.ProfessorDto;
 import br.com.ktrak.domain.dto.in.AtualizaDisciplinaDto;
 import br.com.ktrak.domain.dto.out.ExibeDisciplinaDto;
 import br.com.ktrak.domain.dto.in.InsereDisciplinaDto;
@@ -23,27 +25,27 @@ public class DisciplinaApi {
     private DisciplinaValidator validator;
 
     @GetMapping
-    public ResponseEntity<List<ExibeDisciplinaDto>> buscaTudo() {
+    public ResponseEntity<List<DisciplinaDto>> buscaTudo() {
         var disciplinas = service.buscaTudo();
         return new ResponseEntity<>(disciplinas, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<ExibeDisciplinaDto> insere(@RequestBody InsereDisciplinaDto model) {
-        validator.isNaoPodeInserir(model);
-        var disciplinaInserida = service.insere(model);
+    public ResponseEntity<DisciplinaDto> insere(@RequestBody DisciplinaDto dto) {
+        validator.isNaoPodeInserir(dto);
+        var disciplinaInserida = service.insere(dto);
         return new ResponseEntity<>(disciplinaInserida, HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<ExibeDisciplinaDto> atualiza(@RequestBody AtualizaDisciplinaDto model) {
-        validator.isNaoPodeAtualizar(model);
-        var disciplinaAtualizada = service.atualiza(model);
+    public ResponseEntity<DisciplinaDto> atualiza(@RequestBody DisciplinaDto dto) {
+        validator.isNaoPodeAtualizar(dto);
+        var disciplinaAtualizada = service.atualiza(dto);
         return new ResponseEntity<>(disciplinaAtualizada, HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<ExibeDisciplinaDto> buscaPorId(@PathVariable("id") Long id) {
+    public ResponseEntity<DisciplinaDto> buscaPorId(@PathVariable("id") Long id) {
         validator.isNaoPodeBuscarPorId(id);
         var disciplina = service.buscaPorId(id);
         return new ResponseEntity<>(disciplina, HttpStatus.OK);

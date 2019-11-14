@@ -29,7 +29,7 @@ public class AlunoService implements Serializable {
 
     public AlunoDto buscaPorId(Long id) {
         var aluno = repository.findById(id);
-        return aluno.map(alunoEntity -> converter.toDto(alunoEntity)).orElse(null);
+        return aluno.map(e -> converter.toDto(e)).orElse(null);
     }
 
     public AlunoDto insere(AlunoDto dto) {

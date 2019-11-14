@@ -1,6 +1,7 @@
 package br.com.ktrak.secretaria.validators;
 
-import br.com.ktrak.Secretaria.validators.DisciplinaValidator;
+import br.com.ktrak.domain.dto.DisciplinaDto;
+import br.com.ktrak.secretaria.validators.DisciplinaValidator;
 import br.com.ktrak.domain.dto.in.InsereDisciplinaDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,11 +17,11 @@ class DisciplinaValidatorTest {
     @Autowired
     private DisciplinaValidator validator;
 
-    private InsereDisciplinaDto insereDisciplinaDto;
+    private DisciplinaDto insereDisciplinaDto;
 
     @BeforeEach
     void setUp() {
-        insereDisciplinaDto = new InsereDisciplinaDto();
+        insereDisciplinaDto = new DisciplinaDto();
         insereDisciplinaDto.nome = "Matemática Discreta";
     }
 

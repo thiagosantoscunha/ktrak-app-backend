@@ -1,10 +1,8 @@
-package br.com.ktrak.Secretaria.validators;
+package br.com.ktrak.secretaria.validators;
 
-import br.com.ktrak.Utils.AimbraFluentValidationApi.AimbraFluentApi;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.NumberValidationImpl;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.TextValidationImpl;
-import br.com.ktrak.domain.dto.in.AtualizaDisciplinaDto;
-import br.com.ktrak.domain.dto.in.InsereDisciplinaDto;
+import br.com.ktrak.domain.dto.DisciplinaDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import br.com.ktrak.domain.services.DisciplinaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +22,11 @@ public class DisciplinaValidator {
 
 
 
-    public boolean isNaoPodeInserir(InsereDisciplinaDto dto) {
+    public boolean isNaoPodeInserir(DisciplinaDto dto) {
         return isNaoPodeSalvar(dto.nome);
     }
 
-    public boolean isNaoPodeAtualizar(AtualizaDisciplinaDto model) {
+    public boolean isNaoPodeAtualizar(DisciplinaDto model) {
         return isNaoPodeBuscarPorId(model.id) || isNaoPodeSalvar(model.nome);
     }
 
