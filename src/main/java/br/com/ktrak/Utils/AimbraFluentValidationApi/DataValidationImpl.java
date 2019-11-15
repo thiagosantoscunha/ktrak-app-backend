@@ -10,22 +10,42 @@ import java.text.ParseException;
 public class DataValidationImpl implements IDataValidation {
 
     @Override
-    public void isInvalidFormat(String dataString) {
+    public void isInvalidDateFormat(String dataString) {
         try {
-            patternFormat.setLenient(false);
-            var data = patternFormat.parse(dataString);
+            patternDateFormat.setLenient(false);
+            var data = patternDateFormat.parse(dataString);
         } catch (ParseException e) {
             throw new BadRequestException("A data " + dataString + "tem um formato inválido");
         }
     }
 
     @Override
-    public void isInvalidFormat(String dataString, String message) {
+    public void isInvalidDateFormat(String dataString, String messageError) {
         try {
-            patternFormat.setLenient(false);
-            var data = patternFormat.parse(dataString);
+            patternDateFormat.setLenient(false);
+            var data = patternDateFormat.parse(dataString);
         } catch (ParseException e) {
-            throw new BadRequestException(message);
+            throw new BadRequestException(messageError);
+        }
+    }
+
+    @Override
+    public void isInvalidHourFormat(String dataString) {
+        try {
+            patternHourFormat.setLenient(false);
+            var data = patternHourFormat.parse(dataString);
+        } catch (ParseException e) {
+            throw new BadRequestException("A hora " + dataString + "tem um formato inválido");
+        }
+    }
+
+    @Override
+    public void isInvalidHourFormat(String dataString, String messageError) {
+        try {
+            patternHourFormat.setLenient(false);
+            var data = patternHourFormat.parse(dataString);
+        } catch (ParseException e) {
+            throw new BadRequestException(messageError);
         }
     }
 

@@ -1,6 +1,6 @@
 package br.com.ktrak.domain.converters;
 
-import br.com.ktrak.Utils.LocalDateTimeFormatter;
+import br.com.ktrak.Utils.LocalFormatter;
 import br.com.ktrak.domain.dto.DiaLetivoDto;
 import br.com.ktrak.domain.entities.DiaLetivoEntity;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ public class DiaLetivoConverter extends Converter<DiaLetivoDto, DiaLetivoEntity>
         super(fromDto -> {
             var entity = new DiaLetivoEntity();
             entity.setId(fromDto.id);
-            entity.setDataHora(LocalDateTimeFormatter.toLocalDateTime(fromDto.data));
+            entity.setDataHora(LocalFormatter.toLocalDateTime(fromDto.data));
             entity.setTurma(new TurmaConverter().toEntity(fromDto.turma));
             return entity;
         }, fromEntity -> new DiaLetivoDto(
