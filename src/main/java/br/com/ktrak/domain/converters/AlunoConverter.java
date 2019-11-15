@@ -1,11 +1,9 @@
 package br.com.ktrak.domain.converters;
 
-import br.com.ktrak.Utils.LocalDateTimeFormatter;
+import br.com.ktrak.Utils.LocalFormatter;
 import br.com.ktrak.domain.dto.AlunoDto;
 import br.com.ktrak.domain.entities.AlunoEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.function.Function;
 
 @Service
 public class AlunoConverter extends Converter<AlunoDto, AlunoEntity> {
@@ -14,7 +12,7 @@ public class AlunoConverter extends Converter<AlunoDto, AlunoEntity> {
                 alunoDto -> new AlunoEntity(
                     alunoDto.id,
                     alunoDto.nome,
-                    LocalDateTimeFormatter.toLocalDate(alunoDto.dataNascimento),
+                    LocalFormatter.toLocalDate(alunoDto.dataNascimento),
                     alunoDto.cep,
                     alunoDto.logradouro,
                     alunoDto.bairro,

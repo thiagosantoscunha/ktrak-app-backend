@@ -1,6 +1,6 @@
 package br.com.ktrak.domain.dto.in;
 
-import br.com.ktrak.Utils.LocalDateTimeFormatter;
+import br.com.ktrak.Utils.LocalFormatter;
 import br.com.ktrak.domain.entities.AlunoEntity;
 
 public class AtualizaAlunoDto {
@@ -30,7 +30,7 @@ public class AtualizaAlunoDto {
         AlunoEntity entity = new AlunoEntity();
         entity.setId(id);
         entity.setNome(nome);
-        entity.setDataNascimento(LocalDateTimeFormatter.toLocalDate(dataNascimento));
+        entity.setDataNascimento(LocalFormatter.toLocalDate(dataNascimento));
         entity.setCep(cep);
         entity.setLogradouro(logradouro);
         entity.setBairro(bairro);
