@@ -1,9 +1,7 @@
 package br.com.ktrak.domain.dto.in;
 
-import br.com.ktrak.Utils.LocalDateTimeFormatter;
+import br.com.ktrak.Utils.LocalFormatter;
 import br.com.ktrak.domain.entities.AlunoEntity;
-
-import java.time.LocalDate;
 
 public class InsereAlunoDto {
 
@@ -28,7 +26,7 @@ public class InsereAlunoDto {
     public AlunoEntity toEntity() {
         AlunoEntity entity = new AlunoEntity();
         entity.setNome(nome);
-        entity.setDataNascimento(LocalDateTimeFormatter.toLocalDate(dataNascimento));
+        entity.setDataNascimento(LocalFormatter.toLocalDate(dataNascimento));
         entity.setCep(cep);
         entity.setLogradouro(logradouro);
         entity.setBairro(bairro);

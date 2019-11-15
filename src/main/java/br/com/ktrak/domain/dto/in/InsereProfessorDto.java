@@ -1,6 +1,6 @@
 package br.com.ktrak.domain.dto.in;
 
-import br.com.ktrak.Utils.LocalDateTimeFormatter;
+import br.com.ktrak.Utils.LocalFormatter;
 import br.com.ktrak.domain.entities.ProfessorEntity;
 
 
@@ -18,7 +18,7 @@ public class InsereProfessorDto {
     public ProfessorEntity toEntity() {
         ProfessorEntity entity = new ProfessorEntity();
         entity.setNome(nome);
-        entity.setDataNascimento(LocalDateTimeFormatter.toLocalDate(dataNascimento));
+        entity.setDataNascimento(LocalFormatter.toLocalDate(dataNascimento));
         entity.setCep(cep);
         entity.setLogradouro(logradouro);
         entity.setBairro(bairro);
