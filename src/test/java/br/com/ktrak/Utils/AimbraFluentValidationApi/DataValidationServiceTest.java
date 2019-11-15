@@ -20,10 +20,16 @@ class DataValidationServiceTest {
     }
 
     @Test
+    void isValidFormatDateTest() {
+        var dataNascimento = "1979-12-15";
+        dataValidation.isInvalidDateFormat(dataNascimento);
+    }
+
+    @Test
     void isInvalidFormatTest() {
         var dataNascimento = "19/09/1789";
         var message = assertThrows(BadRequestException.class, () -> {
-            dataValidation.isInvalidFormat(dataNascimento, "Formato de data inválido");
+            dataValidation.isInvalidDateFormat(dataNascimento, "Formato de data inválido");
         }).getMessage();
         assertEquals(message, "Formato de data inválido");
     }
@@ -32,7 +38,7 @@ class DataValidationServiceTest {
     void isInvalidFormatWithoutMessageTest() {
         var dataNascimento = "19/09/1789";
         var message = assertThrows(BadRequestException.class, () -> {
-            dataValidation.isInvalidFormat(dataNascimento);
+            dataValidation.isInvalidDateFormat(dataNascimento);
         }).getMessage();
         assertEquals(message, "A data " + dataNascimento + "tem um formato inválido");
     }
