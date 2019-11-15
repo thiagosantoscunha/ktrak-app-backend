@@ -1,6 +1,6 @@
 package br.com.ktrak.domain.converters;
 
-import br.com.ktrak.Utils.LocalDateTimeFormatter;
+import br.com.ktrak.Utils.LocalFormatter;
 import br.com.ktrak.domain.dto.ProfessorDto;
 import br.com.ktrak.domain.entities.ProfessorEntity;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class ProfessorConverter extends Converter<ProfessorDto, ProfessorEntity>
             professorDto -> new ProfessorEntity(
                 professorDto.id,
                 professorDto.nome,
-                LocalDateTimeFormatter.toLocalDate(professorDto.dataNascimento),
+                LocalFormatter.toLocalDate(professorDto.dataNascimento),
                 professorDto.cep,
                 professorDto.logradouro,
                 professorDto.bairro,
