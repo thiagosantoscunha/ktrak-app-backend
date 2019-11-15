@@ -1,5 +1,7 @@
 package br.com.ktrak.domain.services;
 
+import br.com.ktrak.domain.converters.DisciplinaConverter;
+import br.com.ktrak.domain.dto.DisciplinaDto;
 import br.com.ktrak.domain.dto.in.AtualizaDisciplinaDto;
 import br.com.ktrak.domain.dto.out.ExibeDisciplinaDto;
 import br.com.ktrak.domain.dto.in.InsereDisciplinaDto;
@@ -17,49 +19,39 @@ public class DisciplinaService implements Serializable {
     @Autowired
     private DisciplinaRepository repository;
 
-    public List<ExibeDisciplinaDto> buscaTudo() {
+    @Autowired
+    private DisciplinaConverter converter;
+
+
+    public List<DisciplinaDto> buscaTudo() {
         var entities = repository.findAll();
-        List<ExibeDisciplinaDto> disciplinas = new ArrayList<>();
-        entities.forEach(d -> {
-            ExibeDisciplinaDto dto = new ExibeDisciplinaDto();
-            dto.toDto(d);
-            disciplinas.add(dto);
-        });
-        return disciplinas;
+        return converter.toDtoList(entities);
     }
 
-    public ExibeDisciplinaDto insere(InsereDisciplinaDto model) {
-        var entity = model.toEntity();
-        entity = repository.save(entity);
-        var disciplinaInserida = new ExibeDisciplinaDto();
-        disciplinaInserida.toDto(entity);
-        return disciplinaInserida;
+    public DisciplinaDto insere(DisciplinaDto dto) {
+        var entity = repository.save(converter.toEntity(dto));
+        return converter.toDto(entity);
+    }
+
+    public DisciplinaDto atualiza(DisciplinaDto dto) {
+        var entity = repository.save(converter.toEntity(dto));
+        return converter.toDto(entity);
+    }
+
+    public DisciplinaDto buscaPorId(Long id) {
+        var entity = repository.findById(id);
+        return entity.map(e -> converter.toDto(e)).orElse(null);
+    }
+
+    public void removePorId(Long id) {
+        repository.deleteById(id);
     }
 
     public boolean existePorNome(String nome) {
         return repository.existsByNome(nome);
     }
 
-    public ExibeDisciplinaDto atualiza(AtualizaDisciplinaDto model) {
-        var entity = model.toEntity();
-        entity = repository.save(entity);
-        var disciplinaAtualizada = new ExibeDisciplinaDto();
-        disciplinaAtualizada.toDto(entity);
-        return disciplinaAtualizada;
-    }
-
     public boolean existePorId(Long id) {
         return repository.existsById(id);
-    }
-
-    public ExibeDisciplinaDto buscaPorId(Long id) {
-        var entity = repository.findById(id);
-        ExibeDisciplinaDto dto = new ExibeDisciplinaDto();
-        entity.ifPresent(dto::toDto);
-        return dto;
-    }
-
-    public void removePorId(Long id) {
-        repository.deleteById(id);
     }
 }

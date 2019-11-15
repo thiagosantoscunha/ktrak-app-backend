@@ -4,6 +4,7 @@ import br.com.ktrak.Utils.AimbraFluentValidationApi.interfaces.ITextValidation;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import org.springframework.stereotype.Component;
 
+@Component
 public class TextValidationImpl implements ITextValidation {
     @Override
     public boolean isNull(String value) {
@@ -12,7 +13,7 @@ public class TextValidationImpl implements ITextValidation {
 
     @Override
     public boolean isNull(String value, String messageError) {
-        if (!isNull(value)) throw new BadRequestException(messageError);
+        if (isNull(value)) throw new BadRequestException(messageError);
         return true;
     }
 
@@ -23,7 +24,7 @@ public class TextValidationImpl implements ITextValidation {
 
     @Override
     public boolean isNotNull(String value, String messageError) {
-        if (!isNotNull(value)) throw new BadRequestException(messageError);
+        if (isNotNull(value)) throw new BadRequestException(messageError);
         return true;
     }
 
@@ -34,7 +35,7 @@ public class TextValidationImpl implements ITextValidation {
 
     @Override
     public boolean isNotEmpty(String value, String messageError) {
-        if (!isNotEmpty(value)) throw new BadRequestException(messageError);
+        if (isNotEmpty(value)) throw new BadRequestException(messageError);
         return true;
     }
 
@@ -45,7 +46,7 @@ public class TextValidationImpl implements ITextValidation {
 
     @Override
     public boolean isNotNullAndEmpty(String value, String messageError) {
-        if (!(isNotNull(value) && isNotEmpty(value))) throw new BadRequestException(messageError);
+        if (isNotNull(value) && isNotEmpty(value)) throw new BadRequestException(messageError);
         return true;
     }
 
@@ -56,18 +57,18 @@ public class TextValidationImpl implements ITextValidation {
 
     @Override
     public boolean isNullOrEmpty(String value, String messageError) {
-        if (!(isNull(value) || value.isEmpty())) throw new BadRequestException(messageError);
+        if ((isNull(value) || value.isEmpty())) throw new BadRequestException(messageError);
         return true;
     }
 
     @Override
     public boolean invalidLength(String text, Integer minLength, Integer maxLength) {
-        return text.length() < minLength && text.length() > maxLength;
+        return text.length() < minLength || text.length() > maxLength;
     }
 
     @Override
     public boolean invalidLength(String text, Integer minLength, Integer maxLength, String messageError) {
-        if (text.length() < minLength && text.length() > maxLength) throw new BadRequestException(messageError);
+        if (invalidLength(text, minLength, maxLength)) throw new BadRequestException(messageError);
         return false;
     }
 
@@ -98,29 +99,29 @@ public class TextValidationImpl implements ITextValidation {
         switch (operator) {
             case "==":
                 if (text.length() == length) sendExption(messageError);
-                return true;
+                break;
             case "!=":
                 if (text.length() != length) sendExption(messageError);
-                return true;
+                break;
             case ">":
                 if (text.length() > length) sendExption(messageError);
-                return true;
+                break;
             case ">=":
                 if (text.length() >= length) sendExption(messageError);
-                return true;
+                break;
             case "<":
                 if (text.length() < length) sendExption(messageError);
-                return true;
+                break;
             case "<=":
                 if (text.length() <= length) sendExption(messageError);
-                return true;
+                break;
         }
 
         return false;
     }
 
     private void sendExption(String messageError) {
-        if (isNullOrEmpty(messageError)) {
+        if (isNotNullAndEmpty(messageError)) {
             throw new BadRequestException(messageError);
         }
     }

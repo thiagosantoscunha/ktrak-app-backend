@@ -9,32 +9,35 @@ import java.util.Objects;
 @Entity(name = "pessoas")
 public class PessoaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
 
     @Column(length = 64, nullable = false)
-    private String nome;
+    protected String nome;
 
     @Column(nullable = false)
-    private LocalDate dataNascimento;
+    protected LocalDate dataNascimento;
 
     @Column(length = 64, nullable = false)
-    private String logradouro;
+    protected String logradouro;
 
     @Column(length = 8, nullable = false)
-    private String cep;
+    protected String cep;
 
     @Column(length = 64, nullable = false)
-    private String bairro;
+    protected String bairro;
 
     @Column(length = 64, nullable = false)
-    private String cidade;
+    protected String cidade;
 
     @Column(length = 64, nullable = false)
-    private String estado;
+    protected String estado;
 
-    @Column(length = 255, unique = true)
-    private String digital;
+    @Column(unique = true)
+    protected String digital;
+
+    public PessoaEntity() {
+    }
 
     public Long getId() {
         return id;

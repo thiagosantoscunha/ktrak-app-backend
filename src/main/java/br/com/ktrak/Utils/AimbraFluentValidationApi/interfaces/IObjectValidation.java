@@ -1,6 +1,8 @@
 package br.com.ktrak.Utils.AimbraFluentValidationApi.interfaces;
 
-public interface IValidationObject {
+import org.springframework.stereotype.Component;
+
+public interface IObjectValidation {
     boolean isNull(Object o);
     boolean isNull(Object o, String messageError);
     boolean isNotNull(Object o);

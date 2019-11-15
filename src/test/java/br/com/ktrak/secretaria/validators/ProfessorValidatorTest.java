@@ -1,5 +1,6 @@
 package br.com.ktrak.secretaria.validators;
 
+import br.com.ktrak.domain.dto.ProfessorDto;
 import br.com.ktrak.domain.dto.in.InsereProfessorDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,11 +16,11 @@ class ProfessorValidatorTest {
     @Autowired
     ProfessorValidator validator;
 
-    InsereProfessorDto professor;
+    ProfessorDto professor;
 
     @BeforeEach
     void setUp() {
-        professor = new InsereProfessorDto();
+        professor = new ProfessorDto();
         professor.nome = "Caio Ferreira Mestre dos Magos";
         professor.cep = "20200000";
         professor.logradouro = "Rua das Pacas, cond GI";

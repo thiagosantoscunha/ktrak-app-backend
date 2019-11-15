@@ -9,4 +9,8 @@ public abstract class LocalDateTimeFormatter {
         final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return LocalDate.parse(date, dateTimeFormatter);
     }
+    public static LocalDateTime toLocalDateTime(String date) {
+        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:s");
+        return LocalDateTime.parse(date, dateTimeFormatter);
+    }
 }

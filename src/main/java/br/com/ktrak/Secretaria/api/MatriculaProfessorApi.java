@@ -1,6 +1,7 @@
 package br.com.ktrak.secretaria.api;
 
 
+import br.com.ktrak.domain.dto.ProfessorDto;
 import br.com.ktrak.domain.dto.in.AtualizaProfessorDto;
 import br.com.ktrak.domain.dto.out.ExibeProfessorDto;
 import br.com.ktrak.domain.dto.in.InsereProfessorDto;
@@ -24,27 +25,27 @@ public class MatriculaProfessorApi {
     private ProfessorValidator validator;
 
     @GetMapping
-    public ResponseEntity<List<ExibeProfessorDto>> buscaTudo() {
+    public ResponseEntity<List<ProfessorDto>> buscaTudo() {
         var professores = service.buscaTudo();
         return new ResponseEntity<>(professores, HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<ExibeProfessorDto> buscaPorId(@PathVariable("id") Long id) {
+    public ResponseEntity<ProfessorDto> buscaPorId(@PathVariable("id") Long id) {
         validator.naoPodeBuscar(id);
         var professor = service.buscaPorId(id);
         return new ResponseEntity<>(professor, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<ExibeProfessorDto> insere(@RequestBody InsereProfessorDto model) {
-        validator.isNaoPodeInserir(model);
-        var professorInserido = service.insere(model);
+    public ResponseEntity<ProfessorDto> insere(@RequestBody ProfessorDto dto) {
+        validator.isNaoPodeInserir(dto);
+        var professorInserido = service.insere(dto);
         return new ResponseEntity<>(professorInserido, HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<ExibeProfessorDto> atualiza(@RequestBody AtualizaProfessorDto model) {
+    public ResponseEntity<ProfessorDto> atualiza(@RequestBody ProfessorDto model) {
         validator.isNaoPodeAtualizar(model);
         var professorAtualizado = service.atualiza(model);
         return new ResponseEntity<>(professorAtualizado, HttpStatus.OK);

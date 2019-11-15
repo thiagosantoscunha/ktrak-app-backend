@@ -1,5 +1,7 @@
 package br.com.ktrak.Utils.AimbraFluentValidationApi.interfaces;
 
+import org.springframework.stereotype.Component;
+
 public interface ITextValidation {
     boolean isNull(String value);
     boolean isNull(String value, String messageError);

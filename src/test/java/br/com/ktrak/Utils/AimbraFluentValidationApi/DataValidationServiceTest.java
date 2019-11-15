@@ -1,4 +1,4 @@
-package br.com.ktrak.Utils;
+package br.com.ktrak.Utils.AimbraFluentValidationApi;
 
 import br.com.ktrak.Utils.AimbraFluentValidationApi.DataValidationImpl;
 import br.com.ktrak.domain.exceptions.BadRequestException;
