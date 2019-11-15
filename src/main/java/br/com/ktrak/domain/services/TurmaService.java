@@ -1,5 +1,7 @@
 package br.com.ktrak.domain.services;
 
+import br.com.ktrak.domain.converters.TurmaConverter;
+import br.com.ktrak.domain.dto.TurmaDto;
 import br.com.ktrak.domain.dto.in.AtualizaTurmaDto;
 import br.com.ktrak.domain.dto.in.InsereTurmaDto;
 import br.com.ktrak.domain.dto.out.ExibeTurmaDto;
@@ -16,31 +18,24 @@ import java.util.List;
 public class TurmaService {
 
     @Autowired
-    TurmaRepository repository;
+    private TurmaRepository repository;
 
-    public List<ExibeTurmaDto> buscaTudo() {
+    @Autowired
+    private TurmaConverter converter;
+
+    public List<TurmaDto> buscaTudo() {
         var entities = repository.findAll();
-        List<ExibeTurmaDto> turmas = new ArrayList<>();
-        entities.forEach(e -> {
-            ExibeTurmaDto dto = new ExibeTurmaDto();
-            dto.toDto(e);
-            turmas.add(dto);
-        });
-        return turmas;
+        return converter.toDtoList(entities);
     }
 
-    public ExibeTurmaDto insere(InsereTurmaDto dto) {
-        var entity = dto.toEntity();
-        ExibeTurmaDto dtoInserido = new ExibeTurmaDto();
-        dtoInserido.toDto(repository.save(entity));
-        return dtoInserido;
+    public TurmaDto insere(TurmaDto dto) {
+        var entity = repository.save(converter.toEntity(dto));
+        return converter.toDto(entity);
     }
 
-    public ExibeTurmaDto atualiza(AtualizaTurmaDto dto) {
-        var entity = dto.toEntity();
-        ExibeTurmaDto dtoAtualizado = new ExibeTurmaDto();
-        dtoAtualizado.toDto(entity);
-        return dtoAtualizado;
+    public TurmaDto atualiza(TurmaDto dto) {
+        var entity = converter.toEntity(dto);
+        return converter.toDto(repository.save(entity));
     }
 
     public void remove(Long id) {
