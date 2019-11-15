@@ -7,6 +7,7 @@ import br.com.ktrak.domain.dto.TurmaDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import br.com.ktrak.domain.exceptions.NotFoundException;
 import br.com.ktrak.domain.repositories.DiaLetivoRepository;
+import br.com.ktrak.domain.repositories.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,9 @@ public class DiaLetivoService {
     @Autowired
     private TurmaConverter turmaConverter;
 
+    @Autowired
+    private TurmaRepository turmaRepository;
+
     public List<DiaLetivoDto> buscaTudo() {
         return converter.toDtoList(
                 repository.findAll()
@@ -33,6 +37,14 @@ public class DiaLetivoService {
     public List<DiaLetivoDto> buscaTudoPorTurma(TurmaDto turmaDto) {
         var entities = repository.findAllByTurma(turmaConverter.toEntity(turmaDto));
         return converter.toDtoList(entities);
+    }
+
+    public List<DiaLetivoDto> buscaTudoPorTurmaId(Long idTurma) {
+        var turmaEntity = turmaRepository.findById(idTurma);
+        return turmaEntity.map(
+                entity -> converter.toDtoList(
+                        repository.findAllByTurma(entity))
+        ).orElse(null);
     }
 
     public DiaLetivoDto salvar(DiaLetivoDto dto) {
@@ -50,4 +62,7 @@ public class DiaLetivoService {
                 diaLetivoEntity
         )).orElseThrow(new NotFoundException("Não encontramos por Id").get());
     }
+
+
+
 }
