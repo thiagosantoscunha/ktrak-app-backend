@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity(name = "pessoas")
 public class PessoaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @Column(length = 64, nullable = false)
@@ -33,7 +33,7 @@ public class PessoaEntity {
     @Column(length = 64, nullable = false)
     protected String estado;
 
-    @Column(length = 255, unique = true)
+    @Column(unique = true)
     protected String digital;
 
     public PessoaEntity() {
