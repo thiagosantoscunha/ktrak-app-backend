@@ -15,7 +15,7 @@ public class TurmaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "turma_id")
     private List<DiaHoraAulaEntity> diaHoraAulas = new ArrayList<>();
 
