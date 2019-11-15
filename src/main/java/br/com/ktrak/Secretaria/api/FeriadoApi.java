@@ -25,7 +25,7 @@ public class FeriadoApi {
         return ResponseEntity.ok(service.buscaTudo());
     }
 
-    @GetMapping
+    @GetMapping(path = "/{id}")
     public ResponseEntity<FeriadoDto> buscaPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscaPorId(id));
     }
