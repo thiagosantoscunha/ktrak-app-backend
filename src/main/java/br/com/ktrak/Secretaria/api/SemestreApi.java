@@ -3,6 +3,7 @@ package br.com.ktrak.secretaria.api;
 
 import br.com.ktrak.domain.dto.SemestreDto;
 import br.com.ktrak.domain.services.SemestreService;
+import br.com.ktrak.secretaria.validators.SemestreValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,9 @@ public class SemestreApi {
     @Autowired
     private SemestreService service;
 
+    @Autowired
+    private SemestreValidation validation;
+
     @GetMapping
     public ResponseEntity<List<SemestreDto>> buscaTudo() {
         return ResponseEntity.ok(service.buscaTudo());
@@ -28,11 +32,13 @@ public class SemestreApi {
 
     @PostMapping
     public ResponseEntity<SemestreDto> insere(@RequestBody SemestreDto dto) {
+        validation.isNaoPodeInserir(dto);
         return ResponseEntity.ok(service.salva(dto));
     }
 
     @PutMapping
     public ResponseEntity<SemestreDto> atualiza(@RequestBody SemestreDto dto) {
+        validation.isNaoPodeAtualizar(dto);
         return ResponseEntity.ok(service.salva(dto));
     }
 
