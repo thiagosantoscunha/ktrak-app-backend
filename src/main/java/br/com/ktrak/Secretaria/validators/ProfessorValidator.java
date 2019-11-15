@@ -1,12 +1,9 @@
 package br.com.ktrak.secretaria.validators;
 
-import br.com.ktrak.Utils.AimbraFluentValidationApi.AimbraFluentApi;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.DataValidationImpl;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.NumberValidationImpl;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.TextValidationImpl;
 import br.com.ktrak.domain.dto.ProfessorDto;
-import br.com.ktrak.domain.dto.in.AtualizaProfessorDto;
-import br.com.ktrak.domain.dto.in.InsereProfessorDto;
 import br.com.ktrak.domain.exceptions.NotFoundException;
 import br.com.ktrak.domain.services.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +33,7 @@ public class ProfessorValidator {
         textValidation.isNullOrEmpty(nome, "O nome do professor não pode ser nulo ou vazio");
         textValidation.invalidLength(nome, 10, 64, "O nome precisa ter entre 10 a 64 caracteres");
         textValidation.isNullOrEmpty(dataNascimento, "A data de nascimento esta nula ou vázia");
-        dataValidation.isInvalidFormat(dataNascimento, "O formato da data é inválido.");
+        dataValidation.isInvalidDateFormat(dataNascimento, "O formato da data é inválido.");
         textValidation.isNullOrEmpty(logradouro, "O logradouro esta nulo ou vazio");
         textValidation.invalidLength(logradouro, 4, 64, "O logradouro precisa ter entre 4 a 64 caracteres");
         textValidation.isNullOrEmpty(cep, "O cep está nulo ou vazio");

@@ -29,9 +29,7 @@ public class FeriadoService {
     }
 
     public FeriadoDto salva(FeriadoDto dto) {
-        return converter.toDto(
-                converter.toEntity(dto)
-        );
+        return converter.toDto(repository.save(converter.toEntity(dto)));
     }
 
     public void remove(Long id) {

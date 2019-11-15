@@ -19,14 +19,17 @@ public class TurmaValidation {
     private DiaHoraAulaValidation horaAulaValidation;
 
     @Autowired
+    private DataValidationImpl dataValidation;
+
+    @Autowired
     private DiaHoraAulaRepository diaHoraAulaRepository;
 
 
     public boolean isNaoPodeInserir(TurmaDto dto) {
-        objectValidation.isNotNull(dto.professor, "É preciso selecionar um professor para a turma");
-        objectValidation.isNotNull(dto.disciplina, "É preciso selecionar uma disciplina para a turma");
+        objectValidation.isNull(dto.professor, "É preciso selecionar um professor para a turma");
+        objectValidation.isNull(dto.disciplina, "É preciso selecionar uma disciplina para a turma");
 
-        objectValidation.isNotNull(dto.diaHoraAulas, "É preciso selecionar pelo menos um dia e hora da aula");
+        objectValidation.isNull(dto.diaHoraAulas, "É preciso selecionar pelo menos um dia e hora da aula");
 
         if (dto.diaHoraAulas.size() > 2) {
             throw new BadRequestException("Só é possível selecionar até 2 horarios");
@@ -39,13 +42,15 @@ public class TurmaValidation {
                 throw new BadRequestException("Este dia já esta cadastrado por outra turma.");
             }
 
-            if (o.dia.equals("SATURDAY") || o.dia.equals("SUNDAY")) {
-                throw new BadRequestException("Não pode selecionar sabado ou domingo como dia da aula");
-            }
+            dataValidation.isDayOfWeekend(o.dia, "Não pode selecionar fim de semana para a aula");
 
         });
 
         return false;
     }
 
+    public boolean isNaoPodeAtualizar(TurmaDto dto) {
+        objectValidation.isNull(dto.id, "Id da turma esta vazia");
+        return isNaoPodeInserir(dto);
+    }
 }
