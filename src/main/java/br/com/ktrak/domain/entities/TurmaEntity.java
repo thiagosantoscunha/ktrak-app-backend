@@ -1,6 +1,8 @@
 package br.com.ktrak.domain.entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,6 +14,10 @@ public class TurmaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany
+    @JoinColumn(name = "turma_id")
+    private List<DiaHoraAulaEntity> diaHoraAulas = new ArrayList<>();
 
     @ManyToOne
     private ProfessorEntity professor;
@@ -54,6 +60,14 @@ public class TurmaEntity {
 
     public void setProfessor(ProfessorEntity professor) {
         this.professor = professor;
+    }
+
+    public List<DiaHoraAulaEntity> getDiaHoraAulas() {
+        return diaHoraAulas;
+    }
+
+    public void setDiaHoraAulas(List<DiaHoraAulaEntity> diaHoraAulas) {
+        this.diaHoraAulas = diaHoraAulas;
     }
 
     @Override
