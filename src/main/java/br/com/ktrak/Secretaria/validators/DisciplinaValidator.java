@@ -50,4 +50,6 @@ public class DisciplinaValidator {
     public boolean isNaoPodeRemover(Long id) {
         return isNaoPodeBuscarPorId(id);
     }
+
+
 }

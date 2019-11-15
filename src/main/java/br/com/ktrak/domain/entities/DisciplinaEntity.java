@@ -10,7 +10,7 @@ import java.util.Objects;
 public class DisciplinaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 64, unique = true, nullable = false)

@@ -2,10 +2,6 @@ package br.com.ktrak.secretaria.api;
 
 import br.com.ktrak.secretaria.validators.DisciplinaValidator;
 import br.com.ktrak.domain.dto.DisciplinaDto;
-import br.com.ktrak.domain.dto.ProfessorDto;
-import br.com.ktrak.domain.dto.in.AtualizaDisciplinaDto;
-import br.com.ktrak.domain.dto.out.ExibeDisciplinaDto;
-import br.com.ktrak.domain.dto.in.InsereDisciplinaDto;
 import br.com.ktrak.domain.services.DisciplinaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
