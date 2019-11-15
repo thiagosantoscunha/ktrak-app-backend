@@ -64,14 +64,43 @@ public class DataValidationImpl implements IDataValidation {
     }
 
     @Override
-    public void isDayOfWeek(LocalDate date, String messageError) {
-        if (isDayOfWeek(date)) {
+    public void isNotDayOfWeek(String day, String messageError) {
+        if (isNotDayOfWeek(day)) {
             throw new BadRequestException(messageError);
         }
     }
 
     @Override
-    public boolean isDayOfWeek(LocalDate date) {
+    public boolean isNotDayOfWeekend(LocalDate date) {
+        return !(date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY);
+    }
+
+    @Override
+    public boolean isNotDayOfWeek(String day) {
+        return !DayOfWeek.valueOf(day).toString().equals(day);
+    }
+
+    @Override
+    public void isDayOfWeekend(LocalDate date, String messageError) {
+        if (isDayOfWeekend(date)) {
+            throw new BadRequestException(messageError);
+        }
+    }
+
+    @Override
+    public boolean isDayOfWeekend(String dia) {
+        return (DayOfWeek.SATURDAY.toString().equals(dia) || DayOfWeek.SUNDAY.toString().equals(dia));
+    }
+
+    @Override
+    public void isDayOfWeekend(String dia, String messageError) {
+        if (isDayOfWeekend(dia)) {
+            throw new BadRequestException(messageError);
+        }
+    }
+
+    @Override
+    public boolean isDayOfWeekend(LocalDate date) {
         return date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY;
     }
 

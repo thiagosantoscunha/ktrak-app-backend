@@ -14,6 +14,11 @@ public interface IDataValidation {
     void isInvalidHourFormat(String dataString, String messageError);
     boolean isInvalidRange(LocalDate startDate, LocalDate finishDate);
     void isInvalidRange(LocalDate startDate, LocalDate finishDate, String messageError);
-    boolean isDayOfWeek(LocalDate date);
-    void isDayOfWeek(LocalDate date, String message);
+    boolean isDayOfWeekend(LocalDate date);
+    void isDayOfWeekend(LocalDate date, String message);
+    boolean isDayOfWeekend(String dia);
+    void isDayOfWeekend(String dia, String messageError);
+    boolean isNotDayOfWeek(String day);
+    void isNotDayOfWeek(String day, String messageError);
+    boolean isNotDayOfWeekend(LocalDate date);
 }
