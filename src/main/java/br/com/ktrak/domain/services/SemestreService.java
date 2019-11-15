@@ -1,11 +1,13 @@
 package br.com.ktrak.domain.services;
 
+import br.com.ktrak.Utils.LocalFormatter;
 import br.com.ktrak.domain.converters.SemestreConverter;
 import br.com.ktrak.domain.dto.SemestreDto;
 import br.com.ktrak.domain.repositories.SemestreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -36,5 +38,12 @@ public class SemestreService {
 
     public void remove(Long id) {
         repository.deleteById(id);
+    }
+
+    public boolean existePorDataInicioAndFim(String dataInicio, String dataFim) {
+        return repository.existsByDataInicioAndDataFim(
+                LocalFormatter.toLocalDate(dataInicio),
+                LocalFormatter.toLocalDate(dataFim)
+        );
     }
 }
