@@ -1,9 +1,7 @@
 package br.com.ktrak.domain.entities;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -11,16 +9,17 @@ import java.util.Objects;
 public class DiaLetivoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private LocalDate data;
+    @Column(unique = true, nullable = false)
+    private LocalDateTime dataHora;
 
     @ManyToOne
     private TurmaEntity turma;
 
-//    private List<MatriculaDiaLetitvoEntity> matriculaDiaLetivos;
+//    @OneToMany
+//    private List<MatriculaDiaLetitvoEntity> matriculaDiaLetivos = new ArrayList<>();
 
 
     public Long getId() {
@@ -31,12 +30,12 @@ public class DiaLetivoEntity {
         this.id = id;
     }
 
-    public LocalDate getData() {
-        return data;
+    public LocalDateTime getDataHora() {
+        return dataHora;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setDataHora(LocalDateTime data) {
+        this.dataHora = data;
     }
 
     public TurmaEntity getTurma() {
@@ -53,12 +52,12 @@ public class DiaLetivoEntity {
         if (o == null || getClass() != o.getClass()) return false;
         DiaLetivoEntity that = (DiaLetivoEntity) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(data, that.data) &&
+                Objects.equals(dataHora, that.dataHora) &&
                 Objects.equals(turma, that.turma);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, data, turma);
+        return Objects.hash(id, dataHora, turma);
     }
 }
