@@ -1,5 +1,10 @@
 package br.com.ktrak.domain.entities;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,78 +14,30 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "turmas")
+@ToString @EqualsAndHashCode
 public class TurmaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter @Setter
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "turma_id")
+    @Getter @Setter
     private List<DiaHoraAulaEntity> diaHoraAulas = new ArrayList<>();
 
     @ManyToOne
+    @Getter @Setter
     private ProfessorEntity professor;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "turma_id")
+    @Getter @Setter
     private List<DiaLetivoEntity> diasLetivos = new ArrayList<>();
 
     @ManyToOne()
     @JoinColumn(name = "disciplina_id", nullable = false)
+    @Getter @Setter
     private DisciplinaEntity disciplina;
-
-    public List<DiaLetivoEntity> getDiasLetivos() {
-        return diasLetivos;
-    }
-
-    public void setDiasLetivos(List<DiaLetivoEntity> diasLetivos) {
-        this.diasLetivos = diasLetivos;
-    }
-
-    public DisciplinaEntity getDisciplina() {
-        return disciplina;
-    }
-
-    public void setDisciplina(DisciplinaEntity disciplina) {
-        this.disciplina = disciplina;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public ProfessorEntity getProfessor() {
-        return professor;
-    }
-
-    public void setProfessor(ProfessorEntity professor) {
-        this.professor = professor;
-    }
-
-    public List<DiaHoraAulaEntity> getDiaHoraAulas() {
-        return diaHoraAulas;
-    }
-
-    public void setDiaHoraAulas(List<DiaHoraAulaEntity> diaHoraAulas) {
-        this.diaHoraAulas = diaHoraAulas;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TurmaEntity that = (TurmaEntity) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(professor, that.professor);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, professor);
-    }
 }

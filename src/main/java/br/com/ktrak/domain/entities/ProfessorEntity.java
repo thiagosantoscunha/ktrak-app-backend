@@ -1,5 +1,10 @@
 package br.com.ktrak.domain.entities;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,10 +13,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "professores")
+@ToString @EqualsAndHashCode(callSuper = false)
 public class ProfessorEntity extends PessoaEntity {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="professor_id")
+    @Getter @Setter
     private List<TurmaEntity> turmas = new ArrayList<>();
 
     public ProfessorEntity() {
@@ -28,26 +35,4 @@ public class ProfessorEntity extends PessoaEntity {
         this.estado = estado;
     }
 
-
-    public List<TurmaEntity> getTurmas() {
-        return turmas;
-    }
-
-    public void setTurmas(List<TurmaEntity> turmas) {
-        this.turmas = turmas;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        ProfessorEntity that = (ProfessorEntity) o;
-        return Objects.equals(turmas, that.turmas);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), turmas);
-    }
 }
