@@ -14,9 +14,9 @@ import java.util.Objects;
 @Table(name = "professores")
 public class ProfessorEntity extends PessoaEntity {
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="professor_id")
-    private List<TurmaEntity> turmas = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name="professor_id")
+//    private List<TurmaEntity> turmas = new ArrayList<>();
 
     public ProfessorEntity() {
     }
