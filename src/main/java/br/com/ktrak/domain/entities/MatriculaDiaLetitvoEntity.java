@@ -1,10 +1,5 @@
 package br.com.ktrak.domain.entities;
 
-import br.com.ktrak.domain.entities.ids.MatriculaDiaLetivoId;
-
-import javax.persistence.*;
-import java.util.Objects;
-
 //@Entity
 //@Table(name = "matricula_dia_letivo")
 public class MatriculaDiaLetitvoEntity {

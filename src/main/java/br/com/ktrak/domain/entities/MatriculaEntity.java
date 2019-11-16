@@ -1,37 +1,34 @@
 package br.com.ktrak.domain.entities;
 
-import br.com.ktrak.domain.entities.ids.MatriculaDiaLetivoId;
 import br.com.ktrak.domain.entities.ids.MatriculaId;
+import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.NaturalIdCache;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
 
-@Entity(name = "Matricula")
+@Data
+@Entity
 @Table(name = "matriculas")
 public class MatriculaEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @JoinColumn(name = "aluno_id", nullable = false)
     @ManyToOne
-    @JoinColumn
     private AlunoEntity aluno;
 
-    @Id
+    @JoinColumn(name = "turma_id", nullable = false)
     @ManyToOne
-    @JoinColumn
     private TurmaEntity turma;
 
-    @Column
+    @Column(nullable = false, length = 12, unique = true)
     private String numero;
 
     @Column

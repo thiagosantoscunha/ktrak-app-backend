@@ -1,48 +1,36 @@
 package br.com.ktrak.domain.entities.ids;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@Getter
+@Setter
+@EqualsAndHashCode
 public class MatriculaId implements Serializable {
 
+    private static final long serialVersionUID = -3138856182021663633L;
+
     @Column(name = "aluno_id")
-    private Long alunoId;
+    private Long aluno;
 
-    @Column(name = "dia_letivo_id")
-    private Long diaLetivoId;
+    @Column(name = "turma_id")
+    private Long turma;
 
-    public Long getAlunoId() {
-        return alunoId;
-    }
-
-    public void setAlunoId(Long alunoId) {
-        this.alunoId = alunoId;
-    }
-
-    public Long getDiaLetivoId() {
-        return diaLetivoId;
-    }
-
-    public void setDiaLetivoId(Long diaLetivoId) {
-        this.diaLetivoId = diaLetivoId;
-    }
+//    public MatriculaId() {
+//    }
+//
+//    public MatriculaId(Long aluno, Long turma) {
+//        this.aluno = aluno;
+//        this.turma = turma;
+//    }
 
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MatriculaId that = (MatriculaId) o;
-        return Objects.equals(alunoId, that.alunoId) &&
-                Objects.equals(diaLetivoId, that.diaLetivoId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(alunoId, diaLetivoId);
-    }
 }

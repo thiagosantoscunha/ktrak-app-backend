@@ -19,8 +19,8 @@ public class DisciplinaEntity {
     @Column(length = 64, unique = true, nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "disciplina")
-    private List<TurmaEntity> turmas = new ArrayList<>();
+//    @OneToMany(mappedBy = "disciplina")
+//    private List<TurmaEntity> turmas = new ArrayList<>();
 
     public DisciplinaEntity() {
     }
