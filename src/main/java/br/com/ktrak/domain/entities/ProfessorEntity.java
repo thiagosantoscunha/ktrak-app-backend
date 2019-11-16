@@ -1,9 +1,6 @@
 package br.com.ktrak.domain.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Entity
 @Table(name = "professores")
-@ToString @EqualsAndHashCode(callSuper = false)
 public class ProfessorEntity extends PessoaEntity {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="professor_id")
-    @Getter @Setter
     private List<TurmaEntity> turmas = new ArrayList<>();
 
     public ProfessorEntity() {
