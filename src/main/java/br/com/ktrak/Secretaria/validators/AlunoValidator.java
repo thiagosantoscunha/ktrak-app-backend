@@ -25,13 +25,13 @@ public class AlunoValidator {
     DataValidationImpl dataValidation;
 
     public boolean isNaoPodeInserir(AlunoDto dto) {
-        return isNaoPodeSalvar(dto.nome, dto.dataNascimento, dto.logradouro, dto.cep, dto.bairro, dto.cidade, dto.estado);
+        return isNaoPodeSalvar(dto.getNome(), dto.getDataNascimento(), dto.getLogradouro(), dto.getCep(), dto.getBairro(), dto.getCidade(), dto.getEstado());
     }
 
     public boolean isNaoPodeAtualizar(AlunoDto dto) {
-        numberValidation.isNull(dto.id, "O aluno precisa de um Id");
-        var naoPodeSalvar = isNaoPodeSalvar(dto.nome, dto.dataNascimento, dto.logradouro, dto.cep, dto.bairro, dto.cidade, dto.estado);
-        var hasAluno = service.existePorId(dto.id);
+        numberValidation.isNull(dto.getId(), "O aluno precisa de um Id");
+        var naoPodeSalvar = isNaoPodeSalvar(dto.getNome(), dto.getDataNascimento(), dto.getLogradouro(), dto.getCep(), dto.getBairro(), dto.getCidade(), dto.getEstado());
+        var hasAluno = service.existePorId(dto.getId());
         if (!hasAluno) {
             throw new NotFoundException("O usuário que você esta tentado atualizar não existe");
         }

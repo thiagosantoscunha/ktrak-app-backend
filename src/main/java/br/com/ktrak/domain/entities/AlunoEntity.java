@@ -3,23 +3,30 @@ package br.com.ktrak.domain.entities;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
 @Entity
 @Table(name = "alunos")
+@EqualsAndHashCode(callSuper = false)
 public class AlunoEntity extends PessoaEntity {
 
-    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
+    @Getter @Setter
+    @OneToMany(mappedBy = "aluno")
     private List<MatriculaEntity> matriculas = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name="turma_aluno",
+            joinColumns = @JoinColumn(name="aluno_id", referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name="turma_id", referencedColumnName="id")
+    )
+    private List<TurmaEntity> turmas = new ArrayList<>();
 
     public AlunoEntity() {
     }
