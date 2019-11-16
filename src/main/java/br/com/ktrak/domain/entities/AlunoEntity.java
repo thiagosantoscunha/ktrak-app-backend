@@ -4,6 +4,7 @@ package br.com.ktrak.domain.entities;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,8 +18,8 @@ import java.util.List;
 @Table(name = "alunos")
 public class AlunoEntity extends PessoaEntity {
 
-//    @OneToMany
-//    private List<MatriculaEntity> matriculas = new ArrayList<>();
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
+    private List<MatriculaEntity> matriculas = new ArrayList<>();
 
     public AlunoEntity() {
     }

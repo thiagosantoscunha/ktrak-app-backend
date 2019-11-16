@@ -32,4 +32,7 @@ public class TurmaEntity {
     @ManyToOne()
     @JoinColumn(name = "disciplina_id", nullable = false)
     private DisciplinaEntity disciplina;
+
+    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
+    private List<MatriculaEntity> matriculas;
 }
