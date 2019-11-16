@@ -12,10 +12,10 @@ public class TurmaConverter extends Converter<TurmaDto, TurmaEntity> {
         super(
             fromDto -> {
                 TurmaEntity entity = new TurmaEntity();
-                entity.setId(fromDto.id);
-                entity.setDisciplina(new DisciplinaConverter().toEntity(fromDto.disciplina));
-                entity.setProfessor(new ProfessorConverter().toEntity(fromDto.professor));
-                entity.setDiaHoraAulas(new DiaHoraAulaConverter().toEntityList(fromDto.diaHoraAulas));
+                entity.setId(fromDto.getId());
+                entity.setDisciplina(new DisciplinaConverter().toEntity(fromDto.getDisciplina()));
+                entity.setProfessor(new ProfessorConverter().toEntity(fromDto.getProfessor()));
+                entity.setDiaHoraAulas(new DiaHoraAulaConverter().toEntityList(fromDto.getDiaHoraAulas()));
                 return entity;
             },
             fromEntity -> new TurmaDto(

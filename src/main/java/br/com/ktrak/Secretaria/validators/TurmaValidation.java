@@ -26,16 +26,16 @@ public class TurmaValidation {
 
 
     public boolean isNaoPodeInserir(TurmaDto dto) {
-        objectValidation.isNull(dto.professor, "É preciso selecionar um professor para a turma");
-        objectValidation.isNull(dto.disciplina, "É preciso selecionar uma disciplina para a turma");
+        objectValidation.isNull(dto.getProfessor(), "É preciso selecionar um professor para a turma");
+        objectValidation.isNull(dto.getDisciplina(), "É preciso selecionar uma disciplina para a turma");
 
-        objectValidation.isNull(dto.diaHoraAulas, "É preciso selecionar pelo menos um dia e hora da aula");
+        objectValidation.isNull(dto.getDiaHoraAulas(), "É preciso selecionar pelo menos um dia e hora da aula");
 
-        if (dto.diaHoraAulas.size() > 2) {
+        if (dto.getDiaHoraAulas().size() > 2) {
             throw new BadRequestException("Só é possível selecionar até 2 horarios");
         }
 
-        dto.diaHoraAulas.forEach(o -> {
+        dto.getDiaHoraAulas().forEach(o -> {
             horaAulaValidation.isNaoPodeInserir(o);
 
             if (diaHoraAulaRepository.existsByDiaAndHora(o.dia, o.hora)) {
@@ -50,7 +50,7 @@ public class TurmaValidation {
     }
 
     public boolean isNaoPodeAtualizar(TurmaDto dto) {
-        objectValidation.isNull(dto.id, "Id da turma esta vazia");
+        objectValidation.isNull(dto.getId(), "Id da turma esta vazia");
         return isNaoPodeInserir(dto);
     }
 }

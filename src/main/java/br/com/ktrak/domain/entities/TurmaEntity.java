@@ -16,6 +16,7 @@ public class TurmaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -25,14 +26,17 @@ public class TurmaEntity {
     @ManyToOne
     private ProfessorEntity professor;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "turma_id")
-    private List<DiaLetivoEntity> diasLetivos = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "turma_id")
+//    private List<DiaLetivoEntity> diasLetivos = new ArrayList<>();
 
     @ManyToOne()
     @JoinColumn(name = "disciplina_id", nullable = false)
     private DisciplinaEntity disciplina;
 
-    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
-    private List<MatriculaEntity> matriculas;
+//    @OneToMany(mappedBy = "turma")
+//    private List<MatriculaEntity> matriculas = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "turmas")
+    private List<AlunoEntity> alunos = new ArrayList<>();
 }
