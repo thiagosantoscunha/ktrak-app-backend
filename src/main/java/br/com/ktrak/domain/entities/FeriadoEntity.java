@@ -1,9 +1,12 @@
 package br.com.ktrak.domain.entities;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Data
 @Entity
 @Table(name = "feriados")
 public class FeriadoEntity {
@@ -15,33 +18,4 @@ public class FeriadoEntity {
     @Column
     private LocalDate data;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FeriadoEntity that = (FeriadoEntity) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(data, that.data);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, data);
-    }
 }

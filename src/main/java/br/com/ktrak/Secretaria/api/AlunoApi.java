@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("v1/matriculas/alunos")
-public class MatriculaAlunoApi {
+public class AlunoApi {
 
     @Autowired
     private AlunoService alunoService;

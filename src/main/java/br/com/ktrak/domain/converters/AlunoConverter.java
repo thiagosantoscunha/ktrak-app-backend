@@ -10,14 +10,14 @@ public class AlunoConverter extends Converter<AlunoDto, AlunoEntity> {
     public AlunoConverter() {
         super(
                 alunoDto -> new AlunoEntity(
-                    alunoDto.id,
-                    alunoDto.nome,
-                    LocalFormatter.toLocalDate(alunoDto.dataNascimento),
-                    alunoDto.cep,
-                    alunoDto.logradouro,
-                    alunoDto.bairro,
-                    alunoDto.cidade,
-                    alunoDto.estado
+                    alunoDto.getId(),
+                    alunoDto.getNome(),
+                    LocalFormatter.toLocalDate(alunoDto.getDataNascimento()),
+                    alunoDto.getCep(),
+                    alunoDto.getLogradouro(),
+                    alunoDto.getBairro(),
+                    alunoDto.getCidade(),
+                    alunoDto.getEstado()
                 ),
                 alunoEntity -> new AlunoDto(
                     alunoEntity.getId(),

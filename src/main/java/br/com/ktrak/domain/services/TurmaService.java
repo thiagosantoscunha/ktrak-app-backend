@@ -3,6 +3,7 @@ package br.com.ktrak.domain.services;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.DataValidationImpl;
 import br.com.ktrak.Utils.LocalFormatter;
 import br.com.ktrak.domain.converters.SemestreConverter;
+import br.com.ktrak.domain.converters.TurmaComMatriculaConverter;
 import br.com.ktrak.domain.converters.TurmaConverter;
 import br.com.ktrak.domain.dto.DiaLetivoDto;
 import br.com.ktrak.domain.dto.SemestreDto;
@@ -54,9 +55,12 @@ public class TurmaService implements Serializable {
     @Autowired
     private FeriadoRepository feriadoRepository;
 
+    @Autowired
+    private TurmaComMatriculaConverter turmaComMatriculaConverter;
+
     public List<TurmaDto> buscaTudo() {
         var entities = repository.findAll();
-        return converter.toDtoList(entities);
+        return turmaComMatriculaConverter.toDtoList(entities);
     }
 
     public TurmaDto insere(TurmaDto dto) {
@@ -115,5 +119,9 @@ public class TurmaService implements Serializable {
 
     private boolean isNotFeriado(LocalDate date) {
         return !feriadoRepository.existsByData(date);
+    }
+
+    public boolean existePorId(Long idTurma) {
+        return repository.existsById(idTurma);
     }
 }

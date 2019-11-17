@@ -5,6 +5,7 @@ import br.com.ktrak.domain.dto.DiaLetivoDto;
 import br.com.ktrak.domain.dto.TurmaDto;
 import br.com.ktrak.domain.services.DiaLetivoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,17 @@ public class DiaLetivoApi {
     @RequestMapping
     public ResponseEntity<List<DiaLetivoDto>> buscaTudo() {
         var responseList = service.buscaTudo();
-        return ResponseEntity.ok(responseList);
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("size", responseList.size() + "");
+        return ResponseEntity.ok().headers(responseHeaders).body(responseList);
+    }
+
+    @RequestMapping(path = "/turmas/{idTurma}")
+    public ResponseEntity<List<DiaLetivoDto>> buscaTudoPorIdTurma(@PathVariable Long idTurma) {
+        var responseList = service.buscaTudoPorTurmaId(idTurma);
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("size", responseList.size() + "");
+        return ResponseEntity.ok().headers(responseHeaders).body(responseList);
     }
 
     @RequestMapping(path = "/{id}")

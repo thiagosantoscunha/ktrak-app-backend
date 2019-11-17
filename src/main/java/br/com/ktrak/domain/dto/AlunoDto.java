@@ -1,15 +1,21 @@
 package br.com.ktrak.domain.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+
+@Getter @Setter
 public class AlunoDto {
 
-    public Long id;
-    public String nome;
-    public String dataNascimento;
-    public String cep;
-    public String logradouro;
-    public String bairro;
-    public String cidade;
-    public String estado;
+    private Long id;
+    private String nome;
+    private String dataNascimento;
+    private String cep;
+    private String logradouro;
+    private String bairro;
+    private String cidade;
+    private String estado;
 
     public AlunoDto() {
     }
