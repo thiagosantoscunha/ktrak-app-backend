@@ -1,6 +1,7 @@
 package br.com.ktrak.domain.dto;
 
 import br.com.ktrak.security.dto.UserDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,17 @@ public class PessoaDto {
     private UserDto userDto;
 
     public PessoaDto() {
+    }
+
+    public PessoaDto(Long id, String nome, String dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;
     }
 
     public PessoaDto(Long id, String nome, String dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado, UserDto userDto) {

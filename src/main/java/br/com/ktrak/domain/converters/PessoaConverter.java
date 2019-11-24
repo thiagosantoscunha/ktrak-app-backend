@@ -20,7 +20,6 @@ public class PessoaConverter extends Converter<PessoaDto, PessoaEntity> {
             entity.setBairro(fromDto.getBairro());
             entity.setCidade(fromDto.getCidade());
             entity.setEstado(fromDto.getEstado());
-            entity.setUser(new UserConverter().toEntity(fromDto.getUserDto()));
             return entity;
         },
         fromEntity -> new PessoaDto(
@@ -31,8 +30,7 @@ public class PessoaConverter extends Converter<PessoaDto, PessoaEntity> {
             fromEntity.getLogradouro(),
             fromEntity.getBairro(),
             fromEntity.getCidade(),
-            fromEntity.getEstado(),
-            new UserConverter().toDto(fromEntity.getUser())
+            fromEntity.getEstado()
         ));
     }
 }
