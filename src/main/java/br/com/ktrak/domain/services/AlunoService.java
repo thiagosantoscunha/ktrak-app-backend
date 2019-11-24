@@ -1,5 +1,6 @@
 package br.com.ktrak.domain.services;
 
+import br.com.ktrak.Utils.EstadoUtil;
 import br.com.ktrak.domain.converters.AlunoConverter;
 import br.com.ktrak.domain.dto.AlunoDto;
 import br.com.ktrak.domain.dto.in.AtualizaAlunoDto;

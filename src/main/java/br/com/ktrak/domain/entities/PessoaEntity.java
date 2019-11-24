@@ -1,5 +1,6 @@
 package br.com.ktrak.domain.entities;
 
+import br.com.ktrak.security.entities.UserEntity;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -49,7 +50,13 @@ public class PessoaEntity {
     @Getter() @Setter
     protected String digital;
 
+    @Getter() @Setter
+    @ManyToOne
+    protected UserEntity user;
+
     public PessoaEntity() {
     }
+
+
 
 }
