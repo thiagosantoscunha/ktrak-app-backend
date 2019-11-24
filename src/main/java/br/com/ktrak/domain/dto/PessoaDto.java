@@ -1,16 +1,12 @@
 package br.com.ktrak.domain.dto;
 
-import br.com.ktrak.domain.enums.Status;
 import br.com.ktrak.security.dto.UserDto;
-import br.com.ktrak.security.entities.UserEntity;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter @Setter
-public class AlunoDto {
-
+public class PessoaDto {
     private Long id;
     private String nome;
     private String dataNascimento;
@@ -19,27 +15,12 @@ public class AlunoDto {
     private String bairro;
     private String cidade;
     private String estado;
-    private Boolean status;
+    private UserDto userDto;
 
-    @Getter @Setter
-    private UserDto user;
-
-    public AlunoDto() {
+    public PessoaDto() {
     }
 
-    public AlunoDto(String nome, String dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado, Boolean status) {
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.cep = cep;
-        this.logradouro = logradouro;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.status = status;
-    }
-
-    public AlunoDto(Long id, String nome, String dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado, Boolean status) {
-        super();
+    public PessoaDto(Long id, String nome, String dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -48,9 +29,17 @@ public class AlunoDto {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
-        this.status = status;
     }
 
-
-
+    public PessoaDto(Long id, String nome, String dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado, UserDto userDto) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.userDto = userDto;
+    }
 }

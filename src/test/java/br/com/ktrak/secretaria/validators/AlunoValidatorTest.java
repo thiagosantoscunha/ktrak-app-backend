@@ -3,6 +3,7 @@ package br.com.ktrak.secretaria.validators;
 import br.com.ktrak.domain.dto.AlunoDto;
 import br.com.ktrak.domain.dto.in.AtualizaAlunoDto;
 import br.com.ktrak.domain.dto.in.InsereAlunoDto;
+import br.com.ktrak.domain.enums.Status;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import br.com.ktrak.domain.exceptions.NotFoundException;
 import org.junit.jupiter.api.Assertions;
@@ -30,7 +31,8 @@ class AlunoValidatorTest {
                 "Rua Santos Moreira, 188",
                 "Aquantico",
                 "Macaé",
-                "Rio de Janeiro"
+                "Rio de Janeiro",
+                true
         );
 
     }

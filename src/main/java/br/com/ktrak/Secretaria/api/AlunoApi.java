@@ -1,6 +1,7 @@
 package br.com.ktrak.secretaria.api;
 
 import br.com.ktrak.domain.dto.AlunoDto;
+import br.com.ktrak.domain.dto.TurmaDto;
 import br.com.ktrak.domain.dto.in.AtualizaAlunoDto;
 import br.com.ktrak.domain.dto.out.ExibeAlunoDto;
 import br.com.ktrak.domain.dto.in.InsereAlunoDto;
@@ -9,6 +10,7 @@ import br.com.ktrak.secretaria.validators.AlunoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +39,7 @@ public class AlunoApi {
     }
 
     @PostMapping
+    @Transactional
     public ResponseEntity<AlunoDto> insere(@RequestBody AlunoDto dto) {
         validator.isNaoPodeInserir(dto);
         var alunoInserido = alunoService.insere(dto);
@@ -44,6 +47,7 @@ public class AlunoApi {
     }
 
     @PutMapping
+    @Transactional
     public ResponseEntity<AlunoDto> atualiza(@RequestBody AlunoDto dto) {
         validator.isNaoPodeAtualizar(dto);
         var alunoAtualizado = alunoService.atualiza(dto);

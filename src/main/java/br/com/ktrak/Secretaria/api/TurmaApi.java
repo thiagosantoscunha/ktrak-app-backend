@@ -41,6 +41,13 @@ public class TurmaApi {
         return ResponseEntity.ok().headers(responseHeaders).body(turmas);
     }
 
+    @GetMapping(path = "/alunos/{id}")
+    public ResponseEntity<List<TurmaDto>> buscaTudoPorAluno(@PathVariable("id") Long id) {
+        var turmas = service.buscaTodasAsTurmasPorAluno(id);
+        return ResponseEntity.ok(turmas);
+    }
+
+
     @PostMapping
     public ResponseEntity<TurmaDto> insere(@RequestBody TurmaDto dto) {
         validation.isNaoPodeInserir(dto);
