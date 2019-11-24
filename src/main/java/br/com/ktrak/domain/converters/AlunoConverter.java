@@ -17,7 +17,8 @@ public class AlunoConverter extends Converter<AlunoDto, AlunoEntity> {
                     alunoDto.getLogradouro(),
                     alunoDto.getBairro(),
                     alunoDto.getCidade(),
-                    alunoDto.getEstado()
+                    alunoDto.getEstado(),
+                    alunoDto.getStatus()
                 ),
                 alunoEntity -> new AlunoDto(
                     alunoEntity.getId(),
@@ -27,7 +28,8 @@ public class AlunoConverter extends Converter<AlunoDto, AlunoEntity> {
                     alunoEntity.getLogradouro(),
                     alunoEntity.getBairro(),
                     alunoEntity.getCidade(),
-                    alunoEntity.getEstado()
+                    alunoEntity.getEstado(),
+                    alunoEntity.getStatus()
                 )
         );
     }
