@@ -4,7 +4,9 @@ import br.com.ktrak.Utils.LocalFormatter;
 import br.com.ktrak.security.dto.UserDto;
 import br.com.ktrak.security.entities.UserEntity;
 import org.apache.catalina.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserConverter extends Converter<UserDto, UserEntity> {
     public UserConverter() {
         super(fromDto -> {
