@@ -9,12 +9,12 @@ public class ProfessorDto {
     public String bairro;
     public String cidade;
     public String estado;
+    public Boolean status;
 
     public ProfessorDto() {
     }
 
-    public ProfessorDto(Long id, String nome, String dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado) {
-        super();
+    public ProfessorDto(Long id, String nome, String dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado, Boolean status) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -23,5 +23,6 @@ public class ProfessorDto {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
+        this.status = status;
     }
 }
