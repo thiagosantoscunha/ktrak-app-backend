@@ -5,6 +5,7 @@ import br.com.ktrak.Utils.LocalFormatter;
 import br.com.ktrak.domain.converters.SemestreConverter;
 import br.com.ktrak.domain.converters.TurmaComMatriculaConverter;
 import br.com.ktrak.domain.converters.TurmaConverter;
+import br.com.ktrak.domain.dto.AlunoDto;
 import br.com.ktrak.domain.dto.DiaLetivoDto;
 import br.com.ktrak.domain.dto.SemestreDto;
 import br.com.ktrak.domain.dto.TurmaDto;
@@ -12,14 +13,8 @@ import br.com.ktrak.domain.dto.in.AtualizaTurmaDto;
 import br.com.ktrak.domain.dto.in.InsereTurmaDto;
 import br.com.ktrak.domain.dto.out.ExibeTurmaDto;
 import br.com.ktrak.domain.dto.out.TurmaOutDto;
-import br.com.ktrak.domain.entities.DiaHoraAulaEntity;
-import br.com.ktrak.domain.entities.DiaLetivoEntity;
-import br.com.ktrak.domain.entities.SemestreEntity;
-import br.com.ktrak.domain.entities.TurmaEntity;
-import br.com.ktrak.domain.repositories.DiaLetivoRepository;
-import br.com.ktrak.domain.repositories.FeriadoRepository;
-import br.com.ktrak.domain.repositories.SemestreRepository;
-import br.com.ktrak.domain.repositories.TurmaRepository;
+import br.com.ktrak.domain.entities.*;
+import br.com.ktrak.domain.repositories.*;
 import br.com.ktrak.secretaria.validators.SemestreValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +25,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TurmaService implements Serializable {
@@ -57,6 +53,9 @@ public class TurmaService implements Serializable {
 
     @Autowired
     private TurmaComMatriculaConverter turmaComMatriculaConverter;
+
+    @Autowired
+    private AlunoRepository alunoRepository;
 
     public List<TurmaDto> buscaTudo() {
         var entities = repository.findAll();
@@ -123,5 +122,15 @@ public class TurmaService implements Serializable {
 
     public boolean existePorId(Long idTurma) {
         return repository.existsById(idTurma);
+    }
+
+    public List<TurmaDto> buscaTodasAsTurmasPorAluno(Long idAluno) {
+        var aluno = alunoRepository.findById(idAluno);
+        List<TurmaEntity> turmas;
+        if (aluno.isPresent()) {
+            turmas = repository.findAllbyAluno(aluno.get());
+            return converter.toDtoList(turmas);
+        }
+        return new ArrayList<>();
     }
 }
