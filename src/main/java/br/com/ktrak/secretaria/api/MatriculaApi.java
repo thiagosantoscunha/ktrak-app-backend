@@ -30,6 +30,12 @@ public class MatriculaApi {
         return ResponseEntity.ok().headers(headers).body(response);
     }
 
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<MatriculaDto> buscaPorId(@PathVariable("id") Long id) {
+        var response = matriculaService.buscaPorId(id);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
     @Transactional
     public ResponseEntity<MatriculaDto> insere(@RequestBody MatriculaDto dto) {
