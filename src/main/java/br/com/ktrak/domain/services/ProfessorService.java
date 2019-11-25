@@ -19,7 +19,7 @@ public class ProfessorService implements Serializable {
     private ProfessorConverter converter;
 
     public List<ProfessorDto> buscaTudo() {
-        var entities = repository.findAll();
+        var entities = repository.findAllByOrderByNomeAsc();
         return converter.toDtoList(entities);
     }
 
