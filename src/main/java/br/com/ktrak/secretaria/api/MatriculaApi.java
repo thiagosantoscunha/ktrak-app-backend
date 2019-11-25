@@ -52,4 +52,10 @@ public class MatriculaApi {
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping
+    public ResponseEntity<?> delete(@RequestParam Long id) {
+        matriculaService.remove(id);
+        return ResponseEntity.ok(true);
+    }
+
 }

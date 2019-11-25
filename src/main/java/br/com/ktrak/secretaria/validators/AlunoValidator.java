@@ -67,4 +67,10 @@ public class AlunoValidator {
         if (!hasAluno) throw new NotFoundException("Este aluno não esta cadastrado em nossa base de dados");
         return false;
     }
+
+    public boolean isNaoPodeBuscarPorNome(String nome) {
+        textValidation.isNullOrEmpty(nome, "O campo de busca esta vazio");
+        textValidation.invalidLength(nome, 3, 64, "O campo de busca precisa ter entre 3 a 64 caracteres");
+        return false;
+    }
 }

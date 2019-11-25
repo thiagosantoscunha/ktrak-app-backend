@@ -38,9 +38,9 @@ public class TurmaValidation {
         dto.getDiaHoraAulas().forEach(o -> {
             horaAulaValidation.isNaoPodeInserir(o);
 
-            if (diaHoraAulaRepository.existsByDiaAndHora(o.dia, o.hora)) {
-                throw new BadRequestException("Este dia já esta cadastrado por outra turma.");
-            }
+//            if (diaHoraAulaRepository.existsByDiaAndHora(o.dia, o.hora)) {
+//                throw new BadRequestException("Este dia já esta cadastrado por outra turma.");
+//            }
 
             dataValidation.isDayOfWeekend(o.dia, "Não pode selecionar fim de semana para a aula");
 

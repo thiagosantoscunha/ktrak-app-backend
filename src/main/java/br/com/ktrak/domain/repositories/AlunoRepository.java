@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface AlunoRepository extends CrudRepository<AlunoEntity, Long> {
     List<AlunoEntity> findAllByOrderByNomeAsc();
+    List<AlunoEntity> findByNomeContainingIgnoreCase(String nome);
 }

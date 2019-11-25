@@ -70,4 +70,8 @@ public class AlunoService implements Serializable {
         repository.deleteById(id);
     }
 
+    public List<AlunoDto> buscaTudoPorNome(String nome) {
+        List<AlunoEntity> alunos = this.repository.findByNomeContainingIgnoreCase(nome);
+        return converter.toDtoList(alunos);
+    }
 }
