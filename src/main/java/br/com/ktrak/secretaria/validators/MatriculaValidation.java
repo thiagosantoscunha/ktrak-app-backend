@@ -9,6 +9,8 @@ import br.com.ktrak.domain.services.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class MatriculaValidation {
 
@@ -37,7 +39,7 @@ public class MatriculaValidation {
             throw new BadRequestException("Não foi possível encontrar a turma.");
         }
 
-        var matriculasDoAluno = matriculaService.buscaTudoPorAluno(dto.getAluno());
+        List<MatriculaDto> matriculasDoAluno = matriculaService.buscaTudoPorAluno(dto.getAluno());
 
         if (!matriculasDoAluno.isEmpty()) {
             matriculasDoAluno.forEach(m -> {

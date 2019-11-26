@@ -19,13 +19,11 @@ public class ProfessorService implements Serializable {
     private ProfessorConverter converter;
 
     public List<ProfessorDto> buscaTudo() {
-        var entities = repository.findAllByOrderByNomeAsc();
-        return converter.toDtoList(entities);
+        return converter.toDtoList(repository.findAllByOrderByNomeAsc());
     }
 
     public ProfessorDto insere(ProfessorDto dto) {
-        var entity = repository.save(converter.toEntity(dto));
-        return converter.toDto(entity);
+        return converter.toDto(repository.save(converter.toEntity(dto)));
     }
 
     public boolean existePorId(Long id) {
@@ -37,8 +35,7 @@ public class ProfessorService implements Serializable {
     }
 
     public ProfessorDto atualiza(ProfessorDto dto) {
-        var entity = repository.save(converter.toEntity(dto));
-        return converter.toDto(entity);
+        return converter.toDto(repository.save(converter.toEntity(dto)));
     }
 
     public void remove(Long id) {

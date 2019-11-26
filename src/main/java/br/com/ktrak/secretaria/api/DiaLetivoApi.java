@@ -21,42 +21,32 @@ public class DiaLetivoApi {
 
     @RequestMapping
     public ResponseEntity<List<DiaLetivoDto>> buscaTudo() {
-        var responseList = service.buscaTudo();
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("size", responseList.size() + "");
-        return ResponseEntity.ok().headers(responseHeaders).body(responseList);
+        return ResponseEntity.ok(service.buscaTudo());
     }
 
     @RequestMapping(path = "/turmas/{idTurma}")
     public ResponseEntity<List<DiaLetivoDto>> buscaTudoPorIdTurma(@PathVariable Long idTurma) {
-        var responseList = service.buscaTudoPorTurmaId(idTurma);
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("size", responseList.size() + "");
-        return ResponseEntity.ok().headers(responseHeaders).body(responseList);
+        return ResponseEntity.ok(service.buscaTudoPorTurmaId(idTurma));
     }
 
     @RequestMapping(path = "/{id}")
     public ResponseEntity<DiaLetivoDto> buscaPorId(@PathVariable("id") Long id) {
-        var response = service.buscaPorId(id);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(service.buscaPorId(id));
     }
 
     @PostMapping(path = "/filtros/turmas")
     public ResponseEntity<List<DiaLetivoDto>> buscaTudoPorTurma(@RequestBody TurmaDto turmaDto) {
-        var responseList = service.buscaTudoPorTurma(turmaDto);
-        return ResponseEntity.ok(responseList);
+        return ResponseEntity.ok(service.buscaTudoPorTurma(turmaDto));
     }
 
     @PostMapping
     public ResponseEntity<DiaLetivoDto> insere(@RequestBody DiaLetivoDto dto) {
-        var response = service.salvar(dto);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(service.salvar(dto));
     }
 
     @PutMapping
     public ResponseEntity<DiaLetivoDto> atualiza(@RequestBody DiaLetivoDto dto) {
-        var response = service.salvar(dto);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(service.salvar(dto));
     }
 
     @DeleteMapping

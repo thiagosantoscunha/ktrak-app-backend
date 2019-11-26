@@ -35,10 +35,7 @@ public class TurmaApi {
 
     @GetMapping
     public ResponseEntity<List<TurmaDto>> buscaTudo() {
-        var turmas = service.buscaTudo();
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("size", turmas.size() + "");
-        return ResponseEntity.ok().headers(responseHeaders).body(turmas);
+        return ResponseEntity.ok(service.buscaTudo());
     }
 
     @GetMapping(path = "/{id}")
@@ -49,31 +46,27 @@ public class TurmaApi {
 
     @GetMapping(path = "/alunos/{id}")
     public ResponseEntity<List<TurmaDto>> buscaTudoPorAluno(@PathVariable("id") Long id) {
-        var turmas = service.buscaTodasAsTurmasPorAluno(id);
-        return ResponseEntity.ok(turmas);
+        return ResponseEntity.ok(service.buscaTodasAsTurmasPorAluno(id));
     }
 
 
     @PostMapping
     public ResponseEntity<TurmaDto> insere(@RequestBody TurmaDto dto) {
         validation.isNaoPodeInserir(dto);
-        var entityInserido = service.insere(dto);
-        return new ResponseEntity<>(entityInserido, HttpStatus.OK);
+        return ResponseEntity.ok(service.insere(dto));
     }
 
     @PostMapping(path = "/montaTurmaNoSemestre")
     @Transactional
     public ResponseEntity<TurmaDto> montaTurmaNoSemestre(@RequestBody InsereTurmaPorSemestreVM model) {
         validation.isNaoPodeInserir(model.turma);
-        var entity = service.insereComSemestre(model.turma, model.semestre);
-        return ResponseEntity.ok(entity);
+        return ResponseEntity.ok(service.insereComSemestre(model.turma, model.semestre));
     }
 
     @PutMapping
     public ResponseEntity<TurmaDto> atualiza(@RequestBody TurmaDto dto) {
         validation.isNaoPodeAtualizar(dto);
-        var turmaAtualizada = service.atualiza(dto);
-        return new ResponseEntity<>(turmaAtualizada, HttpStatus.OK);
+        return ResponseEntity.ok(service.atualiza(dto));
     }
 
     @DeleteMapping

@@ -58,19 +58,17 @@ public class TurmaService implements Serializable {
     private AlunoRepository alunoRepository;
 
     public List<TurmaDto> buscaTudo() {
-        var entities = repository.findAll();
-        return turmaComMatriculaConverter.toDtoList(entities);
+        return turmaComMatriculaConverter.toDtoList(repository.findAll());
     }
 
     public TurmaDto insere(TurmaDto dto) {
-        var entity = converter.toEntity(dto);
-        entity = repository.save(entity);
-        return converter.toDto(entity);
+        return converter.toDto(
+                repository.save(converter.toEntity(dto))
+        );
     }
 
     public TurmaDto atualiza(TurmaDto dto) {
-        var entity = converter.toEntity(dto);
-        return converter.toDto(repository.save(entity));
+        return converter.toDto(repository.save(converter.toEntity(dto)));
     }
 
     public void remove(Long id) {
@@ -78,10 +76,10 @@ public class TurmaService implements Serializable {
     }
 
     public TurmaDto insereComSemestre(TurmaDto turmaDto, SemestreDto semestreDto) {
-        var turmaEntity = converter.toEntity(turmaDto);
-        turmaEntity = repository.save(turmaEntity);
-        var semestreEntity = semestreConverter.toEntity(semestreDto);
-        var semestreResponse = semestreRepository.findById(semestreEntity.getId());
+
+        TurmaEntity turmaEntity = repository.save(converter.toEntity(turmaDto));
+        SemestreEntity semestreEntity = semestreConverter.toEntity(semestreDto);
+        Optional<SemestreEntity> semestreResponse = semestreRepository.findById(semestreEntity.getId());
         if (semestreResponse.isPresent()) {
             semestreEntity = semestreResponse.get();
         }
@@ -125,13 +123,14 @@ public class TurmaService implements Serializable {
     }
 
     public List<TurmaDto> buscaTodasAsTurmasPorAluno(Long idAluno) {
-        var aluno = alunoRepository.findById(idAluno);
+        Optional<AlunoEntity> aluno = alunoRepository.findById(idAluno);
         List<TurmaEntity> turmas;
         if (aluno.isPresent()) {
             turmas = repository.findAllbyAluno(aluno.get());
             return converter.toDtoList(turmas);
+        } else {
+            return new ArrayList<>();
         }
-        return new ArrayList<>();
     }
 
     public TurmaDto buscaPorId(Long id) {

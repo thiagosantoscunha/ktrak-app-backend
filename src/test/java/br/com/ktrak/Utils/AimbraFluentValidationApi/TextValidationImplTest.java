@@ -19,7 +19,7 @@ class TextValidationImplTest {
 
     @BeforeEach
     void setUp() {
-        value = new String("Text Validation Test");
+        value = "Text Validation Test";
     }
 
     @Test
@@ -33,9 +33,9 @@ class TextValidationImplTest {
     void isNullThrownTest() {
         value = null;
         String messageError = "The text value is null";
-        String message = Assertions.assertThrows(BadRequestException.class, () -> {
-            validation.isNull(value, messageError);
-        }).getMessage();
+        String message = Assertions.assertThrows(BadRequestException.class, () ->
+            validation.isNull(value, messageError)
+        ).getMessage();
         assertEquals(messageError, message);
     }
 
@@ -170,8 +170,8 @@ class TextValidationImplTest {
     @Test
     void testInvalidLengthWithIqualOperatorWithThrow() {
         value = "Hello Java";
-        var messageError = "Invalid length for text.";
-        var message = assertThrows(BadRequestException.class, () -> {
+        String messageError = "Invalid length for text.";
+        String message = assertThrows(BadRequestException.class, () -> {
             validation.invalidLength(value, "==", 10, messageError);
         }).getMessage();
         assertEquals(messageError, message);
@@ -180,8 +180,8 @@ class TextValidationImplTest {
     @Test
     void testInvalidLengthWithDiferentOperatorWithThrow() {
         value = "Hello, Java";
-        var messageError = "Invalid length for text.";
-        var message = assertThrows(BadRequestException.class, () -> {
+        String messageError = "Invalid length for text.";
+        String message = assertThrows(BadRequestException.class, () -> {
             validation.invalidLength(value, "!=", 10, messageError);
         }).getMessage();
         assertEquals(messageError, message);
@@ -190,8 +190,8 @@ class TextValidationImplTest {
     @Test
     void testInvalidLengthWithGraterThanOperatorWithThrow() {
         value = "Hello, Java";
-        var messageError = "Invalid length for text.";
-        var message = assertThrows(BadRequestException.class, () -> {
+        String messageError = "Invalid length for text.";
+        String message = assertThrows(BadRequestException.class, () -> {
             validation.invalidLength(value, ">", 10, messageError);
         }).getMessage();
         assertEquals(messageError, message);
@@ -199,8 +199,8 @@ class TextValidationImplTest {
     @Test
     void testInvalidLengthWithLessThanOperatorWithThrow() {
         value = "Hell Java";
-        var messageError = "Invalid length for text.";
-        var message = assertThrows(BadRequestException.class, () -> {
+        String messageError = "Invalid length for text.";
+        String message = assertThrows(BadRequestException.class, () -> {
             validation.invalidLength(value, "<", 10, messageError);
         }).getMessage();
         assertEquals(messageError, message);
@@ -209,8 +209,8 @@ class TextValidationImplTest {
     @Test
     void testInvalidLengthWithGraterThanOrEqualOperatorWithThrow() {
         value = "Hell0 Java";
-        var messageError = "Invalid length for text.";
-        var message = assertThrows(BadRequestException.class, () -> {
+        String messageError = "Invalid length for text.";
+        String message = assertThrows(BadRequestException.class, () -> {
             validation.invalidLength(value, ">=", 10, messageError);
         }).getMessage();
         assertEquals(messageError, message);
@@ -219,8 +219,8 @@ class TextValidationImplTest {
     @Test
     void testInvalidLengthWithLessThanOrEqualOperatorWithThrow() {
         value = "Hello Java";
-        var messageError = "Invalid length for text.";
-        var message = assertThrows(BadRequestException.class, () -> {
+        String messageError = "Invalid length for text.";
+        String message = assertThrows(BadRequestException.class, () -> {
             validation.invalidLength(value, "<=", 10, messageError);
         }).getMessage();
         assertEquals(messageError, message);

@@ -26,29 +26,25 @@ public class ProfessorApi {
 
     @GetMapping
     public ResponseEntity<List<ProfessorDto>> buscaTudo() {
-        var professores = service.buscaTudo();
-        return new ResponseEntity<>(professores, HttpStatus.OK);
+        return new ResponseEntity<>(service.buscaTudo(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<ProfessorDto> buscaPorId(@PathVariable("id") Long id) {
         validator.naoPodeBuscar(id);
-        var professor = service.buscaPorId(id);
-        return new ResponseEntity<>(professor, HttpStatus.OK);
+        return new ResponseEntity<>(service.buscaPorId(id), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<ProfessorDto> insere(@RequestBody ProfessorDto dto) {
         validator.isNaoPodeInserir(dto);
-        var professorInserido = service.insere(dto);
-        return new ResponseEntity<>(professorInserido, HttpStatus.OK);
+        return ResponseEntity.ok(service.insere(dto));
     }
 
     @PutMapping
     public ResponseEntity<ProfessorDto> atualiza(@RequestBody ProfessorDto model) {
         validator.isNaoPodeAtualizar(model);
-        var professorAtualizado = service.atualiza(model);
-        return new ResponseEntity<>(professorAtualizado, HttpStatus.OK);
+        return ResponseEntity.ok(service.atualiza(model));
     }
 
     @DeleteMapping(params = "id")

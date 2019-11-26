@@ -24,9 +24,7 @@ public class AuthApi {
 
     @PostMapping("/login")
     public ResponseEntity<AlunoDto> login(@RequestBody UserDto dto) {
-        System.out.println(dto);
-        var pessoa = authService.login(dto);
-        return ResponseEntity.ok(pessoa);
+        return ResponseEntity.ok(authService.login(dto));
     }
 
     @GetMapping

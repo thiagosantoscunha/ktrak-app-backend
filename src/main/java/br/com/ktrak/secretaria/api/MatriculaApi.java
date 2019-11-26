@@ -24,32 +24,26 @@ public class MatriculaApi {
 
     @GetMapping
     public ResponseEntity<List<MatriculaDto>> buscaTudo() {
-        var response = matriculaService.buscaTudo();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("size", response.size() + "");
-        return ResponseEntity.ok().headers(headers).body(response);
+        return ResponseEntity.ok(matriculaService.buscaTudo());
     }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<MatriculaDto> buscaPorId(@PathVariable("id") Long id) {
-        var response = matriculaService.buscaPorId(id);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(matriculaService.buscaPorId(id));
     }
 
     @PostMapping
     @Transactional
     public ResponseEntity<MatriculaDto> insere(@RequestBody MatriculaDto dto) {
         matriculaValidation.isNaoPodeInserir(dto);
-        var response = matriculaService.salva(dto);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(matriculaService.salva(dto));
     }
 
     @PutMapping
     @Transactional
     public ResponseEntity<MatriculaDto> update(@RequestBody MatriculaDto dto) {
         matriculaValidation.isNaoPodeAtualizar(dto);
-        var response = matriculaService.salva(dto);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(matriculaService.salva(dto));
     }
 
     @DeleteMapping

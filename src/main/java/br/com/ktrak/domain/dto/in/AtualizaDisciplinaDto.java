@@ -7,7 +7,7 @@ public class AtualizaDisciplinaDto {
     public String nome;
 
     public DisciplinaEntity toEntity() {
-        var entity = new DisciplinaEntity();
+        DisciplinaEntity entity = new DisciplinaEntity();
         entity.setId(id);
         entity.setNome(nome);
         return entity;

@@ -2,6 +2,7 @@ package br.com.ktrak.domain.services;
 
 import br.com.ktrak.domain.converters.MatriculaConverter;
 import br.com.ktrak.domain.dto.MatriculaDto;
+import br.com.ktrak.domain.entities.MatriculaEntity;
 import br.com.ktrak.domain.repositories.MatriculaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class MatriculaFilterService {
     private MatriculaConverter converter;
 
     public List<MatriculaDto> buscaTudoPorNomeCurso(String nomeCurso) {
-        var result = repository.findAllByNomeCurso(nomeCurso);
+        List<MatriculaEntity> result = repository.findAllByNomeCurso(nomeCurso);
         return converter.toDtoList(result);
     }
 

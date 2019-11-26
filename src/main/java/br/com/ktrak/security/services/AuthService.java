@@ -5,6 +5,7 @@ import br.com.ktrak.domain.converters.AlunoConverter;
 import br.com.ktrak.domain.converters.UserConverter;
 import br.com.ktrak.domain.dto.AlunoDto;
 import br.com.ktrak.domain.entities.AlunoEntity;
+import br.com.ktrak.domain.entities.PessoaEntity;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import br.com.ktrak.domain.repositories.PessoaRepository;
 import br.com.ktrak.security.dto.UserDto;
@@ -37,11 +38,11 @@ public class AuthService {
     private UserConverter converter;
 
     public AlunoDto login(UserDto userDto) {
-        var user = authRepository.findByUsername(userDto.username);
+        UserEntity user = authRepository.findByUsername(userDto.username);
         if (!user.getPassword().equals(userDto.password)) {
             throw new BadRequestException("Usuário ou senha inválida");
         }
-        var pessoa = pessoaRepository.findByUser(user);
+        PessoaEntity pessoa = pessoaRepository.findByUser(user);
         return alunoConverter.toDto((AlunoEntity) pessoa);
     }
 
@@ -56,7 +57,7 @@ public class AuthService {
                         Utils.getUsernameByFullname(alunoDto.getNome()) + entity.getCriadoEm().getYear()
                 )
         );
-        var userResponse = authRepository.save(entity);
+        UserEntity userResponse = authRepository.save(entity);
         return userResponse;
     }
 
