@@ -25,7 +25,7 @@ public class QRCodeApi {
         return ResponseEntity.ok(service.buscaTudo());
     }
 
-    @GetMapping(path = "/data")
+    @GetMapping(path = "/current")
     public ResponseEntity<QRCodeDto> buscaPorDataMaisRecente() {
         return ResponseEntity.ok(service.buscaPorDataMaisRecente());
     }
