@@ -13,4 +13,7 @@ import java.util.List;
 public interface AlunoRepository extends CrudRepository<AlunoEntity, Long> {
     List<AlunoEntity> findAllByOrderByNomeAsc();
     List<AlunoEntity> findByNomeContainingIgnoreCase(String nome);
+
+    @Query("select p from PessoaEntity p join UserEntity u on p = u where u.username = :username")
+    AlunoEntity findByUsername(@Param("username") String username);
 }

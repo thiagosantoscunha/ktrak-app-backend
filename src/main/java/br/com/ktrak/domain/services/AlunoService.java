@@ -74,4 +74,9 @@ public class AlunoService implements Serializable {
         List<AlunoEntity> alunos = this.repository.findByNomeContainingIgnoreCase(nome);
         return converter.toDtoList(alunos);
     }
+
+    public AlunoDto buscaPorUsername(String username) {
+        AlunoEntity response = repository.findByUsername(username);
+        return converter.toDto(response);
+    }
 }
