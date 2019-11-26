@@ -22,29 +22,25 @@ public class DisciplinaApi {
 
     @GetMapping
     public ResponseEntity<List<DisciplinaDto>> buscaTudo() {
-        var disciplinas = service.buscaTudo();
-        return new ResponseEntity<>(disciplinas, HttpStatus.OK);
+        return new ResponseEntity<>(service.buscaTudo(), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<DisciplinaDto> insere(@RequestBody DisciplinaDto dto) {
         validator.isNaoPodeInserir(dto);
-        var disciplinaInserida = service.insere(dto);
-        return new ResponseEntity<>(disciplinaInserida, HttpStatus.OK);
+        return new ResponseEntity<>(service.insere(dto), HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<DisciplinaDto> atualiza(@RequestBody DisciplinaDto dto) {
         validator.isNaoPodeAtualizar(dto);
-        var disciplinaAtualizada = service.atualiza(dto);
-        return new ResponseEntity<>(disciplinaAtualizada, HttpStatus.OK);
+        return new ResponseEntity<>(service.atualiza(dto), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<DisciplinaDto> buscaPorId(@PathVariable("id") Long id) {
         validator.isNaoPodeBuscarPorId(id);
-        var disciplina = service.buscaPorId(id);
-        return new ResponseEntity<>(disciplina, HttpStatus.OK);
+        return new ResponseEntity<>(service.buscaPorId(id), HttpStatus.OK);
     }
 
     @DeleteMapping

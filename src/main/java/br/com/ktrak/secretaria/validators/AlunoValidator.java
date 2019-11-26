@@ -30,8 +30,8 @@ public class AlunoValidator {
 
     public boolean isNaoPodeAtualizar(AlunoDto dto) {
         numberValidation.isNull(dto.getId(), "O aluno precisa de um Id");
-        var naoPodeSalvar = isNaoPodeSalvar(dto.getNome(), dto.getDataNascimento(), dto.getLogradouro(), dto.getCep(), dto.getBairro(), dto.getCidade(), dto.getEstado());
-        var hasAluno = service.existePorId(dto.getId());
+        boolean naoPodeSalvar = isNaoPodeSalvar(dto.getNome(), dto.getDataNascimento(), dto.getLogradouro(), dto.getCep(), dto.getBairro(), dto.getCidade(), dto.getEstado());
+        boolean hasAluno = service.existePorId(dto.getId());
         if (!hasAluno) {
             throw new NotFoundException("O usuário que você esta tentado atualizar não existe");
         }
@@ -57,13 +57,13 @@ public class AlunoValidator {
     }
 
     public boolean isNaoPodeBuscarPorId(Long id) {
-        var hasAluno = service.existePorId(id);
+        boolean hasAluno = service.existePorId(id);
         if (!hasAluno) throw new NotFoundException("Este aluno não esta cadastrado em nossa base de dados");
         return false;
     }
 
     public boolean isNaoPodeRemover(Long id) {
-        var hasAluno = service.existePorId(id);
+        boolean hasAluno = service.existePorId(id);
         if (!hasAluno) throw new NotFoundException("Este aluno não esta cadastrado em nossa base de dados");
         return false;
     }

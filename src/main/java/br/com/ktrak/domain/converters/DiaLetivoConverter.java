@@ -11,7 +11,7 @@ public class DiaLetivoConverter extends Converter<DiaLetivoDto, DiaLetivoEntity>
 
     public DiaLetivoConverter() {
         super(fromDto -> {
-            var entity = new DiaLetivoEntity();
+            DiaLetivoEntity entity = new DiaLetivoEntity();
             entity.setId(fromDto.id);
             entity.setDataHora(LocalFormatter.toLocalDateTime(fromDto.data));
             entity.setTurma(new TurmaConverter().toEntity(fromDto.turma));

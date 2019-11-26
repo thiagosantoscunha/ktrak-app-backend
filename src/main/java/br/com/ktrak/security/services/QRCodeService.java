@@ -35,8 +35,7 @@ public class QRCodeService {
     }
 
     public QRCodeDto buscaPorDataMaisRecente() {
-        var entity = repository.findDistinctFirstByCriadoEm(LocalDate.now());
-        return converter.toDto(entity);
+        return converter.toDto(repository.findDistinctFirstByCriadoEm(LocalDate.now()));
     }
 
     public List<QRCodeDto> buscaTudo() {

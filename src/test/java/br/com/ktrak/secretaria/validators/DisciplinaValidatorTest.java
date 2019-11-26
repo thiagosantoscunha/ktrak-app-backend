@@ -27,35 +27,34 @@ class DisciplinaValidatorTest {
 
     @Test
     void podeInserirComSucessoTest() {
-        var result = validator.isNaoPodeInserir(insereDisciplinaDto);
-        assertFalse(result);
+        assertFalse(validator.isNaoPodeInserir(insereDisciplinaDto));
     }
 
     @Test
     void isNaoPodeInserirSeNomeForNuloTest() {
         insereDisciplinaDto.nome = null;
-        var message = assertThrows(BadRequestException.class, () -> validator.isNaoPodeInserir(insereDisciplinaDto)).getMessage();
+        String message = assertThrows(BadRequestException.class, () -> validator.isNaoPodeInserir(insereDisciplinaDto)).getMessage();
         assertEquals("A discplina precisa ter um nome", message);
     }
 
     @Test
     void isNaoPodeInserirSeNomeForVazioTest() {
         insereDisciplinaDto.nome = "";
-        var message = assertThrows(BadRequestException.class, () -> validator.isNaoPodeInserir(insereDisciplinaDto)).getMessage();
+        String message = assertThrows(BadRequestException.class, () -> validator.isNaoPodeInserir(insereDisciplinaDto)).getMessage();
         assertEquals("A discplina precisa ter um nome", message);
     }
 
     @Test
     void isNaoPodeInserirSeNomeForMenorQue3CaracteresTest() {
         insereDisciplinaDto.nome = "as";
-        var message = assertThrows(BadRequestException.class, () -> validator.isNaoPodeInserir(insereDisciplinaDto)).getMessage();
+        String message = assertThrows(BadRequestException.class, () -> validator.isNaoPodeInserir(insereDisciplinaDto)).getMessage();
         assertEquals("O nome da disciplina precisa ter entre 3 a 64 caracteres", message);
     }
 
     @Test
     void isNaoPodeInserirSeNomeForMaiorQue64CaracteresTest() {
         insereDisciplinaDto.nome = "Geometria análiticamente plana e espacialGeometria análitica Plana";
-        var message = assertThrows(BadRequestException.class, () -> validator.isNaoPodeInserir(insereDisciplinaDto)).getMessage();
+        String message = assertThrows(BadRequestException.class, () -> validator.isNaoPodeInserir(insereDisciplinaDto)).getMessage();
         assertEquals("O nome da disciplina precisa ter entre 3 a 64 caracteres", message);
     }
 

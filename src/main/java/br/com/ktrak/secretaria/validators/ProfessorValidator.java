@@ -57,7 +57,7 @@ public class ProfessorValidator {
 
     public boolean isNaoPodeAtualizar(ProfessorDto dto) {
         numberValidation.isNull(dto.id);
-        var naoPodeSalvar = isNaoPodeSalvar(dto.nome, dto.dataNascimento, dto.logradouro, dto.cep, dto.bairro, dto.cidade, dto.estado);
+        boolean naoPodeSalvar = isNaoPodeSalvar(dto.nome, dto.dataNascimento, dto.logradouro, dto.cep, dto.bairro, dto.cidade, dto.estado);
         if (!service.existePorId(dto.id)) {
             throw new NotFoundException("Não encontramos este professor na base de dados");
         }

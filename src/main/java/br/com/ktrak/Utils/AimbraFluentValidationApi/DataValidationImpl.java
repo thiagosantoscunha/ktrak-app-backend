@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.text.ParseException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Component
 public class DataValidationImpl implements IDataValidation {
@@ -15,7 +16,7 @@ public class DataValidationImpl implements IDataValidation {
     public void isInvalidDateFormat(String dataString) {
         try {
             patternDateFormat.setLenient(false);
-            var data = patternDateFormat.parse(dataString);
+            Date data = patternDateFormat.parse(dataString);
         } catch (ParseException e) {
             throw new BadRequestException("A data " + dataString + "tem um formato inválido");
         }
@@ -25,7 +26,7 @@ public class DataValidationImpl implements IDataValidation {
     public void isInvalidDateFormat(String dataString, String messageError) {
         try {
             patternDateFormat.setLenient(false);
-            var data = patternDateFormat.parse(dataString);
+            Date data = patternDateFormat.parse(dataString);
         } catch (ParseException e) {
             throw new BadRequestException(messageError);
         }
@@ -35,7 +36,7 @@ public class DataValidationImpl implements IDataValidation {
     public void isInvalidHourFormat(String dataString) {
         try {
             patternHourFormat.setLenient(false);
-            var data = patternHourFormat.parse(dataString);
+            Date data = patternHourFormat.parse(dataString);
         } catch (ParseException e) {
             throw new BadRequestException("A hora " + dataString + "tem um formato inválido");
         }
@@ -45,7 +46,7 @@ public class DataValidationImpl implements IDataValidation {
     public void isInvalidHourFormat(String dataString, String messageError) {
         try {
             patternHourFormat.setLenient(false);
-            var data = patternHourFormat.parse(dataString);
+            Date data = patternHourFormat.parse(dataString);
         } catch (ParseException e) {
             throw new BadRequestException(messageError);
         }

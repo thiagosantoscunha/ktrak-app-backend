@@ -19,8 +19,7 @@ public class PessoaApi {
 
     @RequestMapping
     public ResponseEntity<PessoaDto> buscaPorUsername(@PathParam("username") String username) {
-        var body = service.buscaPorUsername(username);
-        return ResponseEntity.ok(body);
+        return ResponseEntity.ok(service.buscaPorUsername(username));
     }
 
 }

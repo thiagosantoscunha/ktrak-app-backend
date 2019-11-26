@@ -39,14 +39,13 @@ class AlunoValidatorTest {
 
     @Test
     void insereAlunoComSucesso() {
-        var result = validator.isNaoPodeInserir(aluno);
-        Assertions.assertFalse(result);
+        Assertions.assertFalse(validator.isNaoPodeInserir(aluno));
     }
 
     @Test
     void isNaoPodeInserirSeNomeForNulo() {
         aluno.setNome(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals("O nome esta nulo ou vazio", message);
@@ -55,7 +54,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirSeNomeForVazio() {
         aluno.setNome("");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals("O nome esta nulo ou vazio", message);
@@ -64,7 +63,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirSeNomeForMenorQue10Caracteres() {
         aluno.setNome("Thiago");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals("O nome precisa ter entre 10 a 64 caracteres", message);
@@ -73,7 +72,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirSeNomeForMaiorQue64Caracteres() {
         aluno.setNome("Thiago dos Santos Celestino da Cunha Thiago dos Santos Celestino");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals("O nome precisa ter entre 10 a 64 caracteres", message);
@@ -82,7 +81,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirSeDataDeNascimentoForNulo() {
         aluno.setDataNascimento(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals("A data de nascimento esta nula ou vázia", message);
@@ -107,7 +106,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirLogradouroForNulo() {
         aluno.setLogradouro(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O logradouro esta nulo ou vazio");
@@ -116,7 +115,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirLogradouroForVazio() {
         aluno.setLogradouro("");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O logradouro esta nulo ou vazio");
@@ -125,7 +124,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirLogradouroForMenorQue4Caracteres() {
         aluno.setLogradouro("nul");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O logradouro precisa ter entre 4 a 64 caracteres");
@@ -134,7 +133,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirLogradouroForMaiorQue64Caracteres() {
         aluno.setLogradouro("Rua das Pacas, condiminio gravata 2 - quadra 20 lote 1100 - Cabo Frio - Rio de Janeiro");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O logradouro precisa ter entre 4 a 64 caracteres");
@@ -143,7 +142,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirSeCepForNulo() {
         aluno.setCep(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O cep está nulo ou vazio");
@@ -152,7 +151,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirSeCepForDiferenteDe8Caracteres() {
         aluno.setCep("0088");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O tamanho do CEP deve ter 8 caracteres");
@@ -161,7 +160,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirSeBairroForNulo() {
         aluno.setBairro(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O bairro esta nulo ou vazio");
@@ -170,7 +169,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirSeBairroForVazio() {
         aluno.setBairro("");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O bairro esta nulo ou vazio");
@@ -179,7 +178,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirSeBairroForMenorQue3Caracteres() {
         aluno.setBairro("nu");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O bairro precisa ter entre 4 a 64 caracteres");
@@ -188,7 +187,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirSeBairroForMaiorQue64Caracteres() {
         aluno.setBairro("PindamonhagabivectstarpudvksPindamonhagabivectstarpudvksPindamonhagabivectstar");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O bairro precisa ter entre 4 a 64 caracteres");
@@ -197,7 +196,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirCidadeForNulo() {
         aluno.setCidade(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "A cidade esta nulo ou vazio");
@@ -206,7 +205,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirCidadeForVazio() {
         aluno.setCidade("");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "A cidade esta nulo ou vazio");
@@ -215,7 +214,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirCidadeForMenorQue3Caracteres() {
         aluno.setCidade("qw");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "A cidade precisa ter entre 4 a 64 caracteres");
@@ -224,7 +223,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirCidadeForMaiorQue64Caracteres() {
         aluno.setCidade("PindamonhagabivectstarpudvksPindamonhagabivectstarpudvksPindamonhagabivectstar");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "A cidade precisa ter entre 4 a 64 caracteres");
@@ -233,7 +232,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirEstadoForNulo() {
         aluno.setEstado(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O estado esta nulo ou vazio");
@@ -242,7 +241,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirEstadoForVazio() {
         aluno.setEstado("");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O estado esta nulo ou vazio");
@@ -251,7 +250,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirEstadoForMenorQue3Caracteres() {
         aluno.setEstado("nu");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O estado precisa ter entre 3 a 64 caracteres");
@@ -260,7 +259,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeInserirEstadoForMaiorQue64Caracteres() {
         aluno.setEstado("PindamonhagabivectstarpudvksPindamonhagabivectstarpudvksPindamonhagabivectstar");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeInserir(aluno);
         }).getMessage();
         assertEquals(message, "O estado precisa ter entre 3 a 64 caracteres");
@@ -276,14 +275,13 @@ class AlunoValidatorTest {
 
     @Test
     void atualizaUsuarioComSucesso() {
-        var result = validator.isNaoPodeAtualizar(aluno);
-        Assertions.assertFalse(result);
+        Assertions.assertFalse(validator.isNaoPodeAtualizar(aluno));
     }
 
     @Test
     void isNaoPodeAtualizarSeIdForNulo() {
         aluno.setId(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals("O aluno precisa de um Id", message);
@@ -292,7 +290,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarSeNomeForNulo() {
         aluno.setNome(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals("O nome esta nulo ou vazio", message);
@@ -301,7 +299,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarSeNomeForVazio() {
         aluno.setNome("");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals("O nome esta nulo ou vazio", message);
@@ -310,7 +308,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarSeNomeForMenorQue10Caracteres() {
         aluno.setNome("Thiago");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals("O nome precisa ter entre 10 a 64 caracteres", message);
@@ -319,7 +317,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarSeNomeForMaiorQue64Caracteres() {
         aluno.setNome("Thiago dos Santos Celestino da Cunha Thiago dos Santos Celestino ");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals("O nome precisa ter entre 10 a 64 caracteres", message);
@@ -328,7 +326,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarSeDataDeNascimentoForNulo() {
         aluno.setDataNascimento(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals("A data de nascimento esta nula ou vázia", message);
@@ -353,7 +351,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarLogradouroForNulo() {
         aluno.setLogradouro(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O logradouro esta nulo ou vazio");
@@ -362,7 +360,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarLogradouroForVazio() {
         aluno.setLogradouro("");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O logradouro esta nulo ou vazio");
@@ -371,7 +369,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarLogradouroForMenorQue4Caracteres() {
         aluno.setLogradouro("nul");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O logradouro precisa ter entre 4 a 64 caracteres");
@@ -380,7 +378,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarLogradouroForMaiorQue64Caracteres() {
         aluno.setLogradouro("Rua das Pacas, condiminio gravata 2 - quadra 20 lote 1100 - Cabo Frio - Rio de Janeiro");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O logradouro precisa ter entre 4 a 64 caracteres");
@@ -389,7 +387,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarSeCepForNulo() {
         aluno.setCep(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O cep está nulo ou vazio");
@@ -398,7 +396,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarSeCepForDiferenteDe8Caracteres() {
         aluno.setCep("0088");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O tamanho do CEP deve ter 8 caracteres");
@@ -407,7 +405,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarSeBairroForNulo() {
         aluno.setBairro(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O bairro esta nulo ou vazio");
@@ -416,7 +414,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarSeBairroForVazio() {
         aluno.setBairro("");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O bairro esta nulo ou vazio");
@@ -425,7 +423,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarSeBairroForMenorQue3Caracteres() {
         aluno.setBairro("nu");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O bairro precisa ter entre 4 a 64 caracteres");
@@ -434,7 +432,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarSeBairroForMaiorQue64Caracteres() {
         aluno.setBairro("PindamonhagabivectstarpudvksPindamonhagabivectstarpudvksPindamonhagabivectstar");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O bairro precisa ter entre 4 a 64 caracteres");
@@ -443,7 +441,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarCidadeForNulo() {
         aluno.setCidade(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "A cidade esta nulo ou vazio");
@@ -452,7 +450,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarCidadeForVazio() {
         aluno.setCidade("");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "A cidade esta nulo ou vazio");
@@ -461,7 +459,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarCidadeForMenorQue3Caracteres() {
         aluno.setCidade("qw");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "A cidade precisa ter entre 4 a 64 caracteres");
@@ -470,7 +468,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarCidadeForMaiorQue64Caracteres() {
         aluno.setCidade("PindamonhagabivectstarpudvksPindamonhagabivectstarpudvksPindamonhagabivectstar");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "A cidade precisa ter entre 4 a 64 caracteres");
@@ -479,7 +477,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarEstadoForNulo() {
         aluno.setEstado(null);
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O estado esta nulo ou vazio");
@@ -488,7 +486,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarEstadoForVazio() {
         aluno.setEstado("");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O estado esta nulo ou vazio");
@@ -497,7 +495,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarEstadoForMenorQue3Caracteres() {
         aluno.setEstado("nu");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O estado precisa ter entre 3 a 64 caracteres");
@@ -506,7 +504,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarEstadoForMaiorQue64Caracteres() {
         aluno.setEstado("PindamonhagabivectstarpudvksPindamonhagabivectstarpudvksPindamonhagabivectstar");
-        var message = assertThrows(BadRequestException.class, () -> {
+        String message = assertThrows(BadRequestException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O estado precisa ter entre 3 a 64 caracteres");
@@ -515,7 +513,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeAtualizarSePessoaNaoExiste() {
         aluno.setId(171771717171L);
-        var message = assertThrows(NotFoundException.class, () -> {
+        String message = assertThrows(NotFoundException.class, () -> {
             validator.isNaoPodeAtualizar(aluno);
         }).getMessage();
         assertEquals(message, "O usuário que você esta tentado atualizar não existe");
@@ -529,7 +527,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeBuscarSeNaoTemUsuario() {
         Long id = -1L;
-        var message = assertThrows(NotFoundException.class, () -> {
+        String message = assertThrows(NotFoundException.class, () -> {
             validator.isNaoPodeBuscarPorId(id);
         }).getMessage();
         assertEquals(message, "Este aluno não esta cadastrado em nossa base de dados");
@@ -542,7 +540,7 @@ class AlunoValidatorTest {
     @Test
     void isNaoPodeRemoverSeNaoTemUsuario() {
         Long id = -1L;
-        var message = assertThrows(NotFoundException.class, () -> {
+        String message = assertThrows(NotFoundException.class, () -> {
             validator.isNaoPodeBuscarPorId(id);
         }).getMessage();
         assertEquals(message, "Este aluno não esta cadastrado em nossa base de dados");

@@ -21,10 +21,11 @@ public class PessoaService {
     private PessoaConverter converter;
 
     public PessoaDto buscaPorUsername(String username) {
-        var user = authRepository.findByUsername(username);
-        System.out.println(user);
-        var pessoa = repository.findByUser(user);
-        return converter.toDto(pessoa);
+        return converter.toDto(
+                repository.findByUser(
+                        authRepository.findByUsername(username)
+                )
+        );
     }
 
 }

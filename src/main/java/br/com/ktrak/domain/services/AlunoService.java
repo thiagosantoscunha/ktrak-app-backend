@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AlunoService implements Serializable {
@@ -37,12 +38,12 @@ public class AlunoService implements Serializable {
     private AuthService authService;
 
     public List<AlunoDto> buscaTudo() {
-        var alunos = repository.findAllByOrderByNomeAsc();
+        List<AlunoEntity> alunos = repository.findAllByOrderByNomeAsc();
         return converter.toDtoList(alunos);
     }
 
     public AlunoDto buscaPorId(Long id) {
-        var aluno = repository.findById(id);
+        Optional<AlunoEntity> aluno = repository.findById(id);
         return aluno.map(e -> converter.toDto(e)).orElse(null);
     }
 
