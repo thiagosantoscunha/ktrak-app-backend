@@ -30,6 +30,12 @@ public class MatriculaApi {
         return ResponseEntity.ok().headers(headers).body(response);
     }
 
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<MatriculaDto> buscaPorId(@PathVariable("id") Long id) {
+        var response = matriculaService.buscaPorId(id);
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
     @Transactional
     public ResponseEntity<MatriculaDto> insere(@RequestBody MatriculaDto dto) {
@@ -44,6 +50,12 @@ public class MatriculaApi {
         matriculaValidation.isNaoPodeAtualizar(dto);
         var response = matriculaService.salva(dto);
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> delete(@RequestParam Long id) {
+        matriculaService.remove(id);
+        return ResponseEntity.ok(true);
     }
 
 }

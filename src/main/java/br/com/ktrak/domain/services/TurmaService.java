@@ -133,4 +133,9 @@ public class TurmaService implements Serializable {
         }
         return new ArrayList<>();
     }
+
+    public TurmaDto buscaPorId(Long id) {
+        Optional<TurmaEntity> turmaEntity = repository.findById(id);
+        return turmaEntity.map(entity -> converter.toDto(entity)).orElse(null);
+    }
 }
