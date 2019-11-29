@@ -1,6 +1,5 @@
 package br.com.ktrak.Utils;
 
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public abstract class Utils {
