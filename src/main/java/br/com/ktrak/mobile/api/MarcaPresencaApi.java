@@ -4,23 +4,21 @@ import br.com.ktrak.domain.dto.MarcaPresencaDto;
 import br.com.ktrak.mobile.validators.MarcaPresencaValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "v1/qrcode")
+@RequestMapping(path = "mobile/v1/marca-presenca")
 public class MarcaPresencaApi {
 
     @Autowired
     private MarcaPresencaValidation marcaPresencaValidation;
 
-
-    @PostMapping("/marca-presenca")
-    public ResponseEntity<?> marcaPresencaDoAluno(@RequestBody MarcaPresencaDto dto) {
+    @RequestMapping
+    public ResponseEntity<?> marcaPresencaDoAluno(@RequestParam("username") String username, @RequestParam("key") String key) {
+        MarcaPresencaDto dto = new MarcaPresencaDto(username, key);
         marcaPresencaValidation.isNaoPodeMarcarPresenca(dto);
-        return null;
+        System.out.println(dto);
+        return ResponseEntity.ok(dto);
     }
 
 }

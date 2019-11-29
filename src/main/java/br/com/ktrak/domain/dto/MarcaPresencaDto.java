@@ -9,4 +9,11 @@ public class MarcaPresencaDto {
     private String username;
     private String key;
 
+    public MarcaPresencaDto() {
+    }
+
+    public MarcaPresencaDto(String username, String key) {
+        this.username = username;
+        this.key = key;
+    }
 }
