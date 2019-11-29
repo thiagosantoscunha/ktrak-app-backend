@@ -49,7 +49,7 @@ public class TurmaService implements Serializable {
     private DataValidationImpl dataValidation;
 
     @Autowired
-    private FeriadoRepository feriadoRepository;
+    private RecessoRepository feriadoRepository;
 
     @Autowired
     private TurmaComMatriculaConverter turmaComMatriculaConverter;
@@ -79,10 +79,7 @@ public class TurmaService implements Serializable {
 
         TurmaEntity turmaEntity = repository.save(converter.toEntity(turmaDto));
         SemestreEntity semestreEntity = semestreConverter.toEntity(semestreDto);
-        Optional<SemestreEntity> semestreResponse = semestreRepository.findById(semestreEntity.getId());
-        if (semestreResponse.isPresent()) {
-            semestreEntity = semestreResponse.get();
-        }
+        semestreEntity = semestreRepository.save(semestreEntity);;
         insereDiasLetivos(turmaEntity, semestreEntity);
         return converter.toDto(turmaEntity);
     }

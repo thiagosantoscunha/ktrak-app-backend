@@ -2,10 +2,8 @@ package br.com.ktrak.secretaria.validators;
 
 import br.com.ktrak.Utils.AimbraFluentValidationApi.*;
 import br.com.ktrak.domain.dto.TurmaDto;
-import br.com.ktrak.domain.dto.in.InsereTurmaDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import br.com.ktrak.domain.repositories.DiaHoraAulaRepository;
-import br.com.ktrak.domain.services.FeriadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

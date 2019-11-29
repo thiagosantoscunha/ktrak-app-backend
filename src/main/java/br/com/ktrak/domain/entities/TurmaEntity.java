@@ -1,6 +1,7 @@
 package br.com.ktrak.domain.entities;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -32,4 +33,8 @@ public class TurmaEntity {
 
     @ManyToMany(mappedBy = "turmas")
     private List<AlunoEntity> alunos = new ArrayList<>();
+
+    @Column
+    @ColumnDefault("false")
+    private boolean isAberta;
 }
