@@ -1,6 +1,6 @@
 package br.com.ktrak.domain.converters;
 
-import br.com.ktrak.security.Entities.QRCodeEntity;
+import br.com.ktrak.security.entities.QRCodeEntity;
 import br.com.ktrak.security.dto.QRCodeDto;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +14,7 @@ public class QRCodeConverter extends Converter<QRCodeDto, QRCodeEntity> {
         }, fromEntity -> {
             QRCodeDto dto = new QRCodeDto();
             dto.setKey(fromEntity.getKey());
+            dto.setCriadoEm(fromEntity.getCriadoEm());
             return dto;
         });
     }

@@ -1,7 +1,6 @@
 package br.com.ktrak.secretaria.api;
 
-import br.com.ktrak.domain.converters.QRCodeConverter;
-import br.com.ktrak.security.Entities.QRCodeEntity;
+import br.com.ktrak.secretaria.validators.QRCodeValidation;
 import br.com.ktrak.security.dto.QRCodeDto;
 import br.com.ktrak.security.services.QRCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +19,22 @@ public class QRCodeApi {
     @Autowired
     private QRCodeService service;
 
+    @Autowired
+    private QRCodeValidation validation;
+
     @GetMapping()
     public ResponseEntity<List<QRCodeDto>> buscaTudo() {
         return ResponseEntity.ok(service.buscaTudo());
     }
 
     @GetMapping(path = "/current")
-    public ResponseEntity<QRCodeDto> buscaPorDataMaisRecente() {
-        return ResponseEntity.ok(service.buscaPorDataMaisRecente());
+    public ResponseEntity<QRCodeDto> buscaPorDataRecente() {
+        return ResponseEntity.ok(service.buscaPorDataRecente());
     }
 
-    @PostMapping
+    @GetMapping(path = "/generate")
     public ResponseEntity<QRCodeDto> generate() {
+        validation.isNaoPodeGerar();
         return ResponseEntity.ok(service.generate());
     }
 
