@@ -60,7 +60,8 @@ public class TurmaApi {
     @Transactional
     public ResponseEntity<TurmaDto> montaTurmaNoSemestre(@RequestBody InsereTurmaPorSemestreVM model) {
         validation.isNaoPodeInserir(model.turma);
-        return ResponseEntity.ok(service.insereComSemestre(model.turma, model.semestre));
+        TurmaDto response = service.insereComSemestre(model.turma, model.semestre);
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping

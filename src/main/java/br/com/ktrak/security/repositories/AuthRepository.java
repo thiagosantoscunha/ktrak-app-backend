@@ -8,8 +8,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface AuthRepository extends CrudRepository<UserEntity, Long> {
+
     UserEntity findByUsername(String username);
 
     @Query(value = "select * from users as u join pessoas as p on p.user_id = u.id where p.id = :id", nativeQuery = true)

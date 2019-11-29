@@ -20,7 +20,7 @@ public class AlunoMobileApi {
     private AlunoService service;
 
     @GetMapping
-    public ResponseEntity<AlunoDto> buscaTudo(@PathParam("username") String username) {
+    public ResponseEntity<AlunoDto> buscaPoUsername(@PathParam("username") String username) {
         return ResponseEntity.ok(service.buscaPorUsername(username));
     }
 

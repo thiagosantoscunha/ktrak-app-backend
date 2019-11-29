@@ -1,23 +1,27 @@
 package br.com.ktrak;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import br.com.ktrak.Utils.SimpleCORSFilter;
 import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.apache.catalina.Context;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @SpringBootApplication
 @CrossOrigin(origins = "*")
@@ -27,20 +31,7 @@ public class KtrakApplication {
         SpringApplication.run(KtrakApplication.class, args);
     }
 
-    @Bean
-    public WebMvcConfigurer configure() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry
-                        .addMapping("/*")
-                        .allowedMethods("GET", "PUT", "DELETE", "POST", "OPTIONS")
-                        .allowedOrigins("http://localhost:4200");
-            }
-        };
-    }
-
-
+//  Ativar na versão mobile
     @Bean
     public ServletWebServerFactory servletContainer() {
 
@@ -71,6 +62,30 @@ public class KtrakApplication {
         connector.setRedirectPort(8443);
         return connector;
     }
+
+//    @Bean
+//    public WebMvcConfigurer configure() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry
+//                        .addMapping("**")
+//                        .allowedMethods("GET", "PUT", "DELETE", "POST", "OPTIONS")
+//                        .allowedOrigins("/**");
+//            }
+//        };
+//    }
+
+
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurerAdapter() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/greeting-javaconfig").allowedOrigins("http://localhost:4200");
+//            }
+//        };
+//    }
 
 
 }

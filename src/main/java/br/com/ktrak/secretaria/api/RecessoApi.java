@@ -1,8 +1,8 @@
 package br.com.ktrak.secretaria.api;
 
-import br.com.ktrak.domain.dto.FeriadoDto;
-import br.com.ktrak.domain.services.FeriadoService;
-import br.com.ktrak.secretaria.validators.FeriadoValidation;
+import br.com.ktrak.domain.dto.RecessoDto;
+import br.com.ktrak.domain.services.RecessoService;
+import br.com.ktrak.secretaria.validators.RecessoValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,38 +11,38 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "v1/feriados")
-public class FeriadoApi {
+@RequestMapping(path = "v1/recessos")
+public class RecessoApi {
 
     @Autowired
-    private FeriadoService service;
+    private RecessoService service;
 
     @Autowired
-    private FeriadoValidation validation;
+    private RecessoValidation validation;
 
     @GetMapping
-    public ResponseEntity<List<FeriadoDto>> buscaTudo() {
+    public ResponseEntity<List<RecessoDto>> buscaTudo() {
         return ResponseEntity.ok(service.buscaTudo());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<FeriadoDto> buscaPorId(@PathVariable Long id) {
+    public ResponseEntity<RecessoDto> buscaPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscaPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<FeriadoDto> insere(@RequestBody FeriadoDto dto) {
+    public ResponseEntity<RecessoDto> insere(@RequestBody RecessoDto dto) {
         validation.isNaoPodeInserir(dto);
         return ResponseEntity.ok(service.salva(dto));
     }
 
     @PutMapping
-    public ResponseEntity<FeriadoDto> atualiza(@RequestBody FeriadoDto dto) {
+    public ResponseEntity<RecessoDto> atualiza(@RequestBody RecessoDto dto) {
         validation.isNaoPodeAtualizar(dto);
         return ResponseEntity.ok(service.salva(dto));
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping
     public ResponseEntity<?> remove(@PathParam("id") Long id) {
         service.remove(id);
         return ResponseEntity.ok(true);

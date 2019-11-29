@@ -1,16 +1,14 @@
 package br.com.ktrak.security.repositories;
 
-import br.com.ktrak.security.Entities.QRCodeEntity;
-import org.springframework.data.jpa.repository.Query;
+import br.com.ktrak.security.entities.QRCodeEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.Optional;
 
 @Repository
-public interface QRCodeRepository extends CrudRepository<QRCodeEntity, Long> {
+public interface QRCodeRepository extends CrudRepository<QRCodeEntity, LocalDate> {
 
-    QRCodeEntity findDistinctFirstByCriadoEm(LocalDate criadoEm);
+    Optional<QRCodeEntity> findDistinctFirstByCriadoEm(LocalDate criadoEm);
 }

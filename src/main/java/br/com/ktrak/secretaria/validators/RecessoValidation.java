@@ -4,17 +4,17 @@ package br.com.ktrak.secretaria.validators;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.DataValidationImpl;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.NumberValidationImpl;
 import br.com.ktrak.Utils.AimbraFluentValidationApi.TextValidationImpl;
-import br.com.ktrak.domain.dto.FeriadoDto;
+import br.com.ktrak.domain.dto.RecessoDto;
 import br.com.ktrak.domain.exceptions.BadRequestException;
-import br.com.ktrak.domain.services.FeriadoService;
+import br.com.ktrak.domain.services.RecessoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FeriadoValidation {
+public class RecessoValidation {
 
     @Autowired
-    private FeriadoService service;
+    private RecessoService service;
 
     @Autowired
     private TextValidationImpl textValidation;
@@ -25,7 +25,7 @@ public class FeriadoValidation {
     @Autowired
     private NumberValidationImpl numberValidation;
 
-    public boolean isNaoPodeInserir(FeriadoDto dto) {
+    public boolean isNaoPodeInserir(RecessoDto dto) {
 
         textValidation.isNullOrEmpty(dto.data, "É preciso digitar uma data Válida para o feriado");
         dataValidation.isInvalidDateFormat(dto.data, "Data de formato inválido para o feriado");
@@ -37,7 +37,7 @@ public class FeriadoValidation {
         return false;
     }
 
-    public boolean isNaoPodeAtualizar(FeriadoDto dto) {
+    public boolean isNaoPodeAtualizar(RecessoDto dto) {
         numberValidation.isNull(dto.id);
         return isNaoPodeInserir(dto);
     }
