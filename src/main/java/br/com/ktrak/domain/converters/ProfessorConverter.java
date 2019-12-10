@@ -19,7 +19,8 @@ public class ProfessorConverter extends Converter<ProfessorDto, ProfessorEntity>
                 professorDto.logradouro,
                 professorDto.bairro,
                 professorDto.cidade,
-                professorDto.estado
+                professorDto.estado,
+                professorDto.status
             ),
             professorEntity -> new ProfessorDto(
                 professorEntity.getId(),
@@ -29,7 +30,8 @@ public class ProfessorConverter extends Converter<ProfessorDto, ProfessorEntity>
                 professorEntity.getLogradouro(),
                 professorEntity.getBairro(),
                 professorEntity.getCidade(),
-                professorEntity.getEstado()
+                professorEntity.getEstado(),
+                professorEntity.getStatus()
             )
         );
     }

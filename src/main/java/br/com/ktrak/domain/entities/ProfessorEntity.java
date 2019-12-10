@@ -21,7 +21,7 @@ public class ProfessorEntity extends PessoaEntity {
     public ProfessorEntity() {
     }
 
-    public ProfessorEntity(Long id, String nome, LocalDate dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado) {
+    public ProfessorEntity(Long id, String nome, LocalDate dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado, Boolean status) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -30,6 +30,7 @@ public class ProfessorEntity extends PessoaEntity {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
+        this.status = status;
     }
 
 }

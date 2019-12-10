@@ -1,6 +1,7 @@
 package br.com.ktrak.domain.entities;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -26,17 +27,14 @@ public class TurmaEntity {
     @ManyToOne
     private ProfessorEntity professor;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "turma_id")
-//    private List<DiaLetivoEntity> diasLetivos = new ArrayList<>();
-
     @ManyToOne()
     @JoinColumn(name = "disciplina_id", nullable = false)
     private DisciplinaEntity disciplina;
 
-//    @OneToMany(mappedBy = "turma")
-//    private List<MatriculaEntity> matriculas = new ArrayList<>();
-
     @ManyToMany(mappedBy = "turmas")
     private List<AlunoEntity> alunos = new ArrayList<>();
+
+    @Column
+    @ColumnDefault("false")
+    private boolean isAberta;
 }

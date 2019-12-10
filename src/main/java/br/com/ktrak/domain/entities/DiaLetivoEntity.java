@@ -1,7 +1,6 @@
 package br.com.ktrak.domain.entities;
 
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,9 +24,5 @@ public class DiaLetivoEntity {
 
     @ManyToMany(mappedBy = "diasLetivos")
     private List<MatriculaEntity> matriculas = new ArrayList<>();
-
-    @Column
-    @ColumnDefault("true")
-    private boolean isPresente;
 
 }

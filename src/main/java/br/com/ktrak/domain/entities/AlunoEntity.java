@@ -1,6 +1,8 @@
 package br.com.ktrak.domain.entities;
 
 
+import br.com.ktrak.domain.enums.Status;
+import br.com.ktrak.security.entities.UserEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,7 +33,7 @@ public class AlunoEntity extends PessoaEntity {
     public AlunoEntity() {
     }
 
-    public AlunoEntity(Long id, String nome, LocalDate dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado) {
+    public AlunoEntity(Long id, String nome, LocalDate dataNascimento, String cep, String logradouro, String bairro, String cidade, String estado, Boolean status) {
         this.id = id;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -40,5 +42,6 @@ public class AlunoEntity extends PessoaEntity {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
+        this.status = status;
     }
 }

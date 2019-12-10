@@ -6,7 +6,7 @@ public class InsereDisciplinaDto {
     public String nome;
 
     public DisciplinaEntity toEntity() {
-        var entity = new DisciplinaEntity();
+        DisciplinaEntity entity = new DisciplinaEntity();
         entity.setNome(nome);
         return entity;
     }

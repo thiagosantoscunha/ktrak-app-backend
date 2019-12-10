@@ -31,7 +31,7 @@ class NumberValidationImplTest {
     @Test
     void testIsNullWithThrow() {
         number = null;
-        var message = assertThrows(BadRequestException.class, () ->
+        String message = assertThrows(BadRequestException.class, () ->
                 numberValidation.isNull(number, "The number is null")
         ).getMessage();
         assertEquals("The number is null", message);
@@ -45,7 +45,7 @@ class NumberValidationImplTest {
 
     @Test
     void testIsNotNullWithThrow() {
-        var message = assertThrows(BadRequestException.class, () -> numberValidation.isNotNull(number, "The number is null"))
+        String message = assertThrows(BadRequestException.class, () -> numberValidation.isNotNull(number, "The number is null"))
                 .getMessage();
         assertEquals("The number is null", message);
     }

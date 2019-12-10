@@ -34,22 +34,19 @@ public class MatriculaService implements Serializable {
     private TurmaConverter turmaConverter;
 
     public List<MatriculaDto> buscaTudo() {
-        var entities = matriculaRepository.findAll();
-        return matriculaConverter.toDtoList(entities);
+        return matriculaConverter.toDtoList(matriculaRepository.findAll());
     }
 
     public MatriculaDto buscaPorId(Long id) {
-        var entity = matriculaRepository.findById(id);
-        return entity.map(matriculaEntity -> matriculaConverter.toDto(matriculaEntity)).orElse(null);
+        return matriculaRepository.findById(id).map(matriculaEntity -> matriculaConverter.toDto(matriculaEntity)).orElse(null);
     }
 
     public MatriculaDto salva(MatriculaDto dto) {
-        var matriculaEntity = new MatriculaEntity();
+        MatriculaEntity matriculaEntity = new MatriculaEntity();
         matriculaEntity.setNumero(MatriculaGeneratorService.build());
         matriculaEntity.setAluno(alunoConverter.toEntity(dto.getAluno()));
         matriculaEntity.setTurma(turmaConverter.toEntity(dto.getTurma()));
-        var entity = matriculaRepository.save(matriculaEntity);
-        return matriculaConverter.toDto(entity);
+        return matriculaConverter.toDto(matriculaRepository.save(matriculaEntity));
     }
 
     public void remove(Long id) {
@@ -61,9 +58,9 @@ public class MatriculaService implements Serializable {
     }
 
     public List<MatriculaDto> buscaTudoPorAluno(AlunoDto alunoDto) {
-        var matriculas = matriculaRepository.findAllByAluno(alunoConverter.toEntity(alunoDto));
-        return matriculas.map(
-                matriculaEntities -> matriculaConverter.toDtoList(matriculaEntities)
-        ).orElseGet(ArrayList::new);
+        return matriculaRepository
+                .findAllByAluno(alunoConverter.toEntity(alunoDto))
+                .map(matriculaEntities -> matriculaConverter.toDtoList(matriculaEntities))
+                .orElseGet(ArrayList::new);
     }
 }

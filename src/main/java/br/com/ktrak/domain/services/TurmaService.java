@@ -5,6 +5,7 @@ import br.com.ktrak.Utils.LocalFormatter;
 import br.com.ktrak.domain.converters.SemestreConverter;
 import br.com.ktrak.domain.converters.TurmaComMatriculaConverter;
 import br.com.ktrak.domain.converters.TurmaConverter;
+import br.com.ktrak.domain.dto.AlunoDto;
 import br.com.ktrak.domain.dto.DiaLetivoDto;
 import br.com.ktrak.domain.dto.SemestreDto;
 import br.com.ktrak.domain.dto.TurmaDto;
@@ -12,14 +13,8 @@ import br.com.ktrak.domain.dto.in.AtualizaTurmaDto;
 import br.com.ktrak.domain.dto.in.InsereTurmaDto;
 import br.com.ktrak.domain.dto.out.ExibeTurmaDto;
 import br.com.ktrak.domain.dto.out.TurmaOutDto;
-import br.com.ktrak.domain.entities.DiaHoraAulaEntity;
-import br.com.ktrak.domain.entities.DiaLetivoEntity;
-import br.com.ktrak.domain.entities.SemestreEntity;
-import br.com.ktrak.domain.entities.TurmaEntity;
-import br.com.ktrak.domain.repositories.DiaLetivoRepository;
-import br.com.ktrak.domain.repositories.FeriadoRepository;
-import br.com.ktrak.domain.repositories.SemestreRepository;
-import br.com.ktrak.domain.repositories.TurmaRepository;
+import br.com.ktrak.domain.entities.*;
+import br.com.ktrak.domain.repositories.*;
 import br.com.ktrak.secretaria.validators.SemestreValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +25,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TurmaService implements Serializable {
@@ -53,25 +49,26 @@ public class TurmaService implements Serializable {
     private DataValidationImpl dataValidation;
 
     @Autowired
-    private FeriadoRepository feriadoRepository;
+    private RecessoRepository feriadoRepository;
 
     @Autowired
     private TurmaComMatriculaConverter turmaComMatriculaConverter;
 
+    @Autowired
+    private AlunoRepository alunoRepository;
+
     public List<TurmaDto> buscaTudo() {
-        var entities = repository.findAll();
-        return turmaComMatriculaConverter.toDtoList(entities);
+        return turmaComMatriculaConverter.toDtoList(repository.findAll());
     }
 
     public TurmaDto insere(TurmaDto dto) {
-        var entity = converter.toEntity(dto);
-        entity = repository.save(entity);
-        return converter.toDto(entity);
+        return converter.toDto(
+                repository.save(converter.toEntity(dto))
+        );
     }
 
     public TurmaDto atualiza(TurmaDto dto) {
-        var entity = converter.toEntity(dto);
-        return converter.toDto(repository.save(entity));
+        return converter.toDto(repository.save(converter.toEntity(dto)));
     }
 
     public void remove(Long id) {
@@ -79,13 +76,10 @@ public class TurmaService implements Serializable {
     }
 
     public TurmaDto insereComSemestre(TurmaDto turmaDto, SemestreDto semestreDto) {
-        var turmaEntity = converter.toEntity(turmaDto);
-        turmaEntity = repository.save(turmaEntity);
-        var semestreEntity = semestreConverter.toEntity(semestreDto);
-        var semestreResponse = semestreRepository.findById(semestreEntity.getId());
-        if (semestreResponse.isPresent()) {
-            semestreEntity = semestreResponse.get();
-        }
+
+        TurmaEntity turmaEntity = repository.save(converter.toEntity(turmaDto));
+        SemestreEntity semestreEntity = semestreConverter.toEntity(semestreDto);
+        semestreEntity = semestreRepository.save(semestreEntity);;
         insereDiasLetivos(turmaEntity, semestreEntity);
         return converter.toDto(turmaEntity);
     }
@@ -123,5 +117,21 @@ public class TurmaService implements Serializable {
 
     public boolean existePorId(Long idTurma) {
         return repository.existsById(idTurma);
+    }
+
+    public List<TurmaDto> buscaTodasAsTurmasPorAluno(Long idAluno) {
+        Optional<AlunoEntity> aluno = alunoRepository.findById(idAluno);
+        List<TurmaEntity> turmas;
+        if (aluno.isPresent()) {
+            turmas = repository.findAllbyAluno(aluno.get());
+            return converter.toDtoList(turmas);
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public TurmaDto buscaPorId(Long id) {
+        Optional<TurmaEntity> turmaEntity = repository.findById(id);
+        return turmaEntity.map(entity -> converter.toDto(entity)).orElse(null);
     }
 }

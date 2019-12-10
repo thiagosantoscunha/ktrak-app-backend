@@ -4,6 +4,8 @@ import br.com.ktrak.domain.converters.DiaLetivoConverter;
 import br.com.ktrak.domain.converters.TurmaConverter;
 import br.com.ktrak.domain.dto.DiaLetivoDto;
 import br.com.ktrak.domain.dto.TurmaDto;
+import br.com.ktrak.domain.entities.DiaLetivoEntity;
+import br.com.ktrak.domain.entities.TurmaEntity;
 import br.com.ktrak.domain.exceptions.BadRequestException;
 import br.com.ktrak.domain.exceptions.NotFoundException;
 import br.com.ktrak.domain.repositories.DiaLetivoRepository;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DiaLetivoService {
@@ -35,12 +38,12 @@ public class DiaLetivoService {
     }
 
     public List<DiaLetivoDto> buscaTudoPorTurma(TurmaDto turmaDto) {
-        var entities = repository.findAllByTurma(turmaConverter.toEntity(turmaDto));
+        List<DiaLetivoEntity> entities = repository.findAllByTurma(turmaConverter.toEntity(turmaDto));
         return converter.toDtoList(entities);
     }
 
     public List<DiaLetivoDto> buscaTudoPorTurmaId(Long idTurma) {
-        var turmaEntity = turmaRepository.findById(idTurma);
+        Optional<TurmaEntity> turmaEntity = turmaRepository.findById(idTurma);
         return turmaEntity.map(
                 entity -> converter.toDtoList(
                         repository.findAllByTurma(entity))
@@ -48,7 +51,7 @@ public class DiaLetivoService {
     }
 
     public DiaLetivoDto salvar(DiaLetivoDto dto) {
-        var entity = repository.save(converter.toEntity(dto));
+        DiaLetivoEntity entity = repository.save(converter.toEntity(dto));
         return converter.toDto(entity);
     }
 
@@ -57,7 +60,7 @@ public class DiaLetivoService {
     }
 
     public DiaLetivoDto buscaPorId(Long id) {
-        var entity = repository.findById(id);
+        Optional<DiaLetivoEntity> entity = repository.findById(id);
         return entity.map(diaLetivoEntity -> converter.toDto(
                 diaLetivoEntity
         )).orElseThrow(new NotFoundException("Não encontramos por Id").get());

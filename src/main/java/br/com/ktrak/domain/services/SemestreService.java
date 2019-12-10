@@ -24,8 +24,9 @@ public class SemestreService {
     }
 
     public SemestreDto buscaPorId(Long id) {
-        var entity = repository.findById(id);
-        return entity.map(semestreEntity -> converter.toDto(semestreEntity)).orElse(null);
+        return repository.findById(id)
+                .map(semestreEntity -> converter.toDto(semestreEntity))
+                .orElse(null);
     }
 
     public SemestreDto salva(SemestreDto dto) {
