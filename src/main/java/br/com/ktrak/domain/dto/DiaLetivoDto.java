@@ -1,5 +1,8 @@
 package br.com.ktrak.domain.dto;
 
+import lombok.Getter;
+
+@Getter
 public class DiaLetivoDto {
 
     public Long id;
