@@ -9,6 +9,7 @@ public class MatriculaConverter extends Converter<MatriculaDto, MatriculaEntity>
     public MatriculaConverter() {
         super(fromDto -> {
             MatriculaEntity entity = new MatriculaEntity();
+            entity.setId(fromDto.getId());
             entity.setAluno(new AlunoConverter().toEntity(fromDto.getAluno()));
             entity.setTurma(new TurmaConverter().toEntity(fromDto.getTurma()));
             return entity;

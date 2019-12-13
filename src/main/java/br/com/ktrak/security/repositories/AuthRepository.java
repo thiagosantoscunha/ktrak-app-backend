@@ -17,4 +17,6 @@ public interface AuthRepository extends CrudRepository<UserEntity, Long> {
 
     @Query(value = "select * from users as u join pessoas as p on p.user_id = u.id where p.id = :id", nativeQuery = true)
     UserEntity findByPessoa(@Param("id") Long id);
+
+    boolean existsByUsername(String username);
 }

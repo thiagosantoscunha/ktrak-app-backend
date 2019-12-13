@@ -42,4 +42,8 @@ public class QRCodeService {
     public List<QRCodeDto> buscaTudo() {
         return converter.toDtoList(repository.findAll());
     }
+
+    public boolean existePorKey(String key) {
+        return repository.existsByKey(key);
+    }
 }

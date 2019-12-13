@@ -119,7 +119,7 @@ public class TurmaService implements Serializable {
         return repository.existsById(idTurma);
     }
 
-    public List<TurmaDto> buscaTodasAsTurmasPorAluno(Long idAluno) {
+    public List<TurmaDto> buscaTodasAsTurmasPorIdAluno(Long idAluno) {
         Optional<AlunoEntity> aluno = alunoRepository.findById(idAluno);
         List<TurmaEntity> turmas;
         if (aluno.isPresent()) {

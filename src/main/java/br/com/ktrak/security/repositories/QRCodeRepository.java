@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface QRCodeRepository extends CrudRepository<QRCodeEntity, LocalDate> {
 
     Optional<QRCodeEntity> findDistinctFirstByCriadoEm(LocalDate criadoEm);
+    boolean existsByKey(String key);
+
 }

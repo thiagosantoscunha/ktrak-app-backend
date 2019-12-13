@@ -63,4 +63,12 @@ public class MatriculaService implements Serializable {
                 .map(matriculaEntities -> matriculaConverter.toDtoList(matriculaEntities))
                 .orElseGet(ArrayList::new);
     }
+
+    public MatriculaDto buscaPorTurma(TurmaDto t) {
+        return matriculaConverter.toDto(matriculaRepository.findByTurma(turmaConverter.toEntity(t)));
+    }
+
+    public MatriculaDto buscaPorTurmaEAluno(TurmaDto turmaDto, AlunoDto alunoDto) {
+        return matriculaConverter.toDto(matriculaRepository.findByTurmaAndAluno(turmaConverter.toEntity(turmaDto), alunoConverter.toEntity(alunoDto)));
+    }
 }
