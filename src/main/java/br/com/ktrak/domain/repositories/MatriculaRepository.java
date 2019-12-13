@@ -1,5 +1,6 @@
 package br.com.ktrak.domain.repositories;
 
+import br.com.ktrak.domain.dto.TurmaDto;
 import br.com.ktrak.domain.entities.AlunoEntity;
 import br.com.ktrak.domain.entities.MatriculaEntity;
 import br.com.ktrak.domain.entities.TurmaEntity;
@@ -18,4 +19,8 @@ public interface MatriculaRepository extends CrudRepository<MatriculaEntity, Lon
 
     @Query(value = "select * from matriculas m join turmas t on m.turma_id = t.id join disciplinas d on t.disciplina_id = d.id where d.nome = :nomeCurso", nativeQuery = true)
     List<MatriculaEntity> findAllByNomeCurso(@Param("nomeCurso") String nomeCurso);
+
+    MatriculaEntity findByTurma(TurmaEntity turma);
+
+    MatriculaEntity findByTurmaAndAluno(TurmaEntity turma, AlunoEntity aluno);
 }

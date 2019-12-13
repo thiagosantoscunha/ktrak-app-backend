@@ -98,4 +98,8 @@ public class AuthService {
         JSONParser parser = new JSONParser(payload);
         System.out.println(parser);
     }
+
+    public boolean existePorUsername(String username) {
+        return authRepository.existsByUsername(username);
+    }
 }

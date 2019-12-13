@@ -1,5 +1,7 @@
 package br.com.ktrak.Utils.AimbraFluentValidationApi.interfaces;
 
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -21,4 +23,5 @@ public interface IDataValidation {
     boolean isNotDayOfWeek(String day);
     void isNotDayOfWeek(String day, String messageError);
     boolean isNotDayOfWeekend(LocalDate date);
+    boolean isNowBetweenDateTime(final DateTime startDate, final DateTime endDate);
 }

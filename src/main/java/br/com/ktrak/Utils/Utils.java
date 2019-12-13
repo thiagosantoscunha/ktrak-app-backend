@@ -2,6 +2,8 @@ package br.com.ktrak.Utils;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.ZoneId;
+
 public abstract class Utils {
 
     public static String getFirstAndLastName(String fullname) {

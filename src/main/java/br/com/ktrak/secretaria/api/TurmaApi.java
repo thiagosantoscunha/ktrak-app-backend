@@ -46,7 +46,7 @@ public class TurmaApi {
 
     @GetMapping(path = "/alunos/{id}")
     public ResponseEntity<List<TurmaDto>> buscaTudoPorAluno(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(service.buscaTodasAsTurmasPorAluno(id));
+        return ResponseEntity.ok(service.buscaTodasAsTurmasPorIdAluno(id));
     }
 
 

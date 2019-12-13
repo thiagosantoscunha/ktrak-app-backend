@@ -20,7 +20,7 @@ public class TurmaMobileApi {
 
     @GetMapping
     public ResponseEntity<List<TurmaDto>> buscaTudo(@PathParam("alunoId") Long alunoId) {
-        return ResponseEntity.ok(service.buscaTodasAsTurmasPorAluno(alunoId));
+        return ResponseEntity.ok(service.buscaTodasAsTurmasPorIdAluno(alunoId));
     }
 
 }

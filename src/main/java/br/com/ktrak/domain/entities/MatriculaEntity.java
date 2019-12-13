@@ -38,21 +38,4 @@ public class MatriculaEntity implements Serializable {
     @Column(nullable = false, length = 12, unique = true)
     private String numero;
 
-    @Column
-    private Integer faltas;
-
-    @Column
-    private Double n1;
-
-    @Column
-    private Double n2;
-
-    @Column
-    private Double n3;
-
-    @Column
-    private Double vf;
-
-    @Column
-    private Double media;
 }

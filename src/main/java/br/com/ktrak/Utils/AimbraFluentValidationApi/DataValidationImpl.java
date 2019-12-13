@@ -2,6 +2,8 @@ package br.com.ktrak.Utils.AimbraFluentValidationApi;
 
 import br.com.ktrak.Utils.AimbraFluentValidationApi.interfaces.IDataValidation;
 import br.com.ktrak.domain.exceptions.BadRequestException;
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
@@ -74,6 +76,11 @@ public class DataValidationImpl implements IDataValidation {
     @Override
     public boolean isNotDayOfWeekend(LocalDate date) {
         return !(date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY);
+    }
+
+    @Override
+    public boolean isNowBetweenDateTime(DateTime startDate, DateTime endDate) {
+        return new Interval(startDate, endDate).containsNow();
     }
 
     @Override

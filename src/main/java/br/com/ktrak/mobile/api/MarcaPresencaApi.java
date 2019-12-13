@@ -19,18 +19,11 @@ public class MarcaPresencaApi {
     private MarcaPresencaService marcaPresencaService;
 
     @RequestMapping
-    public ResponseEntity<?> marcaPresencaDoAluno(@RequestParam("username") String username, @RequestParam("key") String key) {
-        MarcaPresencaDto dto = new MarcaPresencaDto(username, key);
-        marcaPresencaValidation.isNaoPodeMarcarPresenca(dto);
-        System.out.println(dto);
-        return ResponseEntity.ok(dto);
-    }
-    @PostMapping
     @Transactional
     public ResponseEntity<?> insere(@RequestParam("username") String username, @RequestParam("key") String key) {
         MarcaPresencaDto dto = new MarcaPresencaDto(username, key);
         marcaPresencaValidation.isNaoPodeMarcarPresenca(dto);
-        return new ResponseEntity<>(marcaPresencaService.marca(dto), HttpStatus.OK);
+        return ResponseEntity.ok(marcaPresencaService.insere(dto));
     }
 
 }
