@@ -1,1 +1,1 @@
-web: java -jar -Dspring.profiles.active=prod -Dserver.port=$PORT target/ktrak-0.0.1.jar
+web: java -jar -Dspring.profiles.active=prod -Dserver.port=$PORT target/ktrakapp-0.0.1-SNAPSHOT.jar
